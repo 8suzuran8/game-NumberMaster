@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.109375" />
+        <entry key="app/src/main/res/drawable-anydpi/number_background.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable-anydpi/title.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/board_stand_repeat.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.11860670194003527" />
+        <entry key="app/src/main/res/layout-land/activity_opening.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/activity_ranking.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/fragment_howto_page3.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_check.xml" value="0.14351851851851852" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_game_tmp.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/activity_howto.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_howto2.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/activity_howto_page1.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/activity_howto_page2.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/activity_howto_page3.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/activity_input.xml" value="0.18564102564102564" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_opening.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_openning.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_ranking.xml" value="0.13257904052734376" />
+        <entry key="app/src/main/res/layout/activity_story.xml" value="0.22620391845703128" />
+        <entry key="app/src/main/res/layout/activity_thx.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/base.xml" value="0.13588918050130205" />
+        <entry key="app/src/main/res/layout/button_prev.xml" value="0.13095238095238096" />
+        <entry key="app/src/main/res/layout/fragment_container.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/fragment_howto_page0.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/layout/fragment_howto_page1.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/layout/fragment_howto_page2.xml" value="0.11574074074074074" />
+        <entry key="app/src/main/res/layout/fragment_howto_page3.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_ranking_detail.xml" value="0.30223846435546875" />
+        <entry key="app/src/main/res/layout/fragment_ranking_page.xml" value="0.16522878011067704" />
+        <entry key="app/src/main/res/layout/fragment_ranking_page0.xml" value="0.14969940185546876" />
+        <entry key="app/src/main/res/layout/fragment_ranking_page1.xml" value="0.19904632568359376" />
+        <entry key="app/src/main/res/layout/fragment_ranking_page2.xml" value="0.19684753417968756" />
+        <entry key="app/src/main/res/layout/layout_fragment.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/story_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.2587890625" />
+        <entry key="app/src/main/res/layout/view_pager2.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/view_pager2_howto.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/xml-notnight/themes.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
