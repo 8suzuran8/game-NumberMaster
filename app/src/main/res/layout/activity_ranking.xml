@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <RelativeLayout
+        android:id="@+id/text_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/please_enter_the_start_number"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/text_layout"
+            android:background="@color/transparent"
+            android:contentDescription="@string/update_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_update"
+            android:stateListAnimator="@xml/animate_all_update" />
+
+    </RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_container"><!-- fragment.xml --></androidx.viewpager2.widget.ViewPager2>
+
+</RelativeLayout>

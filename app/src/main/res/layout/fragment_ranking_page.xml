@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:lines="1"
+        android:text="@string/ranking_type1"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+    <FrameLayout
+        android:id="@+id/inner_root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/story_background"
+        android:layout_below="@id/title">
+        <ListView
+            android:id="@+id/ranking_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/swipe"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:src="@drawable/finger_icon"
+            android:stateListAnimator="@xml/animate_all_swipe"
+            android:contentDescription="@string/you_can_swipe" />
+
+    </FrameLayout>
+</RelativeLayout>

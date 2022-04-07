@@ -1,0 +1,42 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <!-- 表示化 start -->
+            <objectAnimator
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                android:propertyName="alpha"
+                android:startOffset="1000"
+                android:duration="3000" />
+            <objectAnimator
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                android:propertyName="scaleX"
+                android:startOffset="1000"
+                android:duration="3000" />
+            <objectAnimator
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                android:propertyName="scaleY"
+                android:startOffset="1000"
+                android:duration="3000" />
+            <!-- 表示化 end -->
+
+            <!-- 縮小 start -->
+            <objectAnimator
+                android:valueFrom="1.0"
+                android:valueTo="0.4"
+                android:propertyName="scaleX"
+                android:startOffset="5000"
+                android:duration="3000" />
+            <objectAnimator
+                android:valueFrom="1.0"
+                android:valueTo="0.4"
+                android:propertyName="scaleY"
+                android:startOffset="5000"
+                android:duration="3000" />
+            <!-- 縮小 end -->
+        </set>
+    </item>
+</selector>

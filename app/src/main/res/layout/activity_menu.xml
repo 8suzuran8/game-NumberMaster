@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <ImageView
+        android:id="@+id/title_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:contentDescription="@string/suujishi_number_master"
+        android:src="@drawable/title_normal_mode"
+        android:transformPivotY="0dp" />
+
+    <TableLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:background="@drawable/menu_background">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/menu_start_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/start_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_none1_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/no_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_input_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/input_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/menu_none2_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/no_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_ranking_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/ranking_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_none3_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/no_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/menu_howto_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/howto_menu"
+                android:scaleType="matrix"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_story_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/story_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+
+            <ImageButton
+                android:id="@+id/menu_thanks_hint_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/thanks_hint_menu"
+                android:onClick="buttonClickListener"
+                android:src="@drawable/transparent" />
+        </TableRow>
+    </TableLayout>
+</FrameLayout>

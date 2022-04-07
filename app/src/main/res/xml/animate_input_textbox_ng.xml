@@ -1,0 +1,13 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:propertyName="backgroundColor"
+                android:duration="1000"
+                android:valueFrom="@color/text_box_background_ng"
+                android:valueTo="@color/text_box_background_default"
+                android:valueType="colorType"/>
+        </set>
+    </item>
+</selector>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:lines="1"
+        android:text="@string/tap_to_start"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/transparent"
+        android:visibility="invisible"
+        android:onClick="buttonClickListener" />
+
+</FrameLayout>

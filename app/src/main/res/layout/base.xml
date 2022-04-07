@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base_root_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <ImageView
+        android:id="@+id/background_image1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_number1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/numbers" />
+
+    <ImageView
+        android:id="@+id/background_image2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_number2"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/numbers" />
+
+    <ImageView
+        android:id="@+id/background_image3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_number3"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/numbers" />
+
+    <!-- prev button start -->
+    <ImageView
+        android:id="@+id/prev_button_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:contentDescription="@string/previous_background"
+        android:src="@drawable/menu_previous_moving_background"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/prev_button_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center"
+        android:autoSizeTextType="uniform"
+        android:background="@color/transparent"
+        android:lines="1"
+        android:scaleType="fitCenter"
+        android:text="@string/button_prev"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/prev_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center_horizontal"
+        android:contentDescription="@string/previous_space"
+        android:onClick="buttonClickListener"
+        android:src="@drawable/transparent"
+        android:background="@color/transparent"
+        android:visibility="invisible" />
+    <!-- prev button end -->
+
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:repeatCount="3"
+                android:repeatMode="reverse"
+                android:propertyName="alpha"
+                android:duration="100"
+                android:valueFrom="0.0"
+                android:valueTo="0.8"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

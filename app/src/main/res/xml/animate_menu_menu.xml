@@ -1,0 +1,15 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <!-- 表示化 start -->
+            <objectAnimator
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                android:propertyName="alpha"
+                android:startOffset="5000"
+                android:duration="3000" />
+            <!-- 表示化 end -->
+        </set>
+    </item>
+</selector>

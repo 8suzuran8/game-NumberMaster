@@ -1,0 +1,163 @@
+<resources>
+    <string name="app_name">NumberMaster</string>
+    <string name="status">"SCORE %05d TIME %03d%s%02d%s"</string>
+    <string name="button_text_finish">FINISH</string>
+    <string name="button_prev">PREVIOUS</string>
+    <string name="thx">"SOUND\nhttps://soundeffect-lab.info/
+\n
+BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
+    <string name="previous_background">previous background ball</string>
+    <string name="previous_space">previous space</string>
+    <string name="please_enter_the_value">please enter the value</string>
+    <string name="update_button">update button</string>
+    <string name="you_can_swipe">you can swipe</string>
+    <string name="suujishi_number_master">数字師suujishi number master</string>
+    <string name="finish">FINISH</string>
+    <string name="no_menu">no menu</string>
+    <string name="input_menu">input</string>
+    <string name="ranking_menu">ranking</string>
+    <string name="ranking_type1">SCORE RANKING</string>
+    <string name="ranking_type2">TIME RANKING</string>
+    <string name="ranking_type3">PLAY DATE</string>
+    <string name="howto_menu">howto</string>
+    <string name="start_menu">start</string>
+    <string name="story_menu">story</string>
+    <string name="thanks_hint_menu"><![CDATA[Thanks & Hint]]></string>
+    <string name="numbers">random numbers</string>
+    <string name="_3x3_button">3x3 button</string>
+    <string name="_6x6_button">6x6 button</string>
+    <string name="_9x9_button">9x9 button</string>
+    <string name="secret_button">secret button</string>
+    <string name="finish_button">finish button</string>
+    <string name="stop_button">stop button</string>
+    <string name="board_stand">board stand</string>
+    <string name="effect">effect</string>
+    <string name="button_swipe_top">button swipe top</string>
+    <string name="button_swipe_right">button swipe right</string>
+    <string name="button_swipe_bottom">button swipe bottom</string>
+    <string name="button_swipe_left">button swipe left</string>
+    <string name="copy_start_numbers">copy start numbers</string>
+    <string name="tap_to_start">TAP TO START</string>
+    <string name="howto_screen_shot">howto screen shot</string>
+    <string name="number_panel_noN">number panel no. %d</string>
+    <string name="please_enter_the_start_number">please enter the start number in input menu</string>
+    <string name="effect2">thunder effect</string>
+    <string name="message_title_game">BEEP BEEP !!</string>
+    <string name="message_resize_and_shuffle">Resize and shuffle</string>
+    <string name="message_complete_this_game">Complete this game</string>
+    <string name="message_copy_this">Copy this</string>
+    <string name="message_button_text_ok">OK</string>
+    <string name="message_button_text_cancel">Cancel</string>
+    <string name="message_title_copy">Which one do you want to copy?</string>
+    <string name="message_copy_start_number">Start numbers</string>
+    <string name="message_copy_finish_number">Complete numbers</string>
+    <string name="message_delete_complete_data">Are you sure you want to delete this complete data?</string>
+    <string name="recycle">recycle complete data</string>
+    <string name="input_message">"If you press the button,
+the game you are playing will be rewritten
+to what you have entered."</string>
+    <string name="howto1">"There are 3 steps
+1. Return the numbers to their natural order.
+2. Maximize the score.
+3. Master the new high-dimensional play.
+
+There are 1 way
+1. Slide the number into the empty frame."</string>
+    <string name="howto2">"①
+Vacant place
+Calculated at 9
+
+②
+If you change the size,
+the current situation
+will be shuffled.
+
+③
+Press start to "start".
+"Start" means that the timer will run, you will be able to move the number board, and you will not be able to press the buttons.
+
+Press stop to "pause".
+"Pause" is the opposite of "start".
+In addition, the game is save.
+Once the game is saved, you can restart the game even if you close app.
+
+④"Finish" is to finish the game.
+The order at the start, the order at the finish, and the status are saved in the ranking.
+Then the timer and score become 0.
+You can start a new game.
+
+Proceed to use after maximizing the score.
+
+⑤
+Can be used
+after maximizing the score."</string>
+    <string name="story">" People were close to the environment when they asked if they would gain intelligence or not.
+ The environment is everything from races to the earth and space.
+At that time, people knew that manipulating numbers would cause a mysterious phenomenon, not intellectually but empirically.
+
+ Over time, in the ancient Greek era, he created a magic square in the world of mathematics in an attempt to preserve it.
+ However, because of the emphasis on leaving it, it has become a thing that is not close to the environment at all, just to match the total of vertical, horizontal and diagonal.
+
+ And although it is gradually returning to its original form in modern times, such as weather forecasts and virtual reality, it is still far from being completed.
+
+ A number master, who instinctively knows the original numbers.
+ You may just not be awake.
+ Discard the conceptual numbers and wake up to the real numbers."</string>
+    <string name="hint">"123 147 816
+456 258 357
+789 369 492
+
+123123 816672
+456456 357159
+789789 492834
+123123 438276
+456456 951951
+789789 276438
+
+123123123
+456456456
+789789789
+123123123
+456456456
+789789789
+
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+
+816672672
+357159159
+492834834
+438276276
+951951951
+276438438
+438276276
+951951951
+276438438"</string>
+    <string name="howto31">"☆★☆★☆★☆★☆★☆★☆★☆★
+♪♫Congratulations♪♫
+on Counter Stop.
+☆★☆★☆★☆★☆★☆★☆★☆★
+"</string>
+    <string name="howto32">"1. The search function has been released on the ranking screen.
+
+2. The secret button has changed to a cube mode button on the game screen.
+
+※ Now, if you achieve more counter stops, something will happen in you."</string>
+</resources>

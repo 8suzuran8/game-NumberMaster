@@ -1,0 +1,13 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <!-- メニューの移動 start -->
+            <objectAnimator
+                android:valueTo="0.0"
+                android:propertyName="translationY"
+                android:duration="1000" />
+            <!-- メニューの移動 end -->
+        </set>
+    </item>
+</selector>
