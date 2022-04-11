@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -14,6 +16,7 @@ import androidx.core.view.setMargins
 import androidx.viewpager2.widget.ViewPager2
 import com.example.numbermaster.databinding.ActivityRankingBinding
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class RankingActivity : NumberMasterActivity() {
     private lateinit var viewPager: ViewPager2
@@ -48,9 +51,22 @@ class RankingActivity : NumberMasterActivity() {
             }
             textContainer.layoutParams.height = (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
             textContainer.setPadding(0, 0, 0, that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt())
-            textLayout.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
-            textBox.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
-            viewPager2.layoutParams.height = (that.globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+
+            if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                textLayout.layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+                textBox.layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
+                viewPager2.layoutParams.height =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            } else {
+                textLayout.layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+                textBox.layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
+                viewPager2.layoutParams.height =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            }
         }
 
         val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
@@ -58,7 +74,16 @@ class RankingActivity : NumberMasterActivity() {
         }
         addContentView(layoutBinding.rootLayout, layoutParams)
 
-        this.numberMasterViewPager = NumberMasterViewPager(this, "_ranking", intent.getStringExtra("meta:rootLayoutWidth")!!.toFloat(), intent.getStringExtra("meta:otherSize")!!.toInt(), 3)
+        this.numberMasterViewPager = NumberMasterViewPager(this,
+            "_ranking",
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+            } else {
+                this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+            },
+            this.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt(),
+            3
+        )
         this.viewPager = this.numberMasterViewPager.viewPager
     }
 
@@ -70,6 +95,40 @@ class RankingActivity : NumberMasterActivity() {
         } else {
             // Otherwise, select the previous step.
             viewPager.currentItem = viewPager.currentItem - 1
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        val that = this
+
+        if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            findViewById<TextInputLayout>(R.id.text_layout).apply {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            }
+            findViewById<TextInputEditText>(R.id.text_box).apply {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
+            }
+            findViewById<ViewPager2>(R.id.view_pager2).apply {
+                layoutParams.height =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            }
+        } else {
+            findViewById<TextInputLayout>(R.id.text_layout).apply {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            }
+            findViewById<TextInputEditText>(R.id.text_box).apply {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
+            }
+            findViewById<ViewPager2>(R.id.view_pager2).apply {
+                layoutParams.height =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3)).toInt()
+            }
         }
     }
 

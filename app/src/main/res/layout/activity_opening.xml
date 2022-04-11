@@ -8,14 +8,15 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:autoSizeTextType="uniform"
+        android:background="@color/transparent"
         android:gravity="center"
-        android:lines="1"
+        android:lines="3"
+        android:onClick="buttonClickListener"
         android:text="@string/tap_to_start"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:background="@color/transparent"
-        android:visibility="invisible"
-        android:onClick="buttonClickListener" />
+        android:visibility="invisible" />
 
 </FrameLayout>

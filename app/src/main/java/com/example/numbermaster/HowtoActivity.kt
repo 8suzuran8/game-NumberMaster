@@ -1,5 +1,6 @@
 package com.example.numbermaster
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -34,7 +35,17 @@ class HowtoActivity : NumberMasterActivity() {
         if (settings.containsKey("counter_stop_count") && settings["counter_stop_count"]!!.toInt() > 0) {
             viewPageItemCount = 4
         }
-        val numberMasterViewPager = NumberMasterViewPager(this, "_howto", this.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat(), intent.getStringExtra("meta:otherSize")!!.toInt(), viewPageItemCount)
+        val numberMasterViewPager = NumberMasterViewPager(
+            this,
+            "_howto",
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+            } else {
+                this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+            },
+            this.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt(),
+            viewPageItemCount
+        )
         this.viewPager = numberMasterViewPager.viewPager
 
         dbHelper.writeSettings(mutableMapOf(

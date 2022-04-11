@@ -2,6 +2,8 @@ package com.example.numbermaster
 
 import android.animation.AnimatorInflater
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -17,6 +19,8 @@ open class NumberMasterActivity : AppCompatActivity() {
     open var globalActivityInfo: MutableMap<String, String> = mutableMapOf(
         "meta:rootLayoutWidth" to 0.toString(),
         "meta:rootLayoutHeight" to 0.toString(),
+        "meta:rootLayoutShort" to 0.toString(),
+        "meta:rootLayoutLong" to 0.toString(),
         // 上下左右マージン
         // ステータス部分の高さ
         // 戻るボタンの高さ
@@ -72,34 +76,56 @@ open class NumberMasterActivity : AppCompatActivity() {
         this.initialProcess(this.globalActivityInfo)
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        this.initialProcess(this.globalActivityInfo)
+    }
+
     open fun initialProcess(globalActivityInfo: MutableMap<String, String>) {
         val that = this
         // 背景のアニメーション用
         findViewById<ImageView>(R.id.background_image1).apply {
-            pivotX = (globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() / 2)
+            pivotX = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                (globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2)
+            } else {
+                (globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2)
+            }
             pivotY = 0F
             stateListAnimator =
                 AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_background1)
         }
 
         findViewById<ImageView>(R.id.background_image2).apply {
-            pivotX = globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat()
-            pivotY = globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat()
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                pivotX = globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+                pivotY = globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+            } else {
+                pivotX = globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+                pivotY = globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+            }
             stateListAnimator =
                 AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_background2)
         }
 
         findViewById<ImageView>(R.id.background_image3).apply {
-            pivotX = globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat()
-            pivotY = globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat()
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                pivotX = globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+                pivotY = globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+            } else {
+                pivotX = globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+                pivotY = globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()
+            }
             stateListAnimator =
                 AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_background3)
         }
 
         // 戻るボタン
         findViewById<ImageView>(R.id.prev_button_image).apply {
-            translationX =
-                globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() - globalActivityInfo["meta:otherSize"]!!.toFloat()
+            translationX = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - globalActivityInfo["meta:otherSize"]!!.toFloat()
+            } else {
+                globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - globalActivityInfo["meta:otherSize"]!!.toFloat()
+            }
             updateLayoutParams {
                 width = globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
                 height = globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()

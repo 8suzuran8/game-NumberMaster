@@ -2,6 +2,8 @@ package com.example.numbermaster
 
 import android.animation.*
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -22,6 +24,7 @@ class MenuActivity : NumberMasterActivity() {
     )
 
     private var initialed = false
+    private var menuSize: Int? = null
     private var menuY: Float? = null
 
     // prevボタンで戻った時には実行されない
@@ -44,8 +47,13 @@ class MenuActivity : NumberMasterActivity() {
         }
 
         val that = this
-        val menuSize = (this.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() - (this.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
-        this.menuY = ((this.globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat()) / 2) - (menuSize / 2) - this.globalActivityInfo["meta:otherSize"]!!.toFloat()
+        this.menuSize = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (this.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+
+        this.menuY = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            ((this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()) / 2) - (this.menuSize!! / 2) - this.globalActivityInfo["meta:otherSize"]!!.toFloat()
+        } else {
+            0F
+        }
 
         val dbHelper = NumberMasterOpenHelper(this)
         val settings = dbHelper.loadSettings()
@@ -53,18 +61,24 @@ class MenuActivity : NumberMasterActivity() {
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_menu, inflateRootLayout)
         val layoutBinding: ActivityMenuBinding = ActivityMenuBinding.bind(activityLayout).apply {
-            titleImage.pivotX = (menuSize / 2).toFloat()
+            if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                titleImage.pivotX = (that.menuSize!! / 2).toFloat()
+                titleImage.pivotY = 0F
+            } else {
+                titleImage.pivotX = 0F
+                titleImage.pivotY = (that.menuSize!! / 2).toFloat()
+            }
             titleImage.stateListAnimator = AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_title)
             menuLayout.setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
             menuLayout.stateListAnimator = AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_menu)
-            menuLayout.layoutParams.width = menuSize
-            menuLayout.layoutParams.height = menuSize
+            menuLayout.layoutParams.width = that.menuSize!!
+            menuLayout.layoutParams.height = that.menuSize!!
             menuLayout.translationY = that.menuY!!
 
             if (settings.containsKey("add_icon_read") && settings["add_icon_read"]!!.toInt() == 0) {
                 menuHowtoButton.setImageResource(R.drawable.add_icon)
                 val imageMatrix = menuHowtoButton.imageMatrix.apply {
-                    val oneMenuSize = menuSize / 3
+                    val oneMenuSize = that.menuSize!! / 3
                     val position = (oneMenuSize - (oneMenuSize * 0.4)).toFloat()
                     postScale(0.2F, 0.2F)
                     postTranslate(position, position)
@@ -88,6 +102,32 @@ class MenuActivity : NumberMasterActivity() {
             setMargins(that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt())
         }
         addContentView(layoutBinding.rootLayout, layoutParams)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        val that = this
+
+        this.menuY = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            ((this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()) / 2) - (that.menuSize!! / 2) - this.globalActivityInfo["meta:otherSize"]!!.toFloat()
+        } else {
+            0F
+        }
+
+        findViewById<TableLayout>(R.id.menu_layout).apply {
+            translationY = that.menuY!!.toFloat()
+        }
+
+        findViewById<ImageView>(R.id.title_image).apply {
+            if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                pivotX = (that.menuSize!! / 2).toFloat()
+                pivotY = 0F
+            } else {
+                pivotX = 0F
+                pivotY = (that.menuSize!! / 2).toFloat()
+            }
+        }
     }
 
     fun buttonClickListener(view: View) {

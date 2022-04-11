@@ -94,15 +94,15 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
 
         try {
             val innerRootLayout = layout.findViewById<ScrollView>(R.id.inner_root_layout)
-            innerRootLayout.setPadding((this.rootLayoutWidth / 10).toInt())
+            innerRootLayout.setPadding(this.otherSize)
         } catch (exception: Exception) {
             try {
                 val innerRootLayout = layout.findViewById<FrameLayout>(R.id.inner_root_layout)
-                innerRootLayout.setPadding((this.rootLayoutWidth / 10).toInt())
+                innerRootLayout.setPadding(this.otherSize)
             } catch (exception: Exception) {
                 try {
                     val innerRootLayout = layout.findViewById<RelativeLayout>(R.id.inner_root_layout)
-                    innerRootLayout.setPadding((this.rootLayoutWidth / 10).toInt())
+                    innerRootLayout.setPadding(this.otherSize)
                 } catch (exception: Exception) {
                     return layout
                 }

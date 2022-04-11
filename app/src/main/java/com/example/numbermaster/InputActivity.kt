@@ -24,7 +24,7 @@ class InputActivity : NumberMasterActivity() {
 
         val that = this
 
-        val buttonContainerSize = (that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+        val buttonContainerSize = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 5)).toInt()
         val max = buttonContainerSize - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_input, inflateRootLayout)
@@ -32,8 +32,9 @@ class InputActivity : NumberMasterActivity() {
             val buttonContainerLayoutParams = buttonContainer.layoutParams as LinearLayout.LayoutParams
             buttonContainerLayoutParams.topMargin = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             buttonContainer.apply {
-                layoutParams.height = buttonContainerSize
                 layoutParams = buttonContainerLayoutParams
+                layoutParams.height = buttonContainerSize
+                layoutParams.width = buttonContainerSize
             }
             updateButton.apply {
                 translationX = max
@@ -43,9 +44,8 @@ class InputActivity : NumberMasterActivity() {
                 layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
                 layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             }
+
             checkButton.apply {
-                translationX = max / 2
-                translationY = max / 2 - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)
                 layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
                 layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             }

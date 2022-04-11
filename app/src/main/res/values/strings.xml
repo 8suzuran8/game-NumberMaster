@@ -37,7 +37,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="button_swipe_bottom">button swipe bottom</string>
     <string name="button_swipe_left">button swipe left</string>
     <string name="copy_start_numbers">copy start numbers</string>
-    <string name="tap_to_start">TAP TO START</string>
+    <string name="tap_to_start">Where do you tap to start? Please guess.</string>
     <string name="howto_screen_shot">howto screen shot</string>
     <string name="number_panel_noN">number panel no. %d</string>
     <string name="please_enter_the_start_number">please enter the start number in input menu</string>

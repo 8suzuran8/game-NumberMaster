@@ -30,11 +30,20 @@ open class OpeningActivity : NumberMasterActivity() {
     private fun makeGlobalActivityInfo() {
         val layout = findViewById<FrameLayout>(R.id.base_root_layout)
 
+        // @todo 削除予定
         this.globalActivityInfo["meta:rootLayoutWidth"] = layout.width.toString()
         this.globalActivityInfo["meta:rootLayoutHeight"] = layout.height.toString()
-        this.globalActivityInfo["meta:otherSize"] = (layout.width / 10).toString()
 
-        this.globalActivityInfo["gameSpaceSize"] = (layout.width * 0.8).toString()
+        if (layout.width < layout.height) {
+            this.globalActivityInfo["meta:rootLayoutShort"] = layout.width.toString()
+            this.globalActivityInfo["meta:rootLayoutLong"] = layout.height.toString()
+        } else {
+            this.globalActivityInfo["meta:rootLayoutShort"] = layout.height.toString()
+            this.globalActivityInfo["meta:rootLayoutLong"] = layout.width.toString()
+        }
+        this.globalActivityInfo["meta:otherSize"] = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 10).toString()
+
+        this.globalActivityInfo["gameSpaceSize"] = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() * 0.8).toString()
         this.globalActivityInfo["boardFrameWidth"] = (this.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 40).toString()
 
         val gameSpaceSizeWithoutFrame = this.globalActivityInfo["gameSpaceSize"]!!.toFloat() - (this.globalActivityInfo["boardFrameWidth"]!!.toFloat() * 2)
@@ -82,7 +91,8 @@ open class OpeningActivity : NumberMasterActivity() {
         findViewById<TextView>(R.id.text).apply {
             updateLayoutParams {
                 // 戻るボタン分減らす
-                height = (globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat() - globalActivityInfo["meta:otherSize"]!!.toFloat()).toInt()
+                height = (globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+                width = height
             }
             visibility = TextView.VISIBLE
         }

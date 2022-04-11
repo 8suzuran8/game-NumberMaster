@@ -21,14 +21,16 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:id="@+id/button_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:background="@color/transparent"
             android:gravity="center"
             android:text="@string/input_message"
@@ -37,29 +39,30 @@
             app:flow_horizontalAlign="center" />
 
         <ImageButton
+            android:id="@+id/update_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/update_button"
+            android:alpha="0"
             android:background="@color/transparent"
             android:contentDescription="@string/update_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_update"
-            android:alpha="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/check_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/check_button"
+            android:layout_gravity="center_horizontal"
+            android:alpha="1"
             android:background="@color/transparent"
             android:contentDescription="@string/update_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_check"
-            android:alpha="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </LinearLayout>

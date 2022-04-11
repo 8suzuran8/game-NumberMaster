@@ -15,7 +15,8 @@
         <activity
             android:name=".OpeningActivity"
             android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,35 +25,43 @@
         <activity
             android:name=".MenuActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".GameActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".CheckActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".InputActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".RankingActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".HowtoActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".StoryActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ThxActivity"
             android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
