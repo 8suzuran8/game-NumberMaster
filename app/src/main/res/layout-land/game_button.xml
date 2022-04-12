@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/inner_root_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/button_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|end"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/button_3x3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/_3x3_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_enabled_3x3" />
+
+        <ImageButton
+            android:id="@+id/button_6x6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_3x3"
+            android:background="@color/transparent"
+            android:contentDescription="@string/_6x6_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_enabled_6x6" />
+
+        <ImageButton
+            android:id="@+id/button_9x9"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_6x6"
+            android:background="@color/transparent"
+            android:contentDescription="@string/_9x9_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_enabled_9x9" />
+
+        <ImageButton
+            android:id="@+id/button_secret"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_9x9"
+            android:background="@color/transparent"
+            android:contentDescription="@string/secret_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_disabled_secret" />
+
+        <ImageButton
+            android:id="@+id/button_finish"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_secret"
+            android:background="@color/transparent"
+            android:contentDescription="@string/finish_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_enabled_finish" />
+
+        <ImageButton
+            android:id="@+id/button_stop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_finish"
+            android:background="@color/transparent"
+            android:contentDescription="@string/stop_button"
+            android:onClick="buttonClickListener"
+            android:scaleType="fitStart"
+            android:src="@drawable/button_enabled_stop" />
+    </RelativeLayout>
+</merge>

@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout-land/activity_ranking.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/background.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/fragment_howto_page3.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout-land/game_button.xml" value="0.13385416666666666" />
         <entry key="app/src/main/res/layout/activity_check.xml" value="0.14351851851851852" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_game_tmp.xml" value="0.17708333333333334" />
@@ -43,6 +44,7 @@
         <entry key="app/src/main/res/layout/fragment_ranking_page0.xml" value="0.14969940185546876" />
         <entry key="app/src/main/res/layout/fragment_ranking_page1.xml" value="0.19904632568359376" />
         <entry key="app/src/main/res/layout/fragment_ranking_page2.xml" value="0.19684753417968756" />
+        <entry key="app/src/main/res/layout/game_button.xml" value="0.23796296296296296" />
         <entry key="app/src/main/res/layout/layout_fragment.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/story_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/test.xml" value="0.2587890625" />

@@ -47,7 +47,7 @@ class MenuActivity : NumberMasterActivity() {
         }
 
         val that = this
-        this.menuSize = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (this.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+        this.menuSize = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (this.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4)).toInt()
 
         this.menuY = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             ((this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()) / 2) - (this.menuSize!! / 2) - this.globalActivityInfo["meta:otherSize"]!!.toFloat()
@@ -62,11 +62,11 @@ class MenuActivity : NumberMasterActivity() {
         val activityLayout = layoutInflater.inflate(R.layout.activity_menu, inflateRootLayout)
         val layoutBinding: ActivityMenuBinding = ActivityMenuBinding.bind(activityLayout).apply {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                titleImage.pivotX = (that.menuSize!! / 2).toFloat()
+                titleImage.pivotX = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2) - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
                 titleImage.pivotY = 0F
             } else {
                 titleImage.pivotX = 0F
-                titleImage.pivotY = (that.menuSize!! / 2).toFloat()
+                titleImage.pivotY = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2) - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
             }
             titleImage.stateListAnimator = AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_title)
             menuLayout.setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
@@ -121,11 +121,11 @@ class MenuActivity : NumberMasterActivity() {
 
         findViewById<ImageView>(R.id.title_image).apply {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                pivotX = (that.menuSize!! / 2).toFloat()
+                pivotX = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2) - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
                 pivotY = 0F
             } else {
                 pivotX = 0F
-                pivotY = (that.menuSize!! / 2).toFloat()
+                pivotY = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2) - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
             }
         }
     }

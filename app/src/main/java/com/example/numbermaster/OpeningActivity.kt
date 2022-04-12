@@ -43,7 +43,7 @@ open class OpeningActivity : NumberMasterActivity() {
         }
         this.globalActivityInfo["meta:otherSize"] = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 10).toString()
 
-        this.globalActivityInfo["gameSpaceSize"] = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() * 0.8).toString()
+        this.globalActivityInfo["gameSpaceSize"] = ((this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() * 0.8) - (this.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toString()
         this.globalActivityInfo["boardFrameWidth"] = (this.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 40).toString()
 
         val gameSpaceSizeWithoutFrame = this.globalActivityInfo["gameSpaceSize"]!!.toFloat() - (this.globalActivityInfo["boardFrameWidth"]!!.toFloat() * 2)

@@ -18,6 +18,7 @@ import com.example.numbermaster.databinding.ActivityRankingBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
+// @todo 横向きでコピーをするとエラーになる。
 class RankingActivity : NumberMasterActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var numberMasterViewPager: NumberMasterViewPager

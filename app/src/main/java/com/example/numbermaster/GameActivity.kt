@@ -1,6 +1,7 @@
 package com.example.numbermaster
 
 import android.app.AlertDialog
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.media.AudioManager
@@ -36,10 +37,10 @@ class GameActivity : NumberMasterActivity() {
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_game, inflateRootLayout)
         val layoutBinding: ActivityGameBinding = ActivityGameBinding.bind(activityLayout).apply {
-            status.layoutParams.height = (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
+            status.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
 
-            fullSpace.layoutParams.width = that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat().toInt()
-            fullSpace.layoutParams.height = that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat().toInt()
+            fullSpace.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+            fullSpace.layoutParams.height = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
             layoutMiddle.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             boardStandLayout.layoutParams.width = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             boardStandLayout.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
@@ -50,27 +51,18 @@ class GameActivity : NumberMasterActivity() {
             buttonSwipeRight.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             buttonSwipeTop.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
 
-            buttonContainer.layoutParams.height = (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
-            button3x3.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            button3x3.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            button6x6.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            button6x6.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            button9x9.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            button9x9.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonSecret.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonSecret.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonFinish.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonFinish.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonStop.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonStop.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
         }
 
         val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
             setMargins(
                 0,
-                that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt(),
                 0,
-                that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                0,
+                if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                } else {
+                    0
+                }
             )
         }
         addContentView(layoutBinding.rootLayout, layoutParams)
@@ -185,6 +177,43 @@ class GameActivity : NumberMasterActivity() {
         super.initialProcess(globalActivityInfo)
 
         val that = this
+
+
+        findViewById<RelativeLayout>(R.id.button_container).apply {
+            if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                layoutParams.width = that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
+                layoutParams.height =
+                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
+            } else {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
+                layoutParams.height =that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
+            }
+        }
+
+        val button3x3 = findViewById<ImageButton>(R.id.button_3x3)
+        button3x3.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        button3x3.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val button6x6 = findViewById<ImageButton>(R.id.button_6x6)
+        button6x6.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        button6x6.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val button9x9 = findViewById<ImageButton>(R.id.button_9x9)
+        button9x9.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        button9x9.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val buttonSecret = findViewById<ImageButton>(R.id.button_secret)
+        buttonSecret.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        buttonSecret.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val buttonFinish = findViewById<ImageButton>(R.id.button_finish)
+        buttonFinish.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        buttonFinish.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val buttonStop = findViewById<ImageButton>(R.id.button_stop)
+        buttonStop.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        buttonStop.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
 
         this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
 

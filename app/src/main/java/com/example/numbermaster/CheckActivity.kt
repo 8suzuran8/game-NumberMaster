@@ -18,18 +18,13 @@ class CheckActivity : NumberMasterActivity() {
 
         this.convertIntentExtraToGlobalActivityInfo()
 
-        val gameY = (this.globalActivityInfo["meta:rootLayoutHeight"]!!.toFloat() / 2) - (this.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat() / 2) - this.globalActivityInfo["meta:otherSize"]!!.toFloat()
-
         val that = this
 
         val inflateRootLayout = findViewById<ConstraintLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_check, inflateRootLayout)
         val layoutBinding: ActivityCheckBinding = ActivityCheckBinding.bind(activityLayout).apply {
-            fullSpace.layoutParams.width = that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat().toInt()
-            fullSpace.layoutParams.height = that.globalActivityInfo["meta:rootLayoutWidth"]!!.toFloat().toInt()
-            val fullSpaceLayoutParams = fullSpace.layoutParams as ConstraintLayout.LayoutParams
-            fullSpaceLayoutParams.setMargins(0, gameY.toInt(), 0, 0)
-            fullSpace.layoutParams = fullSpaceLayoutParams
+            fullSpace.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+            fullSpace.layoutParams.height = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
             layoutMiddle.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             boardStandLayout.layoutParams.width = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             boardStandLayout.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()

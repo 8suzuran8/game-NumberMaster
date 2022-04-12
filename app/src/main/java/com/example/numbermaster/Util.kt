@@ -29,7 +29,7 @@ object Util {
         for (zIndex in 0..5) {
             for (yIndex in 0..8) {
                 for (xIndex in 0..8) {
-                    val index = xIndex + (yIndex * 9) + (zIndex * 6)
+                    val index = xIndex + (yIndex * 9) + (zIndex * 9 * 9)
                     val char = numbers.substring(index, index + 1)
                     if (cubeMode) {
                         if (yIndex < (size * 3) && xIndex < (size * 3)) {

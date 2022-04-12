@@ -10,14 +10,15 @@
         android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:autoSizeTextType="uniform"
         android:lines="1"
         android:text="@string/status"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/full_space"
@@ -133,79 +134,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/button_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageButton
-            android:id="@+id/button_3x3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:contentDescription="@string/_3x3_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_enabled_3x3" />
-
-        <ImageButton
-            android:id="@+id/button_6x6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/button_3x3"
-            android:background="@color/transparent"
-            android:contentDescription="@string/_6x6_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_enabled_6x6" />
-
-        <ImageButton
-            android:id="@+id/button_9x9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/button_6x6"
-            android:background="@color/transparent"
-            android:contentDescription="@string/_9x9_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_enabled_9x9" />
-
-        <ImageButton
-            android:id="@+id/button_secret"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/button_9x9"
-            android:background="@color/transparent"
-            android:contentDescription="@string/secret_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_disabled_secret" />
-
-        <ImageButton
-            android:id="@+id/button_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/button_secret"
-            android:background="@color/transparent"
-            android:contentDescription="@string/finish_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_enabled_finish" />
-
-        <ImageButton
-            android:id="@+id/button_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/button_finish"
-            android:background="@color/transparent"
-            android:contentDescription="@string/stop_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitStart"
-            android:src="@drawable/button_enabled_stop" />
-    </RelativeLayout>
+    <include layout="@layout/game_button" />
 
     <ImageView
         android:id="@+id/effect"
