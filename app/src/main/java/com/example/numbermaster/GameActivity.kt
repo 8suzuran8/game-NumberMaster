@@ -150,6 +150,16 @@ class GameActivity : NumberMasterActivity() {
                 this.dialogs["finish"]!!.show()
             }
             R.id.button_stop -> {
+                if (!this.numberMaster!!.buttons["3x3"]!!.isEnabled) {
+                    this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                } else {
+                    this.requestedOrientation = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    } else {
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    }
+                }
+
                 this.numberMaster!!.buttonClickStopProcess()
             }
         }
