@@ -30,10 +30,6 @@ open class OpeningActivity : NumberMasterActivity() {
     private fun makeGlobalActivityInfo() {
         val layout = findViewById<FrameLayout>(R.id.base_root_layout)
 
-        // @todo 削除予定
-        this.globalActivityInfo["meta:rootLayoutWidth"] = layout.width.toString()
-        this.globalActivityInfo["meta:rootLayoutHeight"] = layout.height.toString()
-
         if (layout.width < layout.height) {
             this.globalActivityInfo["meta:rootLayoutShort"] = layout.width.toString()
             this.globalActivityInfo["meta:rootLayoutLong"] = layout.height.toString()

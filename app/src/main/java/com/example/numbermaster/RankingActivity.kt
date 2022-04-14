@@ -8,17 +8,13 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.ListView
-import android.widget.RelativeLayout
+import android.widget.*
 import androidx.core.view.setMargins
 import androidx.viewpager2.widget.ViewPager2
 import com.example.numbermaster.databinding.ActivityRankingBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-// @todo 横向きでコピーをするとエラーになる。
 class RankingActivity : NumberMasterActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var numberMasterViewPager: NumberMasterViewPager
@@ -148,10 +144,20 @@ class RankingActivity : NumberMasterActivity() {
             }
 
             R.id.copy_button -> {
+                if (!this.dialogs[DIALOG_TYPE_COPY]!!.containsKey(view.contentDescription.toString())) {
+                    this.dialogs[DIALOG_TYPE_COPY]!![view.contentDescription.toString()] =
+                        this.createDialog(DIALOG_TYPE_COPY, view.contentDescription.toString().toInt())
+                }
+
                 this.dialogs[DIALOG_TYPE_COPY]!![view.contentDescription.toString()]!!.show()
             }
 
             R.id.recycle_button -> {
+                if (!this.dialogs[DIALOG_TYPE_DELETE]!!.containsKey(view.contentDescription.toString())) {
+                    this.dialogs[DIALOG_TYPE_DELETE]!![view.contentDescription.toString()] =
+                        this.createDialog(DIALOG_TYPE_DELETE, view.contentDescription.toString().toInt())
+                }
+
                 this.dialogs[DIALOG_TYPE_DELETE]!![view.contentDescription.toString()]!!.show()
             }
         }
