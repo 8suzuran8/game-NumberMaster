@@ -7,4 +7,5 @@
     <color name="text_box_background_default">#FFC0C0C0</color>
     <color name="text_box_background_ok">#FF00C0FF</color>
     <color name="text_box_background_ng">#FFFF5050</color>
+    <color name="text_link">#0040FF</color>
 </resources>

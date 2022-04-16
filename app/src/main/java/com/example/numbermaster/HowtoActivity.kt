@@ -1,6 +1,8 @@
 package com.example.numbermaster
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -70,6 +72,11 @@ class HowtoActivity : NumberMasterActivity() {
         when (view.id) {
             R.id.prev_button -> {
                 this.finish()
+            }
+
+            R.id.textView2 -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(this.getString(R.string.howto_link)))
+                startActivity(intent)
             }
         }
     }
