@@ -79,7 +79,9 @@ class InputActivity : NumberMasterActivity() {
         val numbers = textBox.text.toString()
 
         val dbHelper = NumberMasterOpenHelper(this)
-        if (Util.validate(numbers) || dbHelper.testModeNumbers.contains(numbers)) {
+        val settings = dbHelper.loadSettings()
+
+        if (Util.validate(numbers, settings["counter_stop_count"]!!.toInt()) || dbHelper.testModeNumbers.contains(numbers)) {
             dbHelper.writeByInput(numbers)
 
             textBox.setText("")
@@ -93,7 +95,10 @@ class InputActivity : NumberMasterActivity() {
         val textBox = findViewById<TextInputEditText>(R.id.text_box)
         val numbers = textBox.text.toString()
 
-        if (Util.validate(numbers)) {
+        val dbHelper = NumberMasterOpenHelper(this)
+        val settings = dbHelper.loadSettings()
+
+        if (Util.validate(numbers, settings["counter_stop_count"]!!.toInt())) {
             this.checkActivityIntent!!.putExtra("numbers", numbers)
             startActivity(this.checkActivityIntent)
             return

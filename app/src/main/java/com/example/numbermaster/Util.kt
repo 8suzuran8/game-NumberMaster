@@ -19,12 +19,16 @@ object Util {
      * InputActivityで入力された値のバリデーション(unit testのため、ここに置く)
      * @see "NumberMasterUtilUnitTest.validateUnitTest"
      */
-    fun validate(numbers: String): Boolean {
+    fun validate(numbers: String, counterStopCount: Int = 1): Boolean {
         if (numbers.length != (9 * 9 * 6)) return false
 
         val zeroIndex = numbers.indexOf("0")
         val size = ((zeroIndex + 1) / 3)
         val cubeMode = numbers.substring(9 * 9 + 1, 9 * 9 + 2) != "0"
+
+        if (counterStopCount == 0 && cubeMode) {
+            return false
+        }
 
         for (zIndex in 0..5) {
             for (yIndex in 0..8) {
