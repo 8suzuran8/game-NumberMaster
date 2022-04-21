@@ -2,21 +2,33 @@
 <html>
     <head>
         <style>
-         table {
-             width: 300px;
-             height: 300px;
+         body {
+             background: #f77;
+         }
+         form {
+             margin-bottom: 2em;
+         }
+         #target { /* section */
+             background: url("board_frame.png") no-repeat;
+             background-size: 315px 315px;
+             padding: 7.5px;
+             margin: 2em;
+             width: 315px;
+             height: 315px;
          }
          table.size1 {
              background: url("texture1.png") no-repeat;
-             background-size: 300px 300px;
          }
          table.size2 {
              background: url("texture2.png") no-repeat;
-             background-size: 300px 300px;
          }
          table.size3 {
              background: url("texture3.png") no-repeat;
+         }
+         table.size1, table.size2, table.size3 {
              background-size: 300px 300px;
+             width: 300px;
+             height: 300px;
          }
 
          td.number0 {
