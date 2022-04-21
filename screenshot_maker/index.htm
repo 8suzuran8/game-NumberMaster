@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+         table {
+             width: 300px;
+             height: 300px;
+         }
+         table.size1 {
+             background: url("texture1.png") no-repeat;
+             background-size: 300px 300px;
+         }
+         table.size2 {
+             background: url("texture2.png") no-repeat;
+             background-size: 300px 300px;
+         }
+         table.size3 {
+             background: url("texture3.png") no-repeat;
+             background-size: 300px 300px;
+         }
+
+         td.number0 {
+             background: url("number0.png") no-repeat;
+         }
+         td.number1 {
+             background: url("number1.png") no-repeat;
+         }
+         td.number2 {
+             background: url("number2.png") no-repeat;
+         }
+         td.number3 {
+             background: url("number3.png") no-repeat;
+         }
+         td.number4 {
+             background: url("number4.png") no-repeat;
+         }
+         td.number5 {
+             background: url("number5.png") no-repeat;
+         }
+         td.number6 {
+             background: url("number6.png") no-repeat;
+         }
+         td.number7 {
+             background: url("number7.png") no-repeat;
+         }
+         td.number8 {
+             background: url("number8.png") no-repeat;
+         }
+         td.number9 {
+             background: url("number9.png") no-repeat;
+         }
+         table.size1 td {
+             background-size: 97px 97px;
+             width: 100px;
+             height: 100px;
+         }
+         table.size2 td {
+             background-size: 47px 47px;
+             width: 50px;
+             height: 50px;
+         }
+         table.size3 td {
+             background-size: 30px 30px;
+             width: 0;
+             height: 0;
+         }
+         table td {
+             padding: 0px;
+             background-position: 0 0;
+         }
+        </style>
+        <script>
+         function make() {
+             var size = parseInt(document.getElementById("size").value)
+             var numbers = document.getElementById("numbers").value
+             var template = document.getElementById("template" + size).content.cloneNode(true)
+
+             for (var x = 0; x < 9; x ++) {
+                 if (size * 3 <= x) break;
+
+                 for (var y = 0; y < 9; y ++) {
+
+                     if (size * 3 <= y) break;
+
+                     var number = numbers.charAt((y * 9) + x)
+                     // table -> tbody -> tr -> td
+                     if (number == " ") number = "0"
+                     template.children[0].children[0].children[y].children[x].className = "number" + number
+                 }
+             }
+
+             document.getElementById("target").innerHTML = ""
+             document.getElementById("target").append(template)
+         }
+
+         window.onload = function() {
+             document.getElementById("make_button").addEventListener('click', make);
+         }
+        </script>
+    </head>
+
+    <body>
+        <form id="form" onsubmit="return false">
+            <select id="size">
+                <option value="1">1
+                <option value="2">2
+                <option value="3">3
+            </select>
+            <input id="numbers" type="text">
+            <input id="make_button" type="submit" value="make">
+        </form>
+
+        <template id="template1">
+            <table class="size1">
+                <tr><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td></tr>
+            </table>
+        </template>
+
+        <template id="template2">
+            <table class="size2">
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </table>
+        </template>
+
+        <template id="template3">
+            <table class="size3">
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </table>
+        </template>
+
+        <section id="target">
+        </section>
+    </body>
+</html>
