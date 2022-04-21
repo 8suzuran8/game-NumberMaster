@@ -4,6 +4,7 @@ import android.animation.*
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +17,7 @@ import kotlin.concurrent.timer
 class MenuActivity : NumberMasterActivity() {
     private var activityIntents: MutableMap<Int, Intent?> = mutableMapOf(
         R.id.menu_start_button to null,
+        R.id.menu_quest_button to null,
         R.id.menu_input_button to null,
         R.id.menu_ranking_button to null,
         R.id.menu_howto_button to null,
@@ -150,9 +152,11 @@ class MenuActivity : NumberMasterActivity() {
         }
 
         // 存在しないメニューを押したら、ここで終了
-        if (!this.activityIntents.contains(view.id) || this.activityIntents[view.id] == null) {
-            if (view.id != R.id.prev_button) {
-                return
+        if (view.id != R.id.menu_quest_button) {
+            if (!this.activityIntents.contains(view.id) || this.activityIntents[view.id] == null) {
+                if (view.id != R.id.prev_button) {
+                    return
+                }
             }
         }
 
@@ -179,6 +183,10 @@ class MenuActivity : NumberMasterActivity() {
                     }
                 }
                 return
+            }
+            R.id.menu_quest_button -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(this.getString(R.string.quest_link)))
+                startActivity(intent)
             }
             else -> {
                 startActivity(this.activityIntents[view.id])

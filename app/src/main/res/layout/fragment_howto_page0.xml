@@ -21,17 +21,6 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView"
-                android:text="@string/howto_link"
-                android:textColor="@color/text_link"
-                android:onClick="buttonClickListener"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </RelativeLayout>
 
         <ImageView

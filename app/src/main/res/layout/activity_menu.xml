@@ -35,7 +35,7 @@
                 android:src="@drawable/transparent" />
 
             <ImageButton
-                android:id="@+id/menu_none1_button"
+                android:id="@+id/menu_quest_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
