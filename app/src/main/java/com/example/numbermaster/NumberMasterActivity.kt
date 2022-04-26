@@ -81,7 +81,7 @@ open class NumberMasterActivity : AppCompatActivity() {
         this.initialProcess(this.globalActivityInfo)
     }
 
-    open fun initialProcess(globalActivityInfo: MutableMap<String, String>) {
+    open fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean = true) {
         val that = this
         // 背景のアニメーション用
         findViewById<ImageView>(R.id.background_image1).apply {
@@ -133,8 +133,11 @@ open class NumberMasterActivity : AppCompatActivity() {
             visibility = ImageView.VISIBLE
             pivotX = globalActivityInfo["meta:otherSize"]!!.toFloat() / 2
             pivotY = globalActivityInfo["meta:otherSize"]!!.toFloat()
-            stateListAnimator =
-                AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
+
+            if (prevButtonAnimation) {
+                stateListAnimator =
+                    AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
+            }
         }
 
         findViewById<TextView>(R.id.prev_button_text).apply {

@@ -1,5 +1,6 @@
 package com.example.numbermaster
 
+import android.animation.AnimatorInflater
 import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -67,11 +68,34 @@ class GameActivity : NumberMasterActivity() {
         }
         addContentView(layoutBinding.rootLayout, layoutParams)
 
+        this.hideGame()
+
         this.dialogs["3x3"] = this.createDialog(R.id.button_3x3)
         this.dialogs["6x6"] = this.createDialog(R.id.button_6x6)
         this.dialogs["9x9"] = this.createDialog(R.id.button_9x9)
         this.dialogs["secret"] = this.createDialog(R.id.button_secret)
         this.dialogs["finish"] = this.createDialog(R.id.button_finish)
+    }
+
+    /*
+    NumberMaster.invisibleCubeEventの終了時に実行している
+    private fun viewGame() {
+        findViewById<FrameLayout>(R.id.root_layout).apply {
+            z = 1F
+        }
+        findViewById<FrameLayout>(R.id.base_root_layout).apply {
+            z = 0F
+        }
+    }
+     */
+
+    private fun hideGame() {
+        findViewById<FrameLayout>(R.id.root_layout).apply {
+            z = 0F
+        }
+        findViewById<FrameLayout>(R.id.base_root_layout).apply {
+            z = 1F
+        }
     }
 
     /*
@@ -183,11 +207,10 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent()
     }
 
-    override fun initialProcess(globalActivityInfo: MutableMap<String, String>) {
-        super.initialProcess(globalActivityInfo)
+    override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
+        super.initialProcess(globalActivityInfo, false)
 
         val that = this
-
 
         findViewById<RelativeLayout>(R.id.button_container).apply {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
@@ -227,6 +250,12 @@ class GameActivity : NumberMasterActivity() {
 
         this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
 
+        // 音楽とアニメーションを合わせるため、この位置
+        findViewById<ImageView>(R.id.prev_button_image).apply {
+            stateListAnimator =
+                AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
+        }
+
         // boardStandの設定
         this.numberMaster!!.boardStandLayout = findViewById(R.id.board_stand_layout)
         this.numberMaster!!.boardStandForeground = findViewById(R.id.board_stand_foreground)
@@ -248,8 +277,12 @@ class GameActivity : NumberMasterActivity() {
         }
 
         // effectの設定
-        this.numberMaster!!.effect = findViewById(R.id.effect)
-        this.numberMaster!!.effect2 = findViewById(R.id.effect2)
+        this.numberMaster!!.effect = findViewById<ImageView>(R.id.effect).apply {
+            visibility = ImageView.INVISIBLE
+        }
+        this.numberMaster!!.effect2 = findViewById<ImageView>(R.id.effect2).apply {
+            visibility = ImageView.INVISIBLE
+        }
 
         // buttonsの設定
         val buttonContainer = findViewById<RelativeLayout>(R.id.button_container)

@@ -52,7 +52,6 @@ import android.os.Looper
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageButton
-import androidx.annotation.UiThread
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.updateLayoutParams
@@ -353,36 +352,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         } else {
             this.effect!!.setImageBitmap(this.images["effect_magic_square"]!!)
         }
-        ObjectAnimator.ofPropertyValuesHolder(
-            that.effect,
-            PropertyValuesHolder.ofInt("imageAlpha", 200),
-            PropertyValuesHolder.ofFloat("rotation", 45F)
-        ).apply {
-            duration = 300
-            addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    super.onAnimationEnd(animation)
 
-                    ObjectAnimator.ofPropertyValuesHolder(
-                        that.effect,
-                        PropertyValuesHolder.ofInt("imageAlpha", 0),
-                        PropertyValuesHolder.ofFloat("rotation", 90F)
-                    ).apply {
-                        duration = 300
-                        addListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                super.onAnimationEnd(animation)
-                                that.effect!!.visibility = View.INVISIBLE
-                                that.effect!!.rotation = 0F
-                            }
-                        })
-                        start()
-                    }
-                }
-            })
-            start()
-        }
         this.effect!!.visibility = View.VISIBLE
+        this.effect!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
 
         // スコアの計算
         var addScore = 0
@@ -581,6 +553,13 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     that.updateNumberPanel()
                     that.boardStandLayout!!.visibility = FrameLayout.VISIBLE
                     that.cube!!.visibility = View.INVISIBLE
+
+                    activity.findViewById<FrameLayout>(R.id.root_layout).apply {
+                        z = 1F
+                    }
+                    activity.findViewById<FrameLayout>(R.id.base_root_layout).apply {
+                        z = 0F
+                    }
                 }
             }
         }
@@ -869,7 +848,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         return false
     }
 
-    @UiThread
     fun updateNumberPanel() {
         var numberPanelViewIndex = 0
         val sizeMax = this.numberMasterCalculator.getSizeMax(this.status["size"]!!.toInt())

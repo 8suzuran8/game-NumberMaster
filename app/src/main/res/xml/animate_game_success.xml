@@ -1,0 +1,40 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:repeatCount="0"
+                android:propertyName="rotation"
+                android:duration="300"
+                android:valueFrom="0"
+                android:valueTo="45"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:repeatCount="0"
+                android:repeatMode="reverse"
+                android:propertyName="alpha"
+                android:duration="300"
+                android:valueTo="200"
+                android:valueType="floatType"
+                android:interpolator="@anim/interval"/>
+
+            <objectAnimator
+                android:repeatCount="0"
+                android:propertyName="rotation"
+                android:duration="300"
+                android:startOffset="300"
+                android:valueFrom="45"
+                android:valueTo="90"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:repeatCount="0"
+                android:repeatMode="reverse"
+                android:propertyName="alpha"
+                android:duration="300"
+                android:startOffset="300"
+                android:valueTo="0"
+                android:valueType="floatType"
+                android:interpolator="@anim/interval"/>
+        </set>
+    </item>
+</selector>

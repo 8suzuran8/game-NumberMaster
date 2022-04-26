@@ -143,7 +143,8 @@
         android:contentDescription="@string/effect"
         android:scaleType="fitCenter"
         android:src="@drawable/effect_magic_square"
-        android:visibility="invisible" />
+        android:visibility="visible"
+        android:stateListAnimator="@xml/animate_game_success" />
 
     <ImageView
         android:id="@+id/effect2"
@@ -153,5 +154,6 @@
         android:scaleType="centerCrop"
         android:alpha="0"
         android:src="@drawable/thunder1"
-        android:visibility="invisible" />
+        android:visibility="visible"
+        android:stateListAnimator="@xml/animate_game_thunder" />
 </FrameLayout>

@@ -117,8 +117,8 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent()
     }
 
-    override fun initialProcess(globalActivityInfo: MutableMap<String, String>) {
-        super.initialProcess(globalActivityInfo)
+    override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
+        super.initialProcess(globalActivityInfo, prevButtonAnimation)
 
         val that = this
 

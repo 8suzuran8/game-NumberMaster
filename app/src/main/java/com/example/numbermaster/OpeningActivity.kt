@@ -80,8 +80,8 @@ open class OpeningActivity : NumberMasterActivity() {
         }
     }
 
-    override fun initialProcess(globalActivityInfo: MutableMap<String, String>) {
-        super.initialProcess(globalActivityInfo)
+    override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
+        super.initialProcess(globalActivityInfo, prevButtonAnimation)
 
         val that = this
         findViewById<TextView>(R.id.text).apply {
