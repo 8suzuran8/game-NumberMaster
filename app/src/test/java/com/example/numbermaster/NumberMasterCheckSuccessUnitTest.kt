@@ -33,6 +33,41 @@ class NumberMasterCheckSuccessUnitTest {
             mutableListOf(8, 3, 4),
         ),
     )
+    private val checkOrderByNumbers6x6 = listOf(
+        mutableListOf( // 6x6
+            mutableListOf(1, 2, 3, 1, 2, 3, 0, 0, 0), // 0
+            mutableListOf(4, 5, 6, 4, 5, 6, 0, 0, 0), // 1
+            mutableListOf(7, 8, 9, 7, 8, 9, 0, 0, 0), // 2
+            mutableListOf(1, 2, 3, 1, 2, 3, 0, 0, 0), // 3
+            mutableListOf(4, 5, 6, 4, 5, 6, 0, 0, 0), // 4
+            mutableListOf(7, 8, 9, 7, 8, 9, 0, 0, 0), // 5
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 6
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 7
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 8
+        ),
+        mutableListOf( // 固まり
+            mutableListOf(1, 1, 2, 2, 3, 3, 0, 0, 0), // 0
+            mutableListOf(1, 1, 2, 2, 3, 3, 0, 0, 0), // 1
+            mutableListOf(4, 4, 5, 5, 6, 6, 0, 0, 0), // 2
+            mutableListOf(4, 4, 5, 5, 6, 6, 0, 0, 0), // 3
+            mutableListOf(7, 7, 8, 8, 9, 9, 0, 0, 0), // 4
+            mutableListOf(7, 7, 8, 8, 9, 9, 0, 0, 0), // 5
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 6
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 7
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 8
+        ),
+        mutableListOf( // 固まり
+            mutableListOf(1, 1, 4, 4, 7, 7, 0, 0, 0), // 0
+            mutableListOf(1, 1, 4, 4, 7, 7, 0, 0, 0), // 1
+            mutableListOf(2, 2, 5, 5, 8, 8, 0, 0, 0), // 2
+            mutableListOf(2, 2, 5, 5, 8, 8, 0, 0, 0), // 3
+            mutableListOf(3, 3, 6, 6, 9, 9, 0, 0, 0), // 4
+            mutableListOf(3, 3, 6, 6, 9, 9, 0, 0, 0), // 5
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 6
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 7
+            mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0), // 8
+        ),
+    )
     private val checkOrderByNumbers = listOf(
         /**
          * 一段違いの逆サイドは、隣り合っているとする。
@@ -942,6 +977,13 @@ class NumberMasterCheckSuccessUnitTest {
                 if (sizeMax < 8 && index >= 4) break
                 val result = this.numberMasterCheckSuccess.checkAll(mutableListOf(element), sizeMax, 0)
                 assertEquals(1, result)
+            }
+            // 6x6専用
+            if (sizeMax == 5) {
+                for (element in this.checkOrderByNumbers6x6) {
+                    val result = this.numberMasterCheckSuccess.checkAll(mutableListOf(element), sizeMax, 0)
+                    assertEquals(1, result)
+                }
             }
         }
     }

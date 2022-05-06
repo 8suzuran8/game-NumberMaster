@@ -131,7 +131,9 @@ class NumberMasterCheckSuccess {
             if (result) return true
         }
 
-        if (this.sizeMax!! == 8) {
+        if (this.sizeMax!! == 5) {
+            return this.checkOrderByNumber6x6(number)
+        } else if (this.sizeMax!! == 8) {
             return this.checkOrderByNumber9x9(number)
         }
 
@@ -187,6 +189,48 @@ class NumberMasterCheckSuccess {
 
         if (this.trueCount(checkPatternResults) > 0) return true
 
+        return false
+    }
+
+    private fun checkOrderByNumber6x6(number: MutableList<MutableList<Int>>): Boolean {
+        val patterns = mutableListOf(
+            mutableListOf(
+                mutableListOf(1, 1, 2, 2, 3, 3), // 0
+                mutableListOf(1, 1, 2, 2, 3, 3), // 1
+                mutableListOf(4, 4, 5, 5, 6, 6), // 2
+                mutableListOf(4, 4, 5, 5, 6, 6), // 3
+                mutableListOf(7, 7, 8, 8, 9, 9), // 4
+                mutableListOf(7, 7, 8, 8, 9, 9), // 5
+            ),
+            mutableListOf(
+                mutableListOf(3, 3, 2, 2, 1, 1), // 0
+                mutableListOf(3, 3, 2, 2, 1, 1), // 1
+                mutableListOf(6, 6, 5, 5, 4, 4), // 2
+                mutableListOf(6, 6, 5, 5, 4, 4), // 3
+                mutableListOf(9, 9, 8, 8, 7, 7), // 4
+                mutableListOf(9, 9, 8, 8, 7, 7), // 5
+            ),
+        )
+
+        for (pattern in patterns) {
+            var checkPattern = pattern
+            for (rotateIndex in 0..3) {
+                var match = true
+                for (yIndex in pattern.indices) {
+                    for (xIndex in pattern[yIndex].indices) {
+                        if (number[yIndex][xIndex] != pattern[yIndex][xIndex]) {
+                            match = false
+                            break
+                        }
+                    }
+                    if (!match) break
+                }
+
+                if (match) return true
+
+                checkPattern = this.numberMasterCalculator!!.rotate2DList(checkPattern, 5)
+            }
+        }
         return false
     }
 
