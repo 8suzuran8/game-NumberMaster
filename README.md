@@ -12,3 +12,9 @@ Then press the Download button.
 Since it is not installed from Google Play, it appears as a harmful application.
 
 However, nothing is as secure as the source code is published, so feel free to install and play with it.
+
+|STEP1|STEP2|STEP3|
+|---|---|---
+|![screen1](https://user-images.githubusercontent.com/95464364/167235778-8cc87be9-5ef1-4161-a43f-78fb026ee23b.png)|![screen2](https://user-images.githubusercontent.com/95464364/167235797-f789cc8a-3352-430f-96e5-ff6420ce8664.png)|![screen3](https://user-images.githubusercontent.com/95464364/167235801-6d5b8d6f-53a7-43e8-979d-6f67e5cb209f.png)|
+
+
