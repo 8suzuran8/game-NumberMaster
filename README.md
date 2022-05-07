@@ -6,8 +6,8 @@
 
 ## Install and play game
 Go to the [installation file directory](https://github.com/8suzuran8/NumberMaster/tree/main/app/release) and
-Tap app-release.apk or app-release.aab.
-Then press the Download button.
+Tap app-release.apk.
+Then press the View raw link.
 
 Since it is not installed from Google Play, it appears as a harmful application.
 
