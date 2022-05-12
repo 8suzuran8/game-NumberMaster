@@ -49,9 +49,11 @@ import android.media.SoundPool
 import android.opengl.GLSurfaceView
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.updateLayoutParams
@@ -554,8 +556,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     that.boardStandLayout!!.visibility = FrameLayout.VISIBLE
                     that.cube!!.visibility = View.INVISIBLE
 
-                    activity.findViewById<FrameLayout>(R.id.root_layout).apply {
-                        z = 1F
+                    try {
+                        activity.findViewById<FrameLayout>(R.id.root_layout).apply {
+                            z = 1F
+                        }
+                    } catch(exception: Exception) {
+                        activity.findViewById<ConstraintLayout>(R.id.root_layout).apply {
+                            z = 1F
+                        }
                     }
                     activity.findViewById<FrameLayout>(R.id.base_root_layout).apply {
                         z = 0F
