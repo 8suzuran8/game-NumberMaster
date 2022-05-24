@@ -20,7 +20,7 @@ class GameActivity : NumberMasterActivity() {
         "3x3" to null,
         "6x6" to null,
         "9x9" to null,
-        "secret" to null,
+        "cube" to null,
         "finish" to null,
     )
 
@@ -73,7 +73,7 @@ class GameActivity : NumberMasterActivity() {
         this.dialogs["3x3"] = this.createDialog(R.id.button_3x3)
         this.dialogs["6x6"] = this.createDialog(R.id.button_6x6)
         this.dialogs["9x9"] = this.createDialog(R.id.button_9x9)
-        this.dialogs["secret"] = this.createDialog(R.id.button_secret)
+        this.dialogs["cube"] = this.createDialog(R.id.button_cube)
         this.dialogs["finish"] = this.createDialog(R.id.button_finish)
     }
 
@@ -167,11 +167,17 @@ class GameActivity : NumberMasterActivity() {
             R.id.button_9x9 -> {
                 this.dialogs["9x9"]!!.show()
             }
-            R.id.button_secret -> {
-                this.dialogs["secret"]!!.show()
+            R.id.button_cube -> {
+                this.dialogs["cube"]!!.show()
             }
             R.id.button_finish -> {
                 this.dialogs["finish"]!!.show()
+            }
+            R.id.button_secret -> {
+                this.numberMaster!!.buttonClickSecretProcess()
+            }
+            R.id.button_blindfold -> {
+                this.numberMaster!!.buttonClickBlindfoldProcess()
             }
             R.id.button_stop -> {
                 if (!this.numberMaster!!.buttons["3x3"]!!.isEnabled) {
@@ -216,10 +222,10 @@ class GameActivity : NumberMasterActivity() {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
                 layoutParams.width = that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
                 layoutParams.height =
-                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
+                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 1).toInt()
             } else {
                 layoutParams.width =
-                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2).toInt()
+                    (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 1).toInt()
                 layoutParams.height =that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
             }
         }
@@ -239,6 +245,14 @@ class GameActivity : NumberMasterActivity() {
         val buttonSecret = findViewById<ImageButton>(R.id.button_secret)
         buttonSecret.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
         buttonSecret.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val buttonCube = findViewById<ImageButton>(R.id.button_cube)
+        buttonCube.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        buttonCube.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+
+        val buttonBlindfold = findViewById<ImageButton>(R.id.button_blindfold)
+        buttonBlindfold.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        buttonBlindfold.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
 
         val buttonFinish = findViewById<ImageButton>(R.id.button_finish)
         buttonFinish.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
@@ -286,11 +300,16 @@ class GameActivity : NumberMasterActivity() {
 
         // buttonsの設定
         val buttonContainer = findViewById<RelativeLayout>(R.id.button_container)
+        val submenuLayout = findViewById<LinearLayout>(R.id.submenu_layout)
         this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
         this.numberMaster!!.buttons["3x3"] = buttonContainer.getChildAt(0) as ImageButton
         this.numberMaster!!.buttons["6x6"] = buttonContainer.getChildAt(1) as ImageButton
         this.numberMaster!!.buttons["9x9"] = buttonContainer.getChildAt(2) as ImageButton
-        this.numberMaster!!.buttons["secret"] = buttonContainer.getChildAt(3) as ImageButton
+
+        this.numberMaster!!.buttons["blindfold"] = submenuLayout.getChildAt(0) as ImageButton
+        this.numberMaster!!.buttons["cube"] = submenuLayout.getChildAt(1) as ImageButton
+        this.numberMaster!!.buttons["secret"] = submenuLayout.getChildAt(2) as ImageButton
+
         this.numberMaster!!.buttons["finish"] = buttonContainer.getChildAt(4) as ImageButton
         this.numberMaster!!.buttons["stop"] = buttonContainer.getChildAt(5) as ImageButton
         this.numberMaster!!.buttons["swipe_bottom"] = findViewById(R.id.button_swipe_bottom)
@@ -298,7 +317,7 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.buttons["swipe_right"] = findViewById(R.id.button_swipe_right)
         this.numberMaster!!.buttons["swipe_top"] = findViewById(R.id.button_swipe_top)
 
-        for (key in listOf("prev", "3x3", "6x6", "9x9", "secret", "finish", "stop")) {
+        for (key in listOf("prev", "3x3", "6x6", "9x9", "secret", "blindfold", "cube", "finish", "stop")) {
             this.numberMaster!!.buttons[key]!!.apply {
                 isEnabled = true
             }
@@ -326,7 +345,7 @@ class GameActivity : NumberMasterActivity() {
 
         // elseの場合はxmlでOK
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
-            val id = this.resources.getIdentifier("button_enabled_cube", "drawable", this.packageName)
+            val id = this.resources.getIdentifier("button_enabled_menu", "drawable", this.packageName)
             this.numberMaster!!.buttons["secret"]!!.setImageResource(id)
         }
 
@@ -388,8 +407,8 @@ class GameActivity : NumberMasterActivity() {
                     R.id.button_finish -> {
                         that.numberMaster!!.buttonClickFinishProcess()
                     }
-                    R.id.button_secret -> {
-                        that.numberMaster!!.buttonClickSecretProcess()
+                    R.id.button_cube -> {
+                        that.numberMaster!!.buttonClickCubeProcess()
                     }
                     else -> {
                         that.numberMaster!!.buttonClickSizeProcess(size)

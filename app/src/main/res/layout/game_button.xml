@@ -19,6 +19,7 @@
             android:id="@+id/button_3x3"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:background="@color/transparent"
             android:contentDescription="@string/_3x3_button"
             android:onClick="buttonClickListener"
@@ -29,6 +30,7 @@
             android:id="@+id/button_6x6"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_3x3"
             android:background="@color/transparent"
             android:contentDescription="@string/_6x6_button"
@@ -40,6 +42,7 @@
             android:id="@+id/button_9x9"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_6x6"
             android:background="@color/transparent"
             android:contentDescription="@string/_9x9_button"
@@ -47,22 +50,52 @@
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_9x9" />
 
-        <ImageButton
-            android:id="@+id/button_secret"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:id="@+id/submenu_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_9x9"
-            android:background="@color/transparent"
-            android:contentDescription="@string/secret_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_disabled_secret" />
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_blindfold"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/_blindfold_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_blindfold" />
+
+            <ImageButton
+                android:id="@+id/button_cube"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/_cube_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_cube" />
+
+            <ImageButton
+                android:id="@+id/button_secret"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/secret_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_disabled_secret" />
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/button_finish"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_toEndOf="@id/button_secret"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/submenu_layout"
             android:background="@color/transparent"
             android:contentDescription="@string/finish_button"
             android:onClick="buttonClickListener"
@@ -73,6 +106,7 @@
             android:id="@+id/button_stop"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_finish"
             android:background="@color/transparent"
             android:contentDescription="@string/stop_button"

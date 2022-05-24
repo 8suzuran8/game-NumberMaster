@@ -36,8 +36,7 @@
 package com.example.numbermaster
 
 import android.animation.*
-import android.widget.ImageView
-import android.widget.TextView
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.content.res.Resources
 import android.graphics.*
@@ -49,10 +48,8 @@ import android.media.SoundPool
 import android.opengl.GLSurfaceView
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.ImageButton
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
@@ -87,6 +84,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     )
     var status: MutableMap<String, String> = mutableMapOf(
         "useCubeMode" to "0", // 立方体モード使用中か?
+        "blindfoldMode" to "0", // 目隠しモード使用中か？
         "stop" to "1", // STOP中か?
         "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
         "cubeSideNumber" to "0", // 立方体面番号
@@ -107,6 +105,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "number7" to BitmapFactory.decodeResource(this.resources, R.drawable.number7),
         "number8" to BitmapFactory.decodeResource(this.resources, R.drawable.number8),
         "number9" to BitmapFactory.decodeResource(this.resources, R.drawable.number9),
+        "number_question" to BitmapFactory.decodeResource(this.resources, R.drawable.number_question),
         "effect_magic_square" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_magic_square),
         "effect_puzzle3x3" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle3x3),
         "effect_puzzle6x6" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle6x6),
@@ -134,6 +133,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "6x6" to null,
         "9x9" to null,
         "secret" to null,
+        "cube" to null,
+        "blindfold" to null,
         "finish" to null,
         "stop" to null,
         "swipe_top" to null,
@@ -181,7 +182,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 return result
             }
             fun swipeProcess(): Boolean {
-                if (that.status["stop"]!!.toInt() == 1) return false
+                // if (that.status["stop"]!!.toInt() == 1) return false
                 if (that.status["useCubeMode"]!!.toInt() != 1) return false
                 that.cube!!.visibility = View.VISIBLE
                 that.boardStandLayout!!.visibility = FrameLayout.INVISIBLE
@@ -372,6 +373,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             addScore *= 6
         }
 
+        if (this.status["blindfoldMode"]!!.toInt() == 1) {
+            addScore *= 5
+        }
+
         if (successType == 3) {
             addScore *= 2
         }
@@ -457,7 +462,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             var imageName = "button$enableString$buttonKey"
             if (buttonKey == "secret") {
                 imageName = if (this.settings["enabledCube"]!!.toInt() == 1) {
-                    "button" + enableString + "cube"
+                    "button" + enableString + "menu"
                 } else {
                     "button_disabled_$buttonKey"
                 }
@@ -470,6 +475,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     fun buttonClickStopProcess() {
         this.changeButtonEnabled()
+        this.buttonClickSecretProcess(true)
 
         if (this.buttons["3x3"]!!.isEnabled) {
             this.dbHelper!!.writeByStopButton(
@@ -478,6 +484,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 this.nonNumberPanelPosition,
                 this.numbers
             )
+        }
+
+        if (this.status["blindfoldMode"]!!.toInt() == 1) {
+            this.updateNumberPanel()
         }
     }
 
@@ -503,7 +513,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.numberMasterOnSwipeTouchListener!!.onSwipeBottom()
     }
 
-    fun buttonClickSecretProcess() {
+    fun buttonClickCubeProcess() {
         if (this.settings["enabledCube"]!!.toInt() == 0) return
 
         var swipeButtonEnabled = true
@@ -525,6 +535,52 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.shuffle()
         this.updateNumberPanel()
         this.numberMasterOnSwipeTouchListener!!.onSwipeBottom()
+    }
+
+    fun buttonClickBlindfoldProcess() {
+        if (this.settings["enabledCube"]!!.toInt() == 0) return
+
+        if (this.status["blindfoldMode"]!!.toInt() == 0) {
+            this.status["blindfoldMode"] = 1.toString()
+        } else {
+            this.status["blindfoldMode"] = 0.toString()
+            this.updateNumberPanel()
+        }
+    }
+
+    fun buttonClickSecretProcess(forceClose: Boolean = false) {
+        if (this.settings["enabledCube"]!!.toInt() == 0) return
+
+        val that = this
+        this.activity.findViewById<RelativeLayout>(R.id.button_container).apply {
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                    || forceClose) {
+                    updateLayoutParams {
+                        height =
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 1).toInt()
+                    }
+                } else {
+                    updateLayoutParams {
+                        height =
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                    }
+                }
+            } else {
+                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                    || forceClose) {
+                    updateLayoutParams {
+                        width =
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 1).toInt()
+                    }
+                } else {
+                    updateLayoutParams {
+                        width =
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                    }
+                }
+            }
+        }
     }
 
     fun setEvent(window: Window, enableTimer: Boolean = true) {
@@ -608,6 +664,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.settings["counterStopCount"] = this.dbHelper!!.dataGame["settings"]!!["counter_stop_count"].toString()
             this.settings["enabledCube"] = this.dbHelper!!.dataGame["settings"]!!["enabled_cube"].toString()
             this.status["useCubeMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["use_cube_mode"].toString()
+            this.status["blindfoldMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["blindfold_mode"].toString()
             this.status["size"] = this.dbHelper!!.dataGame["current_game_status"]!!["size"].toString()
             this.status["cubeSideNumber"] = this.dbHelper!!.dataGame["current_game_status"]!!["cube_side_number"].toString()
             this.status["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
@@ -932,7 +989,12 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 width = numberPanelSize.toInt()
                 height = numberPanelSize.toInt()
             }
-            setImageBitmap(that.images["number$number"]!!)
+
+            if (that.status["blindfoldMode"]!!.toInt() == 0 || that.buttons["3x3"]!!.isEnabled) {
+                setImageBitmap(that.images["number$number"]!!)
+            } else {
+                setImageBitmap(that.images["number_question"]!!)
+            }
             contentDescription = that.activity.getString(R.string.number_panel_noN, number)
             visibility = ImageButton.VISIBLE
             isEnabled = true
@@ -972,8 +1034,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             null
         )
 
+        val numberPanelImage = if (this.status["blindfoldMode"]!!.toInt() == 0 || this.buttons["3x3"]!!.isEnabled) {
+            this.images["number" + this.numbers[this.status["cubeSideNumber"]!!.toInt()][y][x]]!!
+        } else {
+            this.images["number_question"]!!
+        }
+
         canvas.drawBitmap(
-            this.images["number" + this.numbers[this.status["cubeSideNumber"]!!.toInt()][y][x]]!!,
+            numberPanelImage,
             Rect(0, 0, this.images["number_background"]!!.width, this.images["number_background"]!!.height),
             Rect(startX, startY, endX, endY),
             null

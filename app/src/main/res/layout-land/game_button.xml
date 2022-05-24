@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/inner_root_layout"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/button_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|end"
         android:gravity="center"
@@ -19,6 +18,7 @@
             android:id="@+id/button_3x3"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
             android:contentDescription="@string/_3x3_button"
             android:onClick="buttonClickListener"
@@ -30,6 +30,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@id/button_3x3"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
             android:contentDescription="@string/_6x6_button"
             android:onClick="buttonClickListener"
@@ -41,28 +42,58 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@id/button_6x6"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
             android:contentDescription="@string/_9x9_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_9x9" />
 
-        <ImageButton
-            android:id="@+id/button_secret"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:id="@+id/submenu_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/button_9x9"
-            android:background="@color/transparent"
-            android:contentDescription="@string/secret_button"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_disabled_secret" />
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/button_blindfold"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/_blindfold_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_blindfold" />
+
+            <ImageButton
+                android:id="@+id/button_cube"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/_cube_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_cube" />
+
+            <ImageButton
+                android:id="@+id/button_secret"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/secret_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_disabled_secret" />
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/button_finish"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_below="@id/button_secret"
+            android:layout_below="@id/submenu_layout"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
             android:contentDescription="@string/finish_button"
             android:onClick="buttonClickListener"
@@ -74,6 +105,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@id/button_finish"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
             android:contentDescription="@string/stop_button"
             android:onClick="buttonClickListener"

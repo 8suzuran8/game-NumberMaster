@@ -20,6 +20,7 @@ class NumberMasterOpenHelper(context: Context) : SQLiteOpenHelper(context, DATAB
         ),
         "current_game_status" to mutableMapOf(
             "use_cube_mode" to 0,
+            "blindfold_mode" to 0,
             "size" to 1,
             "cube_side_number" to 0,
             "score" to 0,
@@ -42,7 +43,7 @@ class NumberMasterOpenHelper(context: Context) : SQLiteOpenHelper(context, DATAB
     // DBがない時はNumberMasterOpenHelperのinitialInsertの値が使われる。(以下は使われない。)
     companion object {
         private const val DATABASE_NAME = "NumberMasterDB.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
 
         private const val CREATE_TABLE_QUERY_SETTINGS = """
 CREATE TABLE IF NOT EXISTS settings
@@ -59,6 +60,7 @@ CREATE TABLE IF NOT EXISTS current_game_status
 (
     id INTEGER PRIMARY KEY,
     use_cube_mode INTEGER NOT NULL DEFAULT 0, -- 0 or 1
+    blindfold_mode INTEGER NOT NULL DEFAULT 0, -- 0 or 1
     size INTEGER NOT NULL DEFAULT 1, -- 1 or 2 or 3
     cube_side_number INTEGER NOT NULL DEFAULT 0, -- 0 to 5
     score INTEGER NOT NULL DEFAULT 0,
@@ -69,11 +71,12 @@ CREATE TABLE IF NOT EXISTS current_game_status
 """
 
         private const val CREATE_TABLE_QUERY_SUCCESS_HISTORY = """
-create table if not exists success_history
+CREATE TABLE IF NOT EXISTS success_history
 (
     id INTEGER PRIMARY KEY,
     created_at TEXT NOT NULL DEFAULT (DATETIME(CURRENT_TIMESTAMP, 'localtime')),
     use_cube_mode INTEGER NOT NULL DEFAULT 0,
+    blindfold_mode INTEGER NOT NULL DEFAULT 0, -- 0 or 1
     size INTEGER NOT NULL DEFAULT 1,
     score INTEGER NOT NULL DEFAULT 0,
     time INTEGER NOT NULL DEFAULT 0,
@@ -96,7 +99,24 @@ create table if not exists success_history
         }
     }
 
-    override fun onUpgrade(database: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
+    override fun onUpgrade(database: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < newVersion) {
+            if (oldVersion == 1 && newVersion == 2) {
+                database!!.execSQL(
+                """
+                    ALTER TABLE current_game_status
+                    add blindfold_mode INTEGER NOT NULL DEFAULT 0
+                """
+                )
+                database.execSQL(
+                    """
+                    ALTER TABLE success_history
+                    add blindfold_mode INTEGER NOT NULL DEFAULT 0
+                """
+                )
+            }
+        }
+    }
 
     /**
      * load, update, insert, deleteのbase群
@@ -236,7 +256,7 @@ create table if not exists success_history
         return result
     }
 
-    private fun loadCurrentGameStatus(columns: List<String> = listOf("id", "use_cube_mode", "size", "cube_side_number", "score", "time", "start_numbers", "finish_numbers")): MutableMap<String, String> {
+    private fun loadCurrentGameStatus(columns: List<String> = listOf("id", "use_cube_mode", "blindfold_mode", "size", "cube_side_number", "score", "time", "start_numbers", "finish_numbers")): MutableMap<String, String> {
         this.exists = false
 
         val result = this.loadBase("current_game_status", columns)
@@ -250,7 +270,7 @@ create table if not exists success_history
         return result[0].toMutableMap()
     }
 
-    private fun loadSuccessHistories(orderColumnName: String = "created_at", orderOption: String = "DESC", count: Int = 9, whereString: String = "", whereValues: Array<String>? = null, columns: List<String> = listOf("id", "created_at", "use_cube_mode", "size", "score", "time", "start_numbers", "finish_numbers")): MutableList<MutableMap<String, String>> {
+    private fun loadSuccessHistories(orderColumnName: String = "created_at", orderOption: String = "DESC", count: Int = 9, whereString: String = "", whereValues: Array<String>? = null, columns: List<String> = listOf("id", "created_at", "use_cube_mode", "blindfold_mode", "size", "score", "time", "start_numbers", "finish_numbers")): MutableList<MutableMap<String, String>> {
         return this.loadBase("success_history", columns, orderColumnName, orderOption, count, whereString, whereValues)
     }
 
@@ -261,11 +281,11 @@ create table if not exists success_history
         return this.updateBase("settings", values)
     }
 
-    private fun writeCurrentGameStatus(values: MutableMap<String, String?> = mutableMapOf("id" to null, "use_cube_mode" to 0.toString(), "size" to 1.toString(), "cube_side_number" to 0.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
+    private fun writeCurrentGameStatus(values: MutableMap<String, String?> = mutableMapOf("id" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "cube_side_number" to 0.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
         return this.updateBase("current_game_status", values)
     }
 
-    private fun writeSuccessHistory(values: MutableMap<String, String?> = mutableMapOf("id" to null, "created_at" to null, "use_cube_mode" to 0.toString(), "size" to 1.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
+    private fun writeSuccessHistory(values: MutableMap<String, String?> = mutableMapOf("id" to null, "created_at" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
         return this.insertBase("success_history", values)
     }
 
@@ -339,6 +359,7 @@ create table if not exists success_history
 
         return this.insertBase("current_game_status", mapOf(
             "use_cube_mode" to 0.toString(),
+            "blindfold_mode" to 0.toString(),
             "size" to 1.toString(),
             "cube_side_number" to 0.toString(),
             "score" to 0.toString(),
@@ -364,6 +385,7 @@ create table if not exists success_history
         val currentGameStatus = this.loadCurrentGameStatus()
         if (currentGameStatus.containsKey("use_cube_mode")) {
             this.dataGame["current_game_status"]!!["use_cube_mode"] = currentGameStatus["use_cube_mode"]!!.toInt()
+            this.dataGame["current_game_status"]!!["blindfold_mode"] = currentGameStatus["blindfold_mode"]!!.toInt()
             this.dataGame["current_game_status"]!!["size"] = currentGameStatus["size"]!!.toInt()
             this.dataGame["current_game_status"]!!["cube_side_number"] = currentGameStatus["cube_side_number"]!!.toInt()
             this.dataGame["current_game_status"]!!["score"] = currentGameStatus["score"]!!.toInt()
@@ -384,6 +406,7 @@ create table if not exists success_history
     fun makeStatus(numbers: String): MutableMap<String, String> {
         val status = mutableMapOf(
             "use_cube_mode" to 0.toString(),
+            "blindfold_mode" to 0.toString(),
             "size" to 1.toString(),
             "cube_side_number" to 0.toString(),
         )
@@ -439,6 +462,7 @@ create table if not exists success_history
             this.writeCurrentGameStatus(
                 mutableMapOf(
                     "use_cube_mode" to values["use_cube_mode"].toString(),
+                    "blindfold_mode" to 0.toString(),
                     "size" to 1.toString(),
                     "cube_side_number" to 0.toString(),
                     "score" to 0.toString(),
@@ -461,6 +485,7 @@ create table if not exists success_history
 
         this.writeCurrentGameStatus(mutableMapOf(
             "use_cube_mode" to status["use_cube_mode"],
+            "blindfold_mode" to 0.toString(),
             "size" to status["size"],
             "cube_side_number" to 0.toString(),
             "score" to 0.toString(),
@@ -483,6 +508,7 @@ create table if not exists success_history
 
         return this.writeCurrentGameStatus(mutableMapOf(
             "use_cube_mode" to status["useCubeMode"].toString(),
+            "blindfold_mode" to status["blindfoldMode"].toString(),
             "size" to status["size"].toString(),
             "cube_side_number" to status["cubeSideNumber"].toString(),
             "score" to status["score"].toString(),
@@ -525,6 +551,7 @@ create table if not exists success_history
     fun writeHistory(status: MutableMap<String, String>, nonNumberPanelPosition: MutableMap<String, Int>, numbers: MutableList<MutableList<MutableList<Int>>>): Boolean {
         return this.writeSuccessHistory(mutableMapOf(
             "use_cube_mode" to status["useCubeMode"].toString(),
+            "blindfold_mode" to status["blindfoldMode"].toString(),
             "size" to status["size"].toString(),
             "score" to status["score"].toString(),
             "time" to status["time"].toString(),
