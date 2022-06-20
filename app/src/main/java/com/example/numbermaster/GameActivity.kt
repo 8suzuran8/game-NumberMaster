@@ -143,8 +143,10 @@ class GameActivity : NumberMasterActivity() {
     fun buttonClickListener(view: View) {
         when (view.id) {
             R.id.prev_button -> {
-                this.onFinish()
-                if (this.numberMaster!!.status["stop"]!!.toInt() == 1) this.finish()
+                if (this.numberMaster!!.status["stop"]!!.toInt() == 1) {
+                    this.onFinish()
+                    this.finish()
+                }
             }
             R.id.button_swipe_top -> {
                 this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeTop()

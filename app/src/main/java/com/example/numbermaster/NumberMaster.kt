@@ -477,15 +477,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.changeButtonEnabled()
         this.buttonClickSecretProcess(true)
 
-        if (this.buttons["3x3"]!!.isEnabled) {
-            this.dbHelper!!.writeByStopButton(
-                this.settings,
-                this.status,
-                this.nonNumberPanelPosition,
-                this.numbers
-            )
-        }
-
         if (this.status["blindfoldMode"]!!.toInt() == 1) {
             this.updateNumberPanel()
         }
