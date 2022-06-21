@@ -143,7 +143,7 @@ class GameActivity : NumberMasterActivity() {
     fun buttonClickListener(view: View) {
         when (view.id) {
             R.id.prev_button -> {
-                if (this.numberMaster!!.status["stop"]!!.toInt() == 1) {
+                if (this.numberMaster!!.statusGame["stop"]!!.toInt() == 1) {
                     this.onFinish()
                     this.finish()
                 }
@@ -335,7 +335,7 @@ class GameActivity : NumberMasterActivity() {
 
         // cube
         this.drawCube()
-        this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.status["size"]!!.toInt())
+        this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle["size"]!!.toInt())
 
         this.numberMaster!!.setEvent(window)
 

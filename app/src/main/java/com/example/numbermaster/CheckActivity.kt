@@ -159,12 +159,12 @@ class CheckActivity : NumberMasterActivity() {
         val status = this.numberMaster!!.dbHelper!!.makeStatus(numbers)
         this.numberMaster!!.numbers = this.numberMaster!!.dbHelper!!.stringToNumbers(numbers)
         this.numberMaster!!.nonNumberPanelPosition = this.numberMaster!!.dbHelper!!.dataNonNumberPanelPosition
-        this.numberMaster!!.status["size"] = status["size"].toString()
-        this.numberMaster!!.status["stop"] = 0.toString()
-        this.numberMaster!!.status["score"] = 0.toString()
-        this.numberMaster!!.status["time"] = 0.toString()
-        this.numberMaster!!.status["useCubeMode"] = status["use_cube_mode"].toString()
-        this.numberMaster!!.settings["enabledCube"]  = if (this.numberMaster!!.status["useCubeMode"] == 1.toString()) {
+        this.numberMaster!!.statusPuzzle["size"] = status["size"].toString()
+        this.numberMaster!!.statusGame["stop"] = 0.toString()
+        this.numberMaster!!.statusGame["score"] = 0.toString()
+        this.numberMaster!!.statusGame["time"] = 0.toString()
+        this.numberMaster!!.statusPuzzle["useCubeMode"] = status["use_cube_mode"].toString()
+        this.numberMaster!!.settings["enabledCube"]  = if (this.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
             1.toString()
         } else {
             0.toString()
@@ -172,7 +172,7 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster!!.numberMasterRenderer!!.changeTexture(status["size"]!!.toInt())
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             this.numberMaster!!.buttons[key]!!.apply {
-                if (that.numberMaster!!.status["useCubeMode"] == 1.toString()) {
+                if (that.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
                     isEnabled = true
                     visibility = ImageButton.VISIBLE
                 } else {

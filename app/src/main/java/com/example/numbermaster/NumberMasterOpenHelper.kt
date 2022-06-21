@@ -496,7 +496,7 @@ CREATE TABLE IF NOT EXISTS success_history
     }
 
     // stopボタン押下時に実行
-    fun writeByStopButton(settings: MutableMap<String, String>, status: MutableMap<String, String>, nonNumberPanelPosition: MutableMap<String, Int>, numbers: MutableList<MutableList<MutableList<Int>>>): Boolean {
+    fun writeByStopButton(settings: MutableMap<String, String>, statusGame: MutableMap<String, String>, statusPuzzle: MutableMap<String, String>, nonNumberPanelPosition: MutableMap<String, Int>, numbers: MutableList<MutableList<MutableList<Int>>>): Boolean {
         val result = this.writeSettings(mutableMapOf(
             "counter_stop_count" to settings["counterStopCount"].toString(),
             "enabled_cube" to settings["enabledCube"].toString(),
@@ -507,12 +507,12 @@ CREATE TABLE IF NOT EXISTS success_history
 
 
         return this.writeCurrentGameStatus(mutableMapOf(
-            "use_cube_mode" to status["useCubeMode"].toString(),
-            "blindfold_mode" to status["blindfoldMode"].toString(),
-            "size" to status["size"].toString(),
-            "cube_side_number" to status["cubeSideNumber"].toString(),
-            "score" to status["score"].toString(),
-            "time" to status["time"].toString(),
+            "use_cube_mode" to statusPuzzle["useCubeMode"].toString(),
+            "blindfold_mode" to statusPuzzle["blindfoldMode"].toString(),
+            "size" to statusPuzzle["size"].toString(),
+            "cube_side_number" to statusPuzzle["cubeSideNumber"].toString(),
+            "score" to statusGame["score"].toString(),
+            "time" to statusGame["time"].toString(),
             "start_numbers" to this.loadGameStartNumbers(),
             "finish_numbers" to this.numbersToString(numbers, nonNumberPanelPosition),
         ))
@@ -548,13 +548,13 @@ CREATE TABLE IF NOT EXISTS success_history
     }
 
     // finishボタン押下時に実行
-    fun writeHistory(status: MutableMap<String, String>, nonNumberPanelPosition: MutableMap<String, Int>, numbers: MutableList<MutableList<MutableList<Int>>>): Boolean {
+    fun writeHistory(statusGame: MutableMap<String, String>, statusPuzzle: MutableMap<String, String>, nonNumberPanelPosition: MutableMap<String, Int>, numbers: MutableList<MutableList<MutableList<Int>>>): Boolean {
         return this.writeSuccessHistory(mutableMapOf(
-            "use_cube_mode" to status["useCubeMode"].toString(),
-            "blindfold_mode" to status["blindfoldMode"].toString(),
-            "size" to status["size"].toString(),
-            "score" to status["score"].toString(),
-            "time" to status["time"].toString(),
+            "use_cube_mode" to statusPuzzle["useCubeMode"].toString(),
+            "blindfold_mode" to statusPuzzle["blindfoldMode"].toString(),
+            "size" to statusPuzzle["size"].toString(),
+            "score" to statusGame["score"].toString(),
+            "time" to statusGame["time"].toString(),
             "start_numbers" to this.loadGameStartNumbers(),
             "finish_numbers" to this.numbersToString(numbers, nonNumberPanelPosition),
         ))
