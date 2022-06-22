@@ -220,6 +220,15 @@ class GameActivity : NumberMasterActivity() {
 
         val that = this
 
+        this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
+
+        // 音楽とアニメーションを合わせるため、この位置
+        findViewById<ImageView>(R.id.prev_button_image).apply {
+            stateListAnimator =
+                AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
+        }
+
+        // buttonsの設定
         findViewById<RelativeLayout>(R.id.button_container).apply {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
                 layoutParams.width = that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
@@ -232,44 +241,17 @@ class GameActivity : NumberMasterActivity() {
             }
         }
 
-        val button3x3 = findViewById<ImageButton>(R.id.button_3x3)
-        button3x3.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        button3x3.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val button6x6 = findViewById<ImageButton>(R.id.button_6x6)
-        button6x6.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        button6x6.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val button9x9 = findViewById<ImageButton>(R.id.button_9x9)
-        button9x9.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        button9x9.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val buttonSecret = findViewById<ImageButton>(R.id.button_secret)
-        buttonSecret.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        buttonSecret.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val buttonCube = findViewById<ImageButton>(R.id.button_cube)
-        buttonCube.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        buttonCube.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val buttonBlindfold = findViewById<ImageButton>(R.id.button_blindfold)
-        buttonBlindfold.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        buttonBlindfold.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val buttonFinish = findViewById<ImageButton>(R.id.button_finish)
-        buttonFinish.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        buttonFinish.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        val buttonStop = findViewById<ImageButton>(R.id.button_stop)
-        buttonStop.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        buttonStop.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-        this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
-
-        // 音楽とアニメーションを合わせるため、この位置
-        findViewById<ImageView>(R.id.prev_button_image).apply {
-            stateListAnimator =
-                AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
+        for (key in listOf("3x3", "6x6", "9x9", "secret", "blindfold", "cube", "finish", "stop")) {
+            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            this.numberMaster!!.buttons[key] = findViewById(id)
+            this.numberMaster!!.buttons[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            this.numberMaster!!.buttons[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            this.numberMaster!!.buttons[key]!!.isEnabled = true
+        }
+        this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
+        for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
+            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            this.numberMaster!!.buttons[key] = findViewById(id)
         }
 
         // boardStandの設定
@@ -298,36 +280,6 @@ class GameActivity : NumberMasterActivity() {
         }
         this.numberMaster!!.effect2 = findViewById<ImageView>(R.id.effect2).apply {
             visibility = ImageView.INVISIBLE
-        }
-
-        // buttonsの設定
-        val buttonContainer = findViewById<RelativeLayout>(R.id.button_container)
-        val submenuLayout = findViewById<LinearLayout>(R.id.submenu_layout)
-        this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
-        this.numberMaster!!.buttons["3x3"] = buttonContainer.getChildAt(0) as ImageButton
-        this.numberMaster!!.buttons["6x6"] = buttonContainer.getChildAt(1) as ImageButton
-        this.numberMaster!!.buttons["9x9"] = buttonContainer.getChildAt(2) as ImageButton
-
-        this.numberMaster!!.buttons["blindfold"] = submenuLayout.getChildAt(0) as ImageButton
-        this.numberMaster!!.buttons["cube"] = submenuLayout.getChildAt(1) as ImageButton
-        this.numberMaster!!.buttons["secret"] = submenuLayout.getChildAt(2) as ImageButton
-
-        this.numberMaster!!.buttons["finish"] = buttonContainer.getChildAt(4) as ImageButton
-        this.numberMaster!!.buttons["stop"] = buttonContainer.getChildAt(5) as ImageButton
-        this.numberMaster!!.buttons["swipe_bottom"] = findViewById(R.id.button_swipe_bottom)
-        this.numberMaster!!.buttons["swipe_left"] = findViewById(R.id.button_swipe_left)
-        this.numberMaster!!.buttons["swipe_right"] = findViewById(R.id.button_swipe_right)
-        this.numberMaster!!.buttons["swipe_top"] = findViewById(R.id.button_swipe_top)
-
-        for (key in listOf("prev", "3x3", "6x6", "9x9", "secret", "blindfold", "cube", "finish", "stop")) {
-            this.numberMaster!!.buttons[key]!!.apply {
-                isEnabled = true
-            }
-        }
-        for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
-            this.numberMaster!!.buttons[key]!!.apply {
-                isEnabled = false
-            }
         }
 
         // statusの設定

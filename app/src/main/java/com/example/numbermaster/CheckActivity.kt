@@ -145,10 +145,6 @@ class CheckActivity : NumberMasterActivity() {
 
         // buttonsの設定
         this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
-        this.numberMaster!!.buttons["swipe_bottom"] = findViewById(R.id.button_swipe_bottom)
-        this.numberMaster!!.buttons["swipe_left"] = findViewById(R.id.button_swipe_left)
-        this.numberMaster!!.buttons["swipe_right"] = findViewById(R.id.button_swipe_right)
-        this.numberMaster!!.buttons["swipe_top"] = findViewById(R.id.button_swipe_top)
 
         // cube
         this.drawCube()
@@ -170,17 +166,19 @@ class CheckActivity : NumberMasterActivity() {
             0.toString()
         }
         this.numberMaster!!.numberMasterRenderer!!.changeTexture(status["size"]!!.toInt())
+
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
-            this.numberMaster!!.buttons[key]!!.apply {
-                if (that.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
-                    isEnabled = true
-                    visibility = ImageButton.VISIBLE
-                } else {
-                    isEnabled = false
-                    visibility = ImageButton.INVISIBLE
-                }
+            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            this.numberMaster!!.buttons[key] = findViewById(id)
+            if (that.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
+                this.numberMaster!!.buttons[key]!!.isEnabled = true
+                this.numberMaster!!.buttons[key]!!.visibility = ImageButton.VISIBLE
+            } else {
+                this.numberMaster!!.buttons[key]!!.isEnabled = false
+                this.numberMaster!!.buttons[key]!!.visibility = ImageButton.INVISIBLE
             }
         }
+
         this.numberMaster!!.updateNumberPanel()
     }
 }
