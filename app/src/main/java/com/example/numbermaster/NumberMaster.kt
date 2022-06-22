@@ -136,6 +136,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "9x9" to null,
         "secret" to null,
         "cube" to null,
+        "simul" to null,
         "blindfold" to null,
         "finish" to null,
         "stop" to null,
@@ -548,7 +549,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         val that = this
         this.activity.findViewById<RelativeLayout>(R.id.button_container).apply {
             if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         height =
@@ -557,11 +558,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         height =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4).toInt()
                     }
                 }
             } else {
-                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         width =
@@ -570,7 +571,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         width =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 3).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 4).toInt()
                     }
                 }
             }
