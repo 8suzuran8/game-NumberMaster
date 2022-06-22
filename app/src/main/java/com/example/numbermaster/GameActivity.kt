@@ -222,13 +222,13 @@ class GameActivity : NumberMasterActivity() {
 
         this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
 
-        // 音楽とアニメーションを合わせるため、この位置(NumberMaster作成直後)
+        // 音楽とアニメーションを合わせるため、この位置
         findViewById<ImageView>(R.id.prev_button_image).apply {
             stateListAnimator =
                 AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_prev)
         }
 
-        // ボタンの設定
+        // buttonsの設定
         findViewById<RelativeLayout>(R.id.button_container).apply {
             if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
                 layoutParams.width = that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat().toInt()
