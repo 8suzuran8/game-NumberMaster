@@ -10,6 +10,8 @@ import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginTop
 import androidx.core.view.setPadding
 import com.example.numbermaster.databinding.ActivityGameBinding
 
@@ -343,6 +345,59 @@ class GameActivity : NumberMasterActivity() {
 
         this.numberMaster!!.statusText!!.apply {
             setTextColor(statusTextColor)
+        }
+
+        // @todo サイズ指定
+        /*
+        if (this.numberMaster!!.statusPuzzle["simulMode"]!!.toInt() == 0) {
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = 0
+            } else {
+                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = 0
+            }
+        } else {
+            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2).toInt()
+            } else {
+                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2).toInt()
+            }
+        }
+
+         */
+
+        // スマホの向きによってレイアウトの向きを変える
+        val gameLayout = findViewById<LinearLayout>(R.id.game_layout).apply {
+            orientation = if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                LinearLayout.HORIZONTAL
+            } else {
+                LinearLayout.VERTICAL
+            }
+            setPadding(0)
+        }
+        val gameLayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+        gameLayoutParams.topMargin = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        gameLayoutParams.bottomMargin = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        gameLayout.layoutParams = gameLayoutParams
+
+        val gameMainLong = ((this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt() * 3)) / 2).toInt()
+        if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.width = gameMainLong
+            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
+            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = gameMainLong
+            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
+        } else {
+            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.height = gameMainLong
+            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
+            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = gameMainLong
+            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
+        }
+
+        // @todo 確認用背景色
+        findViewById<ConstraintLayout>(R.id.game_main_1).findViewById<RelativeLayout>(R.id.full_space).apply {
+            this.setBackgroundColor(Color.BLUE)
+        }
+        findViewById<ConstraintLayout>(R.id.game_main_2).findViewById<RelativeLayout>(R.id.full_space).apply {
+            this.setBackgroundColor(Color.GREEN)
         }
     }
 
