@@ -38,20 +38,6 @@ class GameActivity : NumberMasterActivity() {
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_game, inflateRootLayout)
         val layoutBinding: ActivityGameBinding = ActivityGameBinding.bind(activityLayout).apply {
-            status.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
-            fullSpace.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
-            fullSpace.layoutParams.height = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
-            layoutMiddle.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
-            boardStandLayout.layoutParams.width = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
-            boardStandLayout.layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
-            boardStandLayout.setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
-
-            buttonSwipeBottom.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonSwipeLeft.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonSwipeRight.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            buttonSwipeTop.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-
         }
 
         val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
@@ -249,14 +235,31 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.buttons[key]!!.isEnabled = true
         }
         this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
+
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
             this.numberMaster!!.buttons[key] = findViewById(id)
-            this.numberMaster!!.buttons[key]!!.isEnabled = true
+
+            if (key == "swipe_bottom" || key == "swipe_top") {
+                this.numberMaster!!.buttons[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            } else {
+                this.numberMaster!!.buttons[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            }
         }
 
+        findViewById<RelativeLayout>(R.id.full_space).apply {
+            layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+            layoutParams.height = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+        }
+        findViewById<RelativeLayout>(R.id.layout_middle).apply {
+            layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
+        }
         // boardStandの設定
-        this.numberMaster!!.boardStandLayout = findViewById(R.id.board_stand_layout)
+        this.numberMaster!!.boardStandLayout = findViewById<FrameLayout>(R.id.board_stand_layout).apply {
+            layoutParams.width = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
+            layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
+            setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
+        }
         this.numberMaster!!.boardStandForeground = findViewById(R.id.board_stand_foreground)
 
         // 0 is background
@@ -283,14 +286,17 @@ class GameActivity : NumberMasterActivity() {
             visibility = ImageView.INVISIBLE
         }
 
-        // statusの設定
-        this.numberMaster!!.statusText = findViewById(R.id.status)
-
         // cube
         this.drawCube()
         this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle["size"]!!.toInt())
 
         this.numberMaster!!.setEvent(window)
+
+        // statusの設定
+        // loadGameの前で行わなければならない。
+        this.numberMaster!!.statusText = findViewById<TextView>(R.id.status).apply {
+            layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+        }
 
         if (!this.numberMaster!!.loadGame() || this.numberMaster!!.numbers[0][0][0] == 0) {
             this.numberMaster!!.updateStatus()
@@ -299,6 +305,7 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.updateNumberPanel()
 
         // elseの場合はxmlでOK
+        // loadGameの後で行わなければならない。
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
             val id = this.resources.getIdentifier("button_enabled_menu", "drawable", this.packageName)
             this.numberMaster!!.buttons["secret"]!!.setImageResource(id)
