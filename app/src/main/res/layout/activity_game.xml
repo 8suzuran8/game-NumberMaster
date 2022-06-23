@@ -20,140 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/full_space"
+    <LinearLayout
+        android:id="@+id/game_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
-        <ImageButton
-            android:id="@+id/button_swipe_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:contentDescription="@string/button_swipe_top"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_swipe_top"
-            android:visibility="invisible" />
+        <include
+            android:id="@+id/game_main_1"
+            layout="@layout/game_main" />
 
-        <RelativeLayout
-            android:id="@+id/layout_middle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/button_swipe_top">
-
-            <ImageButton
-                android:id="@+id/button_swipe_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:contentDescription="@string/button_swipe_left"
-                android:onClick="buttonClickListener"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button_swipe_left"
-                android:visibility="invisible" />
-
-            <FrameLayout
-                android:id="@+id/board_stand_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/button_swipe_left"
-                android:visibility="invisible"
-                android:background="@drawable/transparent">
-                <ImageView
-                    android:id="@+id/board_stand_foreground"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/board_stand"/>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/number_background"
-                    android:contentDescription="@string/number_panel_noN"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/number1"
-                    android:visibility="visible"/>
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/number_background"
-                    android:contentDescription="@string/number_panel_noN"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/number2"
-                    android:visibility="visible" />
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/number_background"
-                    android:contentDescription="@string/number_panel_noN"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/number3"
-                    android:visibility="visible" />
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/number_background"
-                    android:contentDescription="@string/number_panel_noN"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/number4"
-                    android:visibility="visible"/>
-            </FrameLayout>
-
-            <ImageButton
-                android:id="@+id/button_swipe_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/board_stand_layout"
-                android:background="@color/transparent"
-                android:contentDescription="@string/button_swipe_right"
-                android:onClick="buttonClickListener"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button_swipe_right"
-                android:visibility="invisible" />
-
-        </RelativeLayout>
-
-        <ImageButton
-            android:id="@+id/button_swipe_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_middle"
-            android:background="@color/transparent"
-            android:contentDescription="@string/button_swipe_bottom"
-            android:onClick="buttonClickListener"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_swipe_bottom"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
+        <include
+            android:id="@+id/game_main_2"
+            layout="@layout/game_main" />
+    </LinearLayout>
 
     <include layout="@layout/game_button" />
-
-    <ImageView
-        android:id="@+id/effect"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/effect"
-        android:scaleType="fitCenter"
-        android:src="@drawable/effect_magic_square"
-        android:visibility="visible"
-        android:stateListAnimator="@xml/animate_game_success" />
-
-    <ImageView
-        android:id="@+id/effect2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/effect2"
-        android:scaleType="centerCrop"
-        android:alpha="0"
-        android:src="@drawable/thunder1"
-        android:visibility="visible"
-        android:stateListAnimator="@xml/animate_game_thunder" />
 </FrameLayout>
