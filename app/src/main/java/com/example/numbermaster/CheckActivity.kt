@@ -144,7 +144,7 @@ class CheckActivity : NumberMasterActivity() {
         }
 
         // buttonsの設定
-        this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
+        this.numberMaster!!.buttonsGame["prev"] = findViewById(R.id.prev_button)
 
         // cube
         this.drawCube()
@@ -169,13 +169,13 @@ class CheckActivity : NumberMasterActivity() {
 
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
-            this.numberMaster!!.buttons[key] = findViewById(id)
+            this.numberMaster!!.buttonsPuzzle[key] = findViewById(id)
             if (that.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
-                this.numberMaster!!.buttons[key]!!.isEnabled = true
-                this.numberMaster!!.buttons[key]!!.visibility = ImageButton.VISIBLE
+                this.numberMaster!!.buttonsPuzzle[key]!!.isEnabled = true
+                this.numberMaster!!.buttonsPuzzle[key]!!.visibility = ImageButton.VISIBLE
             } else {
-                this.numberMaster!!.buttons[key]!!.isEnabled = false
-                this.numberMaster!!.buttons[key]!!.visibility = ImageButton.INVISIBLE
+                this.numberMaster!!.buttonsPuzzle[key]!!.isEnabled = false
+                this.numberMaster!!.buttonsPuzzle[key]!!.visibility = ImageButton.INVISIBLE
             }
         }
 
