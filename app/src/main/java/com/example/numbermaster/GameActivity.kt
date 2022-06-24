@@ -168,7 +168,7 @@ class GameActivity : NumberMasterActivity() {
                 this.numberMaster!!.buttonClickBlindfoldProcess()
             }
             R.id.button_stop -> {
-                if (!this.numberMaster!!.buttons["3x3"]!!.isEnabled) {
+                if (!this.numberMaster!!.buttonsGame["3x3"]!!.isEnabled) {
                     this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 } else {
                     this.requestedOrientation = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
@@ -229,21 +229,21 @@ class GameActivity : NumberMasterActivity() {
 
         for (key in listOf("3x3", "6x6", "9x9", "secret", "blindfold", "cube", "finish", "stop")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
-            this.numberMaster!!.buttons[key] = findViewById(id)
-            this.numberMaster!!.buttons[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            this.numberMaster!!.buttons[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-            this.numberMaster!!.buttons[key]!!.isEnabled = true
+            this.numberMaster!!.buttonsGame[key] = findViewById(id)
+            this.numberMaster!!.buttonsGame[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            this.numberMaster!!.buttonsGame[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+            this.numberMaster!!.buttonsGame[key]!!.isEnabled = true
         }
-        this.numberMaster!!.buttons["prev"] = findViewById(R.id.prev_button)
+        this.numberMaster!!.buttonsGame["prev"] = findViewById(R.id.prev_button)
 
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
-            this.numberMaster!!.buttons[key] = findViewById(id)
+            this.numberMaster!!.buttonsPuzzle[key] = findViewById(id)
 
             if (key == "swipe_bottom" || key == "swipe_top") {
-                this.numberMaster!!.buttons[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                this.numberMaster!!.buttonsPuzzle[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             } else {
-                this.numberMaster!!.buttons[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                this.numberMaster!!.buttonsPuzzle[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             }
         }
 
@@ -308,7 +308,7 @@ class GameActivity : NumberMasterActivity() {
         // loadGameの後で行わなければならない。
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
             val id = this.resources.getIdentifier("button_enabled_menu", "drawable", this.packageName)
-            this.numberMaster!!.buttons["secret"]!!.setImageResource(id)
+            this.numberMaster!!.buttonsGame["secret"]!!.setImageResource(id)
         }
 
         // ステータスの文字色

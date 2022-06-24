@@ -114,8 +114,21 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "effect_puzzle9x9" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle9x9),
     )
 
-    var nonNumberPanelPosition: MutableMap<String, Int> = mutableMapOf("cubeSideNumber" to 0, "x" to 2, "y" to 2)
     var statusText: TextView? = null
+
+    var buttonsGame: MutableMap<String, ImageButton?> = mutableMapOf(
+        "prev" to null,
+        "3x3" to null,
+        "6x6" to null,
+        "9x9" to null,
+        "secret" to null,
+        "cube" to null,
+        "blindfold" to null,
+        "finish" to null,
+        "stop" to null,
+    )
+
+    var nonNumberPanelPosition: MutableMap<String, Int> = mutableMapOf("cubeSideNumber" to 0, "x" to 2, "y" to 2)
     var boardStandLayout: FrameLayout? = null
     var boardStandForeground: ImageView? = null
 
@@ -129,16 +142,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     // 数字盤のImageViewの変数
     var numberPanels: MutableList<ImageView?> = MutableList(4) {null}
 
-    var buttons: MutableMap<String, ImageButton?> = mutableMapOf(
-        "prev" to null,
-        "3x3" to null,
-        "6x6" to null,
-        "9x9" to null,
-        "secret" to null,
-        "cube" to null,
-        "blindfold" to null,
-        "finish" to null,
-        "stop" to null,
+    var buttonsPuzzle: MutableMap<String, ImageButton?> = mutableMapOf(
         "swipe_top" to null,
         "swipe_right" to null,
         "swipe_bottom" to null,
@@ -435,7 +439,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         if (changeStopButton) {
             if (this.statusGame["stop"]!!.toInt() == 0) {
                 this.statusGame["stop"] = 1.toString()
-                this.buttons["stop"]!!.setImageResource(+R.drawable.button_enabled_stop)
+                this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_enabled_stop)
 
                 this.dbHelper!!.writeByStopButton(
                     this.settings,
@@ -446,15 +450,15 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 )
             } else {
                 this.statusGame["stop"] = 0.toString()
-                this.buttons["stop"]!!.setImageResource(+R.drawable.button_disabled_stop)
+                this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_disabled_stop)
             }
         }
 
         // 他のボタンの有効無効設定
-        this.buttons["prev"]!!.isEnabled = !this.buttons["prev"]!!.isEnabled
+        this.buttonsGame["prev"]!!.isEnabled = !this.buttonsGame["prev"]!!.isEnabled
         for (buttonKey in listOf("finish", "secret", "3x3", "6x6", "9x9")) {
             // ボタンの有効無効設定
-            this.buttons[buttonKey]!!.isEnabled = !this.buttons[buttonKey]!!.isEnabled
+            this.buttonsGame[buttonKey]!!.isEnabled = !this.buttonsGame[buttonKey]!!.isEnabled
 
             // ボタンの画像変更
             var enableString = "_enabled_"
@@ -472,7 +476,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
 
             val id = this.resources.getIdentifier(imageName, "drawable", this.activity.packageName)
-            this.buttons[buttonKey]!!.setImageResource(id)
+            this.buttonsGame[buttonKey]!!.setImageResource(id)
         }
     }
 
@@ -522,8 +526,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         }
 
         for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
-            this.buttons[buttonName]!!.isEnabled = swipeButtonEnabled
-            this.buttons[buttonName]!!.visibility = swipeButtonVisibility
+            this.buttonsPuzzle[buttonName]!!.isEnabled = swipeButtonEnabled
+            this.buttonsPuzzle[buttonName]!!.visibility = swipeButtonVisibility
         }
 
         this.shuffle()
@@ -669,8 +673,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
             if (this.statusPuzzle["useCubeMode"]!!.toInt() == 1) {
                 for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
-                    this.buttons[buttonName]!!.isEnabled = true
-                    this.buttons[buttonName]!!.visibility = View.VISIBLE
+                    this.buttonsPuzzle[buttonName]!!.isEnabled = true
+                    this.buttonsPuzzle[buttonName]!!.visibility = View.VISIBLE
                 }
             }
 
@@ -984,7 +988,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 height = numberPanelSize.toInt()
             }
 
-            if (that.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || that.buttons["3x3"]!!.isEnabled) {
+            if (that.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || that.buttonsGame["3x3"]!!.isEnabled) {
                 setImageBitmap(that.images["number$number"]!!)
             } else {
                 setImageBitmap(that.images["number_question"]!!)
@@ -1028,7 +1032,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             null
         )
 
-        val numberPanelImage = if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || this.buttons["3x3"]!!.isEnabled) {
+        val numberPanelImage = if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || this.buttonsGame["3x3"]!!.isEnabled) {
             this.images["number" + this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x]]!!
         } else {
             this.images["number_question"]!!
