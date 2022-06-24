@@ -208,7 +208,7 @@ class GameActivity : NumberMasterActivity() {
 
     private fun drawCube() {
         val that = this
-        this.numberMaster!!.cube = GLSurfaceView(this).apply {
+        this.numberMaster!!.cube[0] = GLSurfaceView(this).apply {
             setEGLConfigChooser(8,8,8,8,16,0)
             setRenderer(that.numberMaster!!.numberMasterRenderer)
             setZOrderOnTop(true)
@@ -217,7 +217,7 @@ class GameActivity : NumberMasterActivity() {
             visibility = View.VISIBLE
         }
 
-        findViewById<RelativeLayout>(R.id.full_space).addView(this.numberMaster!!.cube)
+        findViewById<RelativeLayout>(R.id.full_space).addView(this.numberMaster!!.cube[0])
 
         // 時間のかかる初期表示を行っておく
         this.numberMaster!!.numberMasterRenderer!!.rotateStart(this.numberMaster!!.numberMasterRenderer!!.rotateDown)
@@ -261,12 +261,12 @@ class GameActivity : NumberMasterActivity() {
 
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
-            this.numberMaster!!.buttonsPuzzle[key] = findViewById(id)
+            this.numberMaster!!.buttonsPuzzle[0][key] = findViewById(id)
 
             if (key == "swipe_bottom" || key == "swipe_top") {
-                this.numberMaster!!.buttonsPuzzle[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                this.numberMaster!!.buttonsPuzzle[0][key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             } else {
-                this.numberMaster!!.buttonsPuzzle[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
+                this.numberMaster!!.buttonsPuzzle[0][key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             }
         }
 
@@ -283,17 +283,17 @@ class GameActivity : NumberMasterActivity() {
             layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
         }
         // boardStandの設定
-        this.numberMaster!!.boardStandLayout = findViewById<FrameLayout>(R.id.board_stand_layout).apply {
+        this.numberMaster!!.boardStandLayout[0] = findViewById<FrameLayout>(R.id.board_stand_layout).apply {
             layoutParams.width = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
             setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
         }
-        this.numberMaster!!.boardStandForeground = findViewById(R.id.board_stand_foreground)
+        this.numberMaster!!.boardStandForeground[0] = findViewById(R.id.board_stand_foreground)
 
         // 0 is background
-        for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout!!.childCount) {
-            this.numberMaster!!.numberPanels[numberPanelIndex - 1] = this.numberMaster!!.boardStandLayout!!.getChildAt(numberPanelIndex) as ImageButton
-            this.numberMaster!!.numberPanels[numberPanelIndex - 1]!!.apply {
+        for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[0]!!.childCount) {
+            this.numberMaster!!.numberPanels[0][numberPanelIndex - 1] = this.numberMaster!!.boardStandLayout[0]!!.getChildAt(numberPanelIndex) as ImageButton
+            this.numberMaster!!.numberPanels[0][numberPanelIndex - 1]!!.apply {
                 setOnTouchListener(that.numberMaster!!.numberMasterOnSwipeTouchListener)
                 layoutParams.apply {
                     width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
@@ -307,16 +307,16 @@ class GameActivity : NumberMasterActivity() {
         }
 
         // effectの設定
-        this.numberMaster!!.effect = findViewById<ImageView>(R.id.effect).apply {
+        this.numberMaster!!.effect[0] = findViewById<ImageView>(R.id.effect).apply {
             visibility = ImageView.INVISIBLE
         }
-        this.numberMaster!!.effect2 = findViewById<ImageView>(R.id.effect2).apply {
+        this.numberMaster!!.effect2[0] = findViewById<ImageView>(R.id.effect2).apply {
             visibility = ImageView.INVISIBLE
         }
 
         // cube
         this.drawCube()
-        this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle["size"]!!.toInt())
+        this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle[0]["size"]!!.toInt())
 
         this.numberMaster!!.setEvent(window)
 
@@ -326,7 +326,7 @@ class GameActivity : NumberMasterActivity() {
             layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
         }
 
-        if (!this.numberMaster!!.loadGame() || this.numberMaster!!.numbers[0][0][0] == 0) {
+        if (!this.numberMaster!!.loadGame() || this.numberMaster!!.numbers[0][0][0][0] == 0) {
             this.numberMaster!!.updateStatus()
             this.numberMaster!!.shuffle()
         }

@@ -11,6 +11,7 @@ import com.example.numbermaster.databinding.ActivityCheckBinding
 
 class CheckActivity : NumberMasterActivity() {
     var numberMaster: NumberMaster? = null
+    val puzzleNumber = 0 // simul mode非対応なので0固定
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +102,7 @@ class CheckActivity : NumberMasterActivity() {
 
     private fun drawCube() {
         val that = this
-        this.numberMaster!!.cube = GLSurfaceView(this).apply {
+        this.numberMaster!!.cube[this.puzzleNumber] = GLSurfaceView(this).apply {
             setEGLConfigChooser(8,8,8,8,16,0)
             setRenderer(that.numberMaster!!.numberMasterRenderer)
             setZOrderOnTop(true)
@@ -110,7 +111,7 @@ class CheckActivity : NumberMasterActivity() {
             visibility = View.VISIBLE
         }
 
-        findViewById<RelativeLayout>(R.id.full_space).addView(this.numberMaster!!.cube)
+        findViewById<RelativeLayout>(R.id.full_space).addView(this.numberMaster!!.cube[this.puzzleNumber])
 
         // 時間のかかる初期表示を行っておく
         this.numberMaster!!.numberMasterRenderer!!.rotateStart(this.numberMaster!!.numberMasterRenderer!!.rotateDown)
@@ -125,13 +126,13 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster = NumberMaster(this, resources, this.globalActivityInfo)
 
         // boardStandの設定
-        this.numberMaster!!.boardStandLayout = findViewById(R.id.board_stand_layout)
-        this.numberMaster!!.boardStandForeground = findViewById(R.id.board_stand_foreground)
+        this.numberMaster!!.boardStandLayout[this.puzzleNumber] = findViewById(R.id.board_stand_layout)
+        this.numberMaster!!.boardStandForeground[this.puzzleNumber] = findViewById(R.id.board_stand_foreground)
 
         // 0 is background
-        for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout!!.childCount) {
-            this.numberMaster!!.numberPanels[numberPanelIndex - 1] = this.numberMaster!!.boardStandLayout!!.getChildAt(numberPanelIndex) as ImageButton
-            this.numberMaster!!.numberPanels[numberPanelIndex - 1]!!.apply {
+        for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.childCount) {
+            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex - 1] = this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.getChildAt(numberPanelIndex) as ImageButton
+            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex - 1]!!.apply {
                 layoutParams.apply {
                     width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
                     height = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
@@ -153,14 +154,14 @@ class CheckActivity : NumberMasterActivity() {
 
         val numbers = intent.getStringExtra("numbers")!!
         val status = this.numberMaster!!.dbHelper!!.makeStatus(numbers)
-        this.numberMaster!!.numbers = this.numberMaster!!.dbHelper!!.stringToNumbers(numbers)
-        this.numberMaster!!.nonNumberPanelPosition = this.numberMaster!!.dbHelper!!.dataNonNumberPanelPosition
-        this.numberMaster!!.statusPuzzle["size"] = status["size"].toString()
+        this.numberMaster!!.numbers[this.puzzleNumber] = this.numberMaster!!.dbHelper!!.stringToNumbers(numbers)
+        this.numberMaster!!.nonNumberPanelPosition[this.puzzleNumber] = this.numberMaster!!.dbHelper!!.dataNonNumberPanelPosition
+        this.numberMaster!!.statusPuzzle[this.puzzleNumber]["size"] = status["size"].toString()
         this.numberMaster!!.statusGame["stop"] = 0.toString()
         this.numberMaster!!.statusGame["score"] = 0.toString()
         this.numberMaster!!.statusGame["time"] = 0.toString()
-        this.numberMaster!!.statusPuzzle["useCubeMode"] = status["use_cube_mode"].toString()
-        this.numberMaster!!.settings["enabledCube"]  = if (this.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
+        this.numberMaster!!.statusPuzzle[this.puzzleNumber]["useCubeMode"] = status["use_cube_mode"].toString()
+        this.numberMaster!!.settings["enabledCube"]  = if (this.numberMaster!!.statusPuzzle[this.puzzleNumber]["useCubeMode"] == 1.toString()) {
             1.toString()
         } else {
             0.toString()
@@ -169,13 +170,13 @@ class CheckActivity : NumberMasterActivity() {
 
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
             val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
-            this.numberMaster!!.buttonsPuzzle[key] = findViewById(id)
-            if (that.numberMaster!!.statusPuzzle["useCubeMode"] == 1.toString()) {
-                this.numberMaster!!.buttonsPuzzle[key]!!.isEnabled = true
-                this.numberMaster!!.buttonsPuzzle[key]!!.visibility = ImageButton.VISIBLE
+            this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key] = findViewById(id)
+            if (that.numberMaster!!.statusPuzzle[this.puzzleNumber]["useCubeMode"] == 1.toString()) {
+                this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key]!!.isEnabled = true
+                this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key]!!.visibility = ImageButton.VISIBLE
             } else {
-                this.numberMaster!!.buttonsPuzzle[key]!!.isEnabled = false
-                this.numberMaster!!.buttonsPuzzle[key]!!.visibility = ImageButton.INVISIBLE
+                this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key]!!.isEnabled = false
+                this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key]!!.visibility = ImageButton.INVISIBLE
             }
         }
 

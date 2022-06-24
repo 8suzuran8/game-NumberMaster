@@ -82,11 +82,19 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "enabledCube" to "0", // 立方体モード使用可能か?(スコアカンスト済みか?)
         "addIconRead" to "1" // 追加機能のHOWTOが既読か？
     )
-    var statusPuzzle: MutableMap<String, String> = mutableMapOf(
-        "useCubeMode" to "0", // 立方体モード使用中か?
-        "blindfoldMode" to "0", // 目隠しモード使用中か？
-        "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
-        "cubeSideNumber" to "0", // 立方体面番号
+    var statusPuzzle: MutableList<MutableMap<String, String>> = mutableListOf(
+        mutableMapOf(
+            "useCubeMode" to "0", // 立方体モード使用中か?
+            "blindfoldMode" to "0", // 目隠しモード使用中か？
+            "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
+            "cubeSideNumber" to "0", // 立方体面番号
+        ),
+        mutableMapOf(
+            "useCubeMode" to "0", // 立方体モード使用中か?
+            "blindfoldMode" to "0", // 目隠しモード使用中か？
+            "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
+            "cubeSideNumber" to "0", // 立方体面番号
+        ),
     )
     var statusGame: MutableMap<String, String> = mutableMapOf(
         "simulMode" to "0",
@@ -129,35 +137,73 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "stop" to null,
     )
 
-    var nonNumberPanelPosition: MutableMap<String, Int> = mutableMapOf("cubeSideNumber" to 0, "x" to 2, "y" to 2)
-    var boardStandLayout: FrameLayout? = null
-    var boardStandForeground: ImageView? = null
+    var nonNumberPanelPosition: MutableList<MutableMap<String, Int>> = mutableListOf(
+        mutableMapOf("cubeSideNumber" to 0, "x" to 2, "y" to 2),
+        mutableMapOf("cubeSideNumber" to 0, "x" to 2, "y" to 2),
+    )
+    var boardStandLayout: MutableList<FrameLayout?> = mutableListOf(
+        null,
+        null,
+    )
+    var boardStandForeground: MutableList<ImageView?> = mutableListOf(
+        null,
+        null,
+    )
 
     // 数字の管理
     // 神ステージの6面 x 9 x 9 = 81 * 6 = 486
     // [神ステージの面番号][y位置][x位置]
     // 面番号は初期表示面が0で、それを中心に上から時計回りで、上1、右2、下3、左4、初期表示面の裏側が5
     // x位置、y位置は左上が0, 0
-    var numbers = MutableList(6) {MutableList(9) {MutableList(9) {0} } }
+    var numbers = mutableListOf(
+        MutableList(6) {MutableList(9) {MutableList(9) {0} } },
+        MutableList(6) {MutableList(9) {MutableList(9) {0} } },
+    )
 
     // 数字盤のImageViewの変数
-    var numberPanels: MutableList<ImageView?> = MutableList(4) {null}
-
-    var buttonsPuzzle: MutableMap<String, ImageButton?> = mutableMapOf(
-        "swipe_top" to null,
-        "swipe_right" to null,
-        "swipe_bottom" to null,
-        "swipe_left" to null,
+    var numberPanels: MutableList<MutableList<ImageView?>> = mutableListOf(
+        MutableList(4) {null},
+        MutableList(4) {null},
     )
-    var effect: ImageView? = null // 魔方陣
-    var effect2: ImageView? = null // 稲妻
-    var cube: GLSurfaceView? = null
+
+    var buttonsPuzzle: MutableList<MutableMap<String, ImageButton?>> = mutableListOf(
+        mutableMapOf(
+            "swipe_top" to null,
+            "swipe_right" to null,
+            "swipe_bottom" to null,
+            "swipe_left" to null,
+        ),
+        mutableMapOf(
+            "swipe_top" to null,
+            "swipe_right" to null,
+            "swipe_bottom" to null,
+            "swipe_left" to null,
+        ),
+    )
+    var effect: MutableList<ImageView?> = mutableListOf( // 魔方陣
+        null,
+        null,
+    )
+    var effect2: MutableList<ImageView?> = mutableListOf( // 稲妻
+        null,
+        null,
+    )
+    var cube: MutableList<GLSurfaceView?> = mutableListOf(
+        null,
+        null,
+    )
 
     // [0]横、[1]縦
     // [*][1]と[*][3]は同じ値でなければならない
-    private var cubeNet: MutableList<MutableList<Int?>> = mutableListOf(
-        mutableListOf(4, 0, 2, 5),
-        mutableListOf(1, 0, 3, 5),
+    private var cubeNet: MutableList<MutableList<MutableList<Int?>>> = mutableListOf(
+        mutableListOf(
+            mutableListOf(4, 0, 2, 5),
+            mutableListOf(1, 0, 3, 5),
+        ),
+        mutableListOf(
+            mutableListOf(4, 0, 2, 5),
+            mutableListOf(1, 0, 3, 5),
+        ),
     )
 
     // 音楽、効果音
@@ -190,9 +236,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
             fun swipeProcess(): Boolean {
                 // if (that.status["stop"]!!.toInt() == 1) return false
-                if (that.statusPuzzle["useCubeMode"]!!.toInt() != 1) return false
-                that.cube!!.visibility = View.VISIBLE
-                that.boardStandLayout!!.visibility = FrameLayout.INVISIBLE
+                if (that.statusPuzzle[0]["useCubeMode"]!!.toInt() != 1) return false
+                that.cube[0]!!.visibility = View.VISIBLE
+                that.boardStandLayout[0]!!.visibility = FrameLayout.INVISIBLE
                 that.invisibleCubeEvent()
 
                 return true
@@ -220,8 +266,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         }
 
         this.numberMasterCheckSuccess.numberMasterCalculator = this.numberMasterCalculator
-        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle["size"]!!.toInt())
-        this.nonNumberPanelPosition = mutableMapOf("cubeSideNumber" to this.statusPuzzle["cubeSideNumber"]!!.toInt(), "x" to sizeMax, "y" to sizeMax)
+        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[0]["size"]!!.toInt())
+        this.nonNumberPanelPosition[0] = mutableMapOf("cubeSideNumber" to this.statusPuzzle[0]["cubeSideNumber"]!!.toInt(), "x" to sizeMax, "y" to sizeMax)
 
         // 3DCG
         this.numberMasterRenderer = NumberMasterRenderer(activity, mutableListOf(R.drawable.texture_3x3, R.drawable.texture_6x6, R.drawable.texture_9x9))
@@ -247,41 +293,41 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun setCubeSideNumber(mouseDirection: String) {
-        this.cubeNet = this.numberMasterCalculator.getNextCubeNet(mouseDirection, this.cubeNet)
-        this.statusPuzzle["cubeSideNumber"] = this.cubeNet[0][1].toString()
+        this.cubeNet[0] = this.numberMasterCalculator.getNextCubeNet(mouseDirection, this.cubeNet[0])
+        this.statusPuzzle[0]["cubeSideNumber"] = this.cubeNet[0][0][1].toString()
     }
 
     fun numberPanelClickListener(imageView: View) {
         if (this.statusGame["stop"]!!.toInt() == 1) return
         if (!imageView.contentDescription.startsWith("number panel")) return
 
-        val numberPanelSize = this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle["size"]]!!.toFloat()
+        val numberPanelSize = this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[0]["size"]]!!.toFloat()
 
         // 以下、移動することは明らか
         val that = this
 
         val clickPanelPosition = mutableMapOf(
-            "cubeSideNumber" to this.statusPuzzle["cubeSideNumber"]!!.toInt(),
+            "cubeSideNumber" to this.statusPuzzle[0]["cubeSideNumber"]!!.toInt(),
             "x" to (imageView.translationX / numberPanelSize).roundToInt(),
             "y" to (imageView.translationY / numberPanelSize).roundToInt(),
         )
 
         val beforeNonNumberPanelPosition = mutableMapOf(
-            "cubeSideNumber" to that.nonNumberPanelPosition["cubeSideNumber"]!!.toInt(),
-            "y" to that.nonNumberPanelPosition["y"]!!.toInt(),
-            "x" to that.nonNumberPanelPosition["x"]!!.toInt(),
+            "cubeSideNumber" to that.nonNumberPanelPosition[0]["cubeSideNumber"]!!.toInt(),
+            "y" to that.nonNumberPanelPosition[0]["y"]!!.toInt(),
+            "x" to that.nonNumberPanelPosition[0]["x"]!!.toInt(),
         )
 
-        var moveToX = this.nonNumberPanelPosition["x"]!! * numberPanelSize
-        var moveToY = this.nonNumberPanelPosition["y"]!! * numberPanelSize
-        if (this.nonNumberPanelPosition["cubeSideNumber"]!! != this.statusPuzzle["cubeSideNumber"]!!.toInt()) {
-            if (this.nonNumberPanelPosition["x"]!! == clickPanelPosition["x"]) {
+        var moveToX = this.nonNumberPanelPosition[0]["x"]!! * numberPanelSize
+        var moveToY = this.nonNumberPanelPosition[0]["y"]!! * numberPanelSize
+        if (this.nonNumberPanelPosition[0]["cubeSideNumber"]!! != this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()) {
+            if (this.nonNumberPanelPosition[0]["x"]!! == clickPanelPosition["x"]) {
                 moveToY = if (clickPanelPosition["y"] == 0) {
                     -numberPanelSize
                 } else {
                     numberPanelSize * 3
                 }
-            } else if (this.nonNumberPanelPosition["y"]!! == clickPanelPosition["y"]) {
+            } else if (this.nonNumberPanelPosition[0]["y"]!! == clickPanelPosition["y"]) {
                 moveToX = if (clickPanelPosition["x"] == 0) {
                     -numberPanelSize
                 } else {
@@ -303,26 +349,26 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
                     // 数字の場所を入れ替える
                     val tmp =
-                        that.numbers[that.statusPuzzle["cubeSideNumber"]!!.toInt()][clickPanelPosition["y"]!!][clickPanelPosition["x"]!!]
-                    that.numbers[that.statusPuzzle["cubeSideNumber"]!!.toInt()][clickPanelPosition["y"]!!][clickPanelPosition["x"]!!] =
-                        that.numbers[that.nonNumberPanelPosition["cubeSideNumber"]!!][that.nonNumberPanelPosition["y"]!!][that.nonNumberPanelPosition["x"]!!]
-                    that.numbers[that.nonNumberPanelPosition["cubeSideNumber"]!!][that.nonNumberPanelPosition["y"]!!][that.nonNumberPanelPosition["x"]!!] =
+                        that.numbers[0][that.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][clickPanelPosition["y"]!!][clickPanelPosition["x"]!!]
+                    that.numbers[0][that.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][clickPanelPosition["y"]!!][clickPanelPosition["x"]!!] =
+                        that.numbers[0][that.nonNumberPanelPosition[0]["cubeSideNumber"]!!][that.nonNumberPanelPosition[0]["y"]!!][that.nonNumberPanelPosition[0]["x"]!!]
+                    that.numbers[0][that.nonNumberPanelPosition[0]["cubeSideNumber"]!!][that.nonNumberPanelPosition[0]["y"]!!][that.nonNumberPanelPosition[0]["x"]!!] =
                         tmp
 
                     // 空白枠の更新
-                    that.nonNumberPanelPosition["cubeSideNumber"] =
-                        that.statusPuzzle["cubeSideNumber"]!!.toInt()
-                    that.nonNumberPanelPosition["y"] = clickPanelPosition["y"]!!
-                    that.nonNumberPanelPosition["x"] = clickPanelPosition["x"]!!
+                    that.nonNumberPanelPosition[0]["cubeSideNumber"] =
+                        that.statusPuzzle[0]["cubeSideNumber"]!!.toInt()
+                    that.nonNumberPanelPosition[0]["y"] = clickPanelPosition["y"]!!
+                    that.nonNumberPanelPosition[0]["x"] = clickPanelPosition["x"]!!
 
                     // numberPanelと背景の更新
                     that.updateNumberPanelByMove(beforeNonNumberPanelPosition, clickPanelPosition)
 
                     // 完成の確認
                     val successType = that.numberMasterCheckSuccess.checkAll(
-                        that.numbers,
-                        that.numberMasterCalculator.getSizeMax(that.statusPuzzle["size"]!!.toInt()),
-                        that.statusPuzzle["useCubeMode"]!!.toInt()
+                        that.numbers[0],
+                        that.numberMasterCalculator.getSizeMax(that.statusPuzzle[0]["size"]!!.toInt()),
+                        that.statusPuzzle[0]["useCubeMode"]!!.toInt()
                     )
 
                     if (successType == null) {
@@ -349,22 +395,22 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         // アニメーション
         if (successType == 1) {
             when {
-                this.statusPuzzle["size"]!!.toInt() == 1 -> {
-                    this.effect!!.setImageBitmap(this.images["effect_puzzle3x3"]!!)
+                this.statusPuzzle[0]["size"]!!.toInt() == 1 -> {
+                    this.effect[0]!!.setImageBitmap(this.images["effect_puzzle3x3"]!!)
                 }
-                this.statusPuzzle["size"]!!.toInt() == 2 -> {
-                    this.effect!!.setImageBitmap(this.images["effect_puzzle6x6"]!!)
+                this.statusPuzzle[0]["size"]!!.toInt() == 2 -> {
+                    this.effect[0]!!.setImageBitmap(this.images["effect_puzzle6x6"]!!)
                 }
-                this.statusPuzzle["size"]!!.toInt() == 3 -> {
-                    this.effect!!.setImageBitmap(this.images["effect_puzzle9x9"]!!)
+                this.statusPuzzle[0]["size"]!!.toInt() == 3 -> {
+                    this.effect[0]!!.setImageBitmap(this.images["effect_puzzle9x9"]!!)
                 }
             }
         } else {
-            this.effect!!.setImageBitmap(this.images["effect_magic_square"]!!)
+            this.effect[0]!!.setImageBitmap(this.images["effect_magic_square"]!!)
         }
 
-        this.effect!!.visibility = View.VISIBLE
-        this.effect!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
+        this.effect[0]!!.visibility = View.VISIBLE
+        this.effect[0]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
 
         // スコアの計算
         var addScore = 0
@@ -374,13 +420,13 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             addScore = 100
         }
 
-        addScore *= this.statusPuzzle["size"]!!.toInt()
+        addScore *= this.statusPuzzle[0]["size"]!!.toInt()
 
-        if (this.statusPuzzle["useCubeMode"]!!.toInt() == 1) {
+        if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 1) {
             addScore *= 6
         }
 
-        if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 1) {
+        if (this.statusPuzzle[0]["blindfoldMode"]!!.toInt() == 1) {
             addScore *= 5
         }
 
@@ -414,20 +460,20 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     private fun counterStopEffect() {
         val that = this
 
-        this.effect2!!.visibility = ImageView.VISIBLE
-        this.effect2!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(this.activity, R.xml.animate_game_thunder)
+        this.effect2[0]!!.visibility = ImageView.VISIBLE
+        this.effect2[0]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(this.activity, R.xml.animate_game_thunder)
 
         // 上記animation時間100 * 3loop + 100
         timer(name = "thunder", initialDelay = 400, period = 500) {
             Handler(Looper.getMainLooper()).post {
                 this.cancel()
-                that.effect2!!.setImageResource(R.drawable.thunder2)
-                that.effect2!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(that.activity, R.xml.animate_game_thunder)
+                that.effect2[0]!!.setImageResource(R.drawable.thunder2)
+                that.effect2[0]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(that.activity, R.xml.animate_game_thunder)
                 timer(name = "thunder", initialDelay = 300, period = 500) {
                     Handler(Looper.getMainLooper()).post {
-                        that.effect2!!.setImageResource(R.drawable.thunder1)
+                        that.effect2[0]!!.setImageResource(R.drawable.thunder1)
                         this.cancel()
-                        that.effect2!!.visibility = ImageView.INVISIBLE
+                        that.effect2[0]!!.visibility = ImageView.INVISIBLE
                     }
                 }
             }
@@ -442,13 +488,16 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 this.statusGame["stop"] = 1.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_enabled_stop)
 
-                this.dbHelper!!.writeByStopButton(
-                    this.settings,
-                    this.statusGame,
-                    this.statusPuzzle,
-                    this.nonNumberPanelPosition,
-                    this.numbers
-                )
+                // simul modeの場合は保存しない
+                if (this.statusGame["simulMode"]!!.toInt() == 0) {
+                    this.dbHelper!!.writeByStopButton(
+                        this.settings,
+                        this.statusGame,
+                        this.statusPuzzle[0],
+                        this.nonNumberPanelPosition[0],
+                        this.numbers[0]
+                    )
+                }
             } else {
                 this.statusGame["stop"] = 0.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_disabled_stop)
@@ -485,14 +534,22 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.changeButtonEnabled()
         this.buttonClickSecretProcess(true)
 
-        if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 1) {
+        if (this.statusPuzzle[0]["blindfoldMode"]!!.toInt() == 1) {
             this.updateNumberPanel()
         }
     }
 
     fun buttonClickFinishProcess() {
-        // DBに記録を残す
-        this.dbHelper!!.writeHistory(this.statusGame, this.statusPuzzle, this.nonNumberPanelPosition, this.numbers)
+        // simul modeの場合は保存しない
+        if (this.statusGame["simulMode"]!!.toInt() == 0) {
+            // DBに記録を残す
+            this.dbHelper!!.writeHistory(
+                this.statusGame,
+                this.statusPuzzle[0],
+                this.nonNumberPanelPosition[0],
+                this.numbers[0]
+            )
+        }
 
         // ステータスを初期化する
         this.statusGame["score"] = 0.toString()
@@ -502,8 +559,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun buttonClickSizeProcess(sizeKey: Int) {
-        if (this.statusPuzzle["size"]!!.toInt() != sizeKey) {
-            this.statusPuzzle["size"] = sizeKey.toString()
+        if (this.statusPuzzle[0]["size"]!!.toInt() != sizeKey) {
+            this.statusPuzzle[0]["size"] = sizeKey.toString()
             this.numberMasterRenderer!!.changeTexture(sizeKey)
         }
 
@@ -517,18 +574,18 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
         var swipeButtonEnabled = true
         var swipeButtonVisibility = View.VISIBLE
-        if (this.statusPuzzle["useCubeMode"]!!.toInt() == 1) {
-            this.statusPuzzle["useCubeMode"] = 0.toString()
-            this.statusPuzzle["cubeSideNumber"] = 0.toString()
+        if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 1) {
+            this.statusPuzzle[0]["useCubeMode"] = 0.toString()
+            this.statusPuzzle[0]["cubeSideNumber"] = 0.toString()
             swipeButtonEnabled = false
             swipeButtonVisibility = View.INVISIBLE
         } else {
-            this.statusPuzzle["useCubeMode"] = 1.toString()
+            this.statusPuzzle[0]["useCubeMode"] = 1.toString()
         }
 
         for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
-            this.buttonsPuzzle[buttonName]!!.isEnabled = swipeButtonEnabled
-            this.buttonsPuzzle[buttonName]!!.visibility = swipeButtonVisibility
+            this.buttonsPuzzle[0][buttonName]!!.isEnabled = swipeButtonEnabled
+            this.buttonsPuzzle[0][buttonName]!!.visibility = swipeButtonVisibility
         }
 
         this.shuffle()
@@ -539,10 +596,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     fun buttonClickBlindfoldProcess() {
         if (this.settings["enabledCube"]!!.toInt() == 0) return
 
-        if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 0) {
-            this.statusPuzzle["blindfoldMode"] = 1.toString()
+        if (this.statusPuzzle[0]["blindfoldMode"]!!.toInt() == 0) {
+            this.statusPuzzle[0]["blindfoldMode"] = 1.toString()
         } else {
-            this.statusPuzzle["blindfoldMode"] = 0.toString()
+            this.statusPuzzle[0]["blindfoldMode"] = 0.toString()
             this.updateNumberPanel()
         }
     }
@@ -608,8 +665,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 this.cancel()
                 Handler(Looper.getMainLooper()).post {
                     that.updateNumberPanel()
-                    that.boardStandLayout!!.visibility = FrameLayout.VISIBLE
-                    that.cube!!.visibility = View.INVISIBLE
+                    that.boardStandLayout[0]!!.visibility = FrameLayout.VISIBLE
+                    that.cube[0]!!.visibility = View.INVISIBLE
 
                     try {
                         activity.findViewById<FrameLayout>(R.id.root_layout).apply {
@@ -662,24 +719,24 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         if (result && this.dbHelper!!.exists) {
             this.settings["counterStopCount"] = this.dbHelper!!.dataGame["settings"]!!["counter_stop_count"].toString()
             this.settings["enabledCube"] = this.dbHelper!!.dataGame["settings"]!!["enabled_cube"].toString()
-            this.statusPuzzle["useCubeMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["use_cube_mode"].toString()
-            this.statusPuzzle["blindfoldMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["blindfold_mode"].toString()
-            this.statusPuzzle["size"] = this.dbHelper!!.dataGame["current_game_status"]!!["size"].toString()
-            this.statusPuzzle["cubeSideNumber"] = this.dbHelper!!.dataGame["current_game_status"]!!["cube_side_number"].toString()
+            this.statusPuzzle[0]["useCubeMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["use_cube_mode"].toString()
+            this.statusPuzzle[0]["blindfoldMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["blindfold_mode"].toString()
+            this.statusPuzzle[0]["size"] = this.dbHelper!!.dataGame["current_game_status"]!!["size"].toString()
+            this.statusPuzzle[0]["cubeSideNumber"] = this.dbHelper!!.dataGame["current_game_status"]!!["cube_side_number"].toString()
             this.statusGame["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
             this.statusGame["time"] = this.dbHelper!!.dataGame["current_game_status"]!!["time"].toString()
 
-            this.nonNumberPanelPosition = this.dbHelper!!.dataNonNumberPanelPosition
-            this.numbers = this.dbHelper!!.dataNumbers
+            this.nonNumberPanelPosition[0] = this.dbHelper!!.dataNonNumberPanelPosition
+            this.numbers[0] = this.dbHelper!!.dataNumbers
 
-            if (this.statusPuzzle["useCubeMode"]!!.toInt() == 1) {
+            if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 1) {
                 for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
-                    this.buttonsPuzzle[buttonName]!!.isEnabled = true
-                    this.buttonsPuzzle[buttonName]!!.visibility = View.VISIBLE
+                    this.buttonsPuzzle[0][buttonName]!!.isEnabled = true
+                    this.buttonsPuzzle[0][buttonName]!!.visibility = View.VISIBLE
                 }
             }
 
-            this.numberMasterRenderer!!.changeTexture(this.statusPuzzle["size"]!!.toInt())
+            this.numberMasterRenderer!!.changeTexture(this.statusPuzzle[0]["size"]!!.toInt())
 
             this.updateStatus()
 
@@ -689,26 +746,26 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun shuffle() {
-        this.numbers = this.numberMasterCalculator.shuffleNumbers(
-            this.statusPuzzle["useCubeMode"]!!.toInt(),
-            this.statusPuzzle["size"]!!.toInt()
+        this.numbers[0] = this.numberMasterCalculator.shuffleNumbers(
+            this.statusPuzzle[0]["useCubeMode"]!!.toInt(),
+            this.statusPuzzle[0]["size"]!!.toInt()
         )
-        this.nonNumberPanelPosition = this.numberMasterCalculator.getRandom9Position(
-            this.statusPuzzle["useCubeMode"]!!.toInt(),
-            this.statusPuzzle["size"]!!.toInt(),
-            this.numbers
+        this.nonNumberPanelPosition[0] = this.numberMasterCalculator.getRandom9Position(
+            this.statusPuzzle[0]["useCubeMode"]!!.toInt(),
+            this.statusPuzzle[0]["size"]!!.toInt(),
+            this.numbers[0]
         )
 
-        this.dbHelper!!.writeGameStartNumbers(this.nonNumberPanelPosition, this.numbers)
+        this.dbHelper!!.writeGameStartNumbers(this.nonNumberPanelPosition[0], this.numbers[0])
     }
 
     private fun updateNumberPanelByMove(beforeNonNumberPanelPosition: MutableMap<String, Int>, afterNonNumberPanelPosition: MutableMap<String, Int>) {
-        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle["size"]!!.toInt())
+        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[0]["size"]!!.toInt())
 
         val bitmap = Bitmap.createBitmap(
-            this.boardStandLayout!!.background.toBitmap(
-                this.boardStandLayout!!.width,
-                this.boardStandLayout!!.height,
+            this.boardStandLayout[0]!!.background.toBitmap(
+                this.boardStandLayout[0]!!.width,
+                this.boardStandLayout[0]!!.height,
                 Bitmap.Config.ARGB_8888
             )
         )
@@ -768,7 +825,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.updateNumberPanelBackgroundOnce(canvas, y, x)
 
             this.updateNumberPanelButtonOnce(
-                this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x],
+                this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][y][x],
                 numberPanelViewIndex,
                 y,
                 x
@@ -782,7 +839,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.updateNumberPanelBackgroundOnce(canvas, y, x)
 
             this.updateNumberPanelButtonOnce(
-                this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x],
+                this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][y][x],
                 numberPanelViewIndex,
                 y,
                 x
@@ -796,7 +853,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.updateNumberPanelBackgroundOnce(canvas, y, x)
 
             this.updateNumberPanelButtonOnce(
-                this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x],
+                this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][y][x],
                 numberPanelViewIndex,
                 y,
                 x
@@ -810,7 +867,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.updateNumberPanelBackgroundOnce(canvas, y, x)
 
             this.updateNumberPanelButtonOnce(
-                this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x],
+                this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][y][x],
                 numberPanelViewIndex,
                 y,
                 x
@@ -818,32 +875,32 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             numberPanelViewIndex += 1
         }
 
-        for (numberPanelIndex in numberPanelViewIndex until this.numberPanels.size) {
-            this.numberPanels[numberPanelIndex]!!.apply {
+        for (numberPanelIndex in numberPanelViewIndex until this.numberPanels[0].size) {
+            this.numberPanels[0][numberPanelIndex]!!.apply {
                 visibility = ImageButton.INVISIBLE
                 isEnabled = false
             }
         }
 
-        this.boardStandLayout!!.background = bitmap.toDrawable(this.resources)
+        this.boardStandLayout[0]!!.background = bitmap.toDrawable(this.resources)
     }
 
     private fun isNumberPanelPosition(currentCubeSideNumber: Int, y: Int, x: Int): Boolean {
-        if (this.nonNumberPanelPosition["cubeSideNumber"]!! == currentCubeSideNumber) {
+        if (this.nonNumberPanelPosition[0]["cubeSideNumber"]!! == currentCubeSideNumber) {
             if (
-                this.nonNumberPanelPosition["x"]!! == x
-                && this.nonNumberPanelPosition["y"]!! != y
-                && this.nonNumberPanelPosition["y"]!! - 1 <= y
-                && this.nonNumberPanelPosition["y"]!! + 1 >= y
+                this.nonNumberPanelPosition[0]["x"]!! == x
+                && this.nonNumberPanelPosition[0]["y"]!! != y
+                && this.nonNumberPanelPosition[0]["y"]!! - 1 <= y
+                && this.nonNumberPanelPosition[0]["y"]!! + 1 >= y
             ) {
                 return true
             }
 
             if (
-                this.nonNumberPanelPosition["y"]!! == y
-                && this.nonNumberPanelPosition["x"]!! != x
-                && this.nonNumberPanelPosition["x"]!! - 1 <= x
-                && this.nonNumberPanelPosition["x"]!! + 1 >= x
+                this.nonNumberPanelPosition[0]["y"]!! == y
+                && this.nonNumberPanelPosition[0]["x"]!! != x
+                && this.nonNumberPanelPosition[0]["x"]!! - 1 <= x
+                && this.nonNumberPanelPosition[0]["x"]!! + 1 >= x
             ) {
                 return true
             }
@@ -851,58 +908,58 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             return false
         }
 
-        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle["size"]!!.toInt())
+        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[0]["size"]!!.toInt())
 
-        if (this.nonNumberPanelPosition["x"]!! == sizeMax) {
+        if (this.nonNumberPanelPosition[0]["x"]!! == sizeMax) {
             if (
                 x == 0
-                && this.nonNumberPanelPosition["y"]!! == y
-                && this.nonNumberPanelPosition["cubeSideNumber"]!!
+                && this.nonNumberPanelPosition[0]["y"]!! == y
+                && this.nonNumberPanelPosition[0]["cubeSideNumber"]!!
                 == this.numberMasterCalculator.getTargetCubeSideNumber(
                     "right",
-                    this.cubeNet
+                    this.cubeNet[0]
                 )
             ) {
                 return true
             }
         }
 
-        if (this.nonNumberPanelPosition["y"] == sizeMax) {
+        if (this.nonNumberPanelPosition[0]["y"] == sizeMax) {
             if (
                 y == 0
-                && this.nonNumberPanelPosition["x"]!! == x
-                && this.nonNumberPanelPosition["cubeSideNumber"]!!
+                && this.nonNumberPanelPosition[0]["x"]!! == x
+                && this.nonNumberPanelPosition[0]["cubeSideNumber"]!!
                 == this.numberMasterCalculator.getTargetCubeSideNumber(
                     "bottom",
-                    this.cubeNet
+                    this.cubeNet[0]
                 )
             ) {
                 return true
             }
         }
 
-        if (this.nonNumberPanelPosition["x"] == 0) {
+        if (this.nonNumberPanelPosition[0]["x"] == 0) {
             if (
                 x == sizeMax
-                && this.nonNumberPanelPosition["y"]!! == y
-                && this.nonNumberPanelPosition["cubeSideNumber"]!!
+                && this.nonNumberPanelPosition[0]["y"]!! == y
+                && this.nonNumberPanelPosition[0]["cubeSideNumber"]!!
                 == this.numberMasterCalculator.getTargetCubeSideNumber(
                     "left",
-                    this.cubeNet
+                    this.cubeNet[0]
                 )
             ) {
                 return true
             }
         }
 
-        if (this.nonNumberPanelPosition["y"] == 0) {
+        if (this.nonNumberPanelPosition[0]["y"] == 0) {
             if (
                 y == sizeMax
-                && this.nonNumberPanelPosition["x"]!! == x
-                && this.nonNumberPanelPosition["cubeSideNumber"]!!
+                && this.nonNumberPanelPosition[0]["x"]!! == x
+                && this.nonNumberPanelPosition[0]["cubeSideNumber"]!!
                 == this.numberMasterCalculator.getTargetCubeSideNumber(
                     "top",
-                    this.cubeNet
+                    this.cubeNet[0]
                 )
             ) {
                 return true
@@ -914,13 +971,13 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     fun updateNumberPanel() {
         var numberPanelViewIndex = 0
-        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle["size"]!!.toInt())
+        val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[0]["size"]!!.toInt())
 
         // 数字盤の設定
         val bitmap = Bitmap.createBitmap(
-            this.boardStandLayout!!.background.toBitmap(
-                this.boardStandLayout!!.width,
-                this.boardStandLayout!!.height,
+            this.boardStandLayout[0]!!.background.toBitmap(
+                this.boardStandLayout[0]!!.width,
+                this.boardStandLayout[0]!!.height,
                 Bitmap.Config.ARGB_8888
             )
         )
@@ -929,24 +986,24 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         canvas.drawBitmap(
             this.images["board_frame"]!!,
             Rect(0, 0, this.images["board_frame"]!!.width, this.images["board_frame"]!!.height),
-            Rect(0, 0, this.boardStandLayout!!.width, this.boardStandLayout!!.height),
+            Rect(0, 0, this.boardStandLayout[0]!!.width, this.boardStandLayout[0]!!.height),
             null
         )
 
         for (yIndex in 0..sizeMax) {
             for (xIndex in 0..sizeMax) {
                 if (
-                    this.nonNumberPanelPosition["cubeSideNumber"]!! == this.statusPuzzle["cubeSideNumber"]!!.toInt()
-                    && this.nonNumberPanelPosition["x"]!! == xIndex
-                    && this.nonNumberPanelPosition["y"]!! == yIndex
+                    this.nonNumberPanelPosition[0]["cubeSideNumber"]!! == this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()
+                    && this.nonNumberPanelPosition[0]["x"]!! == xIndex
+                    && this.nonNumberPanelPosition[0]["y"]!! == yIndex
                 ) {
                     this.updateNumberPanelBackgroundOnce(canvas, yIndex, xIndex)
                     continue
                 }
 
-                if (this.isNumberPanelPosition(this.statusPuzzle["cubeSideNumber"]!!.toInt(), yIndex, xIndex)) {
+                if (this.isNumberPanelPosition(this.statusPuzzle[0]["cubeSideNumber"]!!.toInt(), yIndex, xIndex)) {
                     this.updateNumberPanelButtonOnce(
-                        this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][yIndex][xIndex],
+                        this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][yIndex][xIndex],
                         numberPanelViewIndex,
                         yIndex,
                         xIndex
@@ -966,22 +1023,22 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
         }
 
-        for (numberPanelIndex in numberPanelViewIndex until this.numberPanels.size) {
-            this.numberPanels[numberPanelIndex]!!.apply {
+        for (numberPanelIndex in numberPanelViewIndex until this.numberPanels[0].size) {
+            this.numberPanels[0][numberPanelIndex]!!.apply {
                 visibility = ImageButton.INVISIBLE
                 isEnabled = false
             }
         }
 
-        this.boardStandLayout!!.background = bitmap.toDrawable(this.resources)
+        this.boardStandLayout[0]!!.background = bitmap.toDrawable(this.resources)
     }
 
     private fun updateNumberPanelButtonOnce(number: Int, index: Int, y: Int, x: Int) {
         val that = this
         val numberPanelSize =
-            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle["size"]!!]!!.toFloat()
+            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[0]["size"]!!]!!.toFloat()
 
-        this.numberPanels[index]!!.apply {
+        this.numberPanels[0][index]!!.apply {
             translationX = numberPanelSize * x
             translationY = numberPanelSize * y
             updateLayoutParams {
@@ -989,7 +1046,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 height = numberPanelSize.toInt()
             }
 
-            if (that.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || that.buttonsGame["3x3"]!!.isEnabled) {
+            if (that.statusPuzzle[0]["blindfoldMode"]!!.toInt() == 0 || that.buttonsGame["3x3"]!!.isEnabled) {
                 setImageBitmap(that.images["number$number"]!!)
             } else {
                 setImageBitmap(that.images["number_question"]!!)
@@ -1002,7 +1059,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     private fun updateNumberPanelBackgroundOnce(canvas: Canvas, y: Int, x: Int) {
         val numberPanelSize =
-            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle["size"]!!]!!.toFloat()
+            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[0]["size"]!!]!!.toFloat()
 
         val startX = (numberPanelSize * x + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
         val startY = (numberPanelSize * y + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
@@ -1019,7 +1076,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     private fun updateNumberPanelForegroundOnce(canvas: Canvas, y: Int, x: Int) {
         val numberPanelSize =
-            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle["size"]!!]!!.toFloat()
+            this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[0]["size"]!!]!!.toFloat()
 
         val startX = (numberPanelSize * x + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
         val startY = (numberPanelSize * y + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
@@ -1033,8 +1090,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             null
         )
 
-        val numberPanelImage = if (this.statusPuzzle["blindfoldMode"]!!.toInt() == 0 || this.buttonsGame["3x3"]!!.isEnabled) {
-            this.images["number" + this.numbers[this.statusPuzzle["cubeSideNumber"]!!.toInt()][y][x]]!!
+        val numberPanelImage = if (this.statusPuzzle[0]["blindfoldMode"]!!.toInt() == 0 || this.buttonsGame["3x3"]!!.isEnabled) {
+            this.images["number" + this.numbers[0][this.statusPuzzle[0]["cubeSideNumber"]!!.toInt()][y][x]]!!
         } else {
             this.images["number_question"]!!
         }
