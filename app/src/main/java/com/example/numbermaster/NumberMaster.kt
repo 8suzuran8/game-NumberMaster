@@ -89,6 +89,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "cubeSideNumber" to "0", // 立方体面番号
     )
     var statusGame: MutableMap<String, String> = mutableMapOf(
+        "simulMode" to "0",
         "stop" to "1", // STOP中か?
         "score" to "0",
         "time" to "0",

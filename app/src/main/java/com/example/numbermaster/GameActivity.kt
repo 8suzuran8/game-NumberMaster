@@ -11,12 +11,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginTop
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 import com.example.numbermaster.databinding.ActivityGameBinding
 
 class GameActivity : NumberMasterActivity() {
     var numberMaster: NumberMaster? = null
+    private var gameMainSize: Int = 0
 
     private val dialogs: MutableMap<String, AlertDialog.Builder?> = mutableMapOf(
         "3x3" to null,
@@ -34,13 +35,13 @@ class GameActivity : NumberMasterActivity() {
         volumeControlStream = AudioManager.STREAM_MUSIC
 
         this.convertIntentExtraToGlobalActivityInfo()
+        this.gameMainSize = (this.globalActivityInfo["gameSpaceSize"]!!.toFloat() + (this.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt() * 2)).toInt()
 
         val that = this
 
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_game, inflateRootLayout)
-        val layoutBinding: ActivityGameBinding = ActivityGameBinding.bind(activityLayout).apply {
-        }
+        val layoutBinding: ActivityGameBinding = ActivityGameBinding.bind(activityLayout)
 
         val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
             setMargins(
@@ -166,6 +167,26 @@ class GameActivity : NumberMasterActivity() {
             R.id.button_secret -> {
                 this.numberMaster!!.buttonClickSecretProcess()
             }
+            R.id.button_simul -> {
+                if (this.numberMaster!!.statusGame["simulMode"]!!.toInt() == 0) {
+                    this.numberMaster!!.statusGame["simulMode"] = 1.toString()
+                    val that = this
+                    findViewById<ConstraintLayout>(R.id.game_main_2).apply {
+                        updateLayoutParams {
+                            width = that.gameMainSize
+                            height = that.gameMainSize
+                        }
+                    }
+                } else {
+                    this.numberMaster!!.statusGame["simulMode"] = 0.toString()
+                    findViewById<ConstraintLayout>(R.id.game_main_2).apply {
+                        updateLayoutParams {
+                            width = 0
+                            height = 0
+                        }
+                    }
+                }
+            }
             R.id.button_blindfold -> {
                 this.numberMaster!!.buttonClickBlindfoldProcess()
             }
@@ -249,9 +270,14 @@ class GameActivity : NumberMasterActivity() {
             }
         }
 
-        findViewById<RelativeLayout>(R.id.full_space).apply {
-            layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
-            layoutParams.height = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+        for (key in listOf("game_main_1", "game_main_2")) {
+            val id = this.resources.getIdentifier(key, "id", this.packageName)
+            findViewById<ConstraintLayout>(id).findViewById<RelativeLayout>(R.id.full_space).apply {
+                layoutParams.width =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+                layoutParams.height =
+                    (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
+            }
         }
         findViewById<RelativeLayout>(R.id.layout_middle).apply {
             layoutParams.height = that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
@@ -347,56 +373,27 @@ class GameActivity : NumberMasterActivity() {
             setTextColor(statusTextColor)
         }
 
-        // @todo サイズ指定
-        /*
-        if (this.numberMaster!!.statusPuzzle["simulMode"]!!.toInt() == 0) {
-            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = 0
-            } else {
-                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = 0
-            }
+        // simul mode layout
+        if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            findViewById<LinearLayout>(R.id.game_layout).orientation = LinearLayout.VERTICAL
         } else {
-            if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2).toInt()
-            } else {
-                findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2).toInt()
-            }
+            findViewById<LinearLayout>(R.id.game_layout).orientation =LinearLayout.HORIZONTAL
         }
 
-         */
-
-        // スマホの向きによってレイアウトの向きを変える
-        val gameLayout = findViewById<LinearLayout>(R.id.game_layout).apply {
-            orientation = if (that.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                LinearLayout.HORIZONTAL
-            } else {
-                LinearLayout.VERTICAL
-            }
-            setPadding(0)
+        findViewById<ConstraintLayout>(R.id.game_main_1).apply {
+            layoutParams.height = that.gameMainSize
+            layoutParams.width = that.gameMainSize
         }
-        val gameLayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        gameLayoutParams.topMargin = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        gameLayoutParams.bottomMargin = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
-        gameLayout.layoutParams = gameLayoutParams
-
-        val gameMainLong = ((this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt() * 3)) / 2).toInt()
-        if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.width = gameMainLong
-            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
-            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = gameMainLong
-            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
-        } else {
-            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.height = gameMainLong
-            findViewById<ConstraintLayout>(R.id.game_main_1).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
-            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.height = gameMainLong
-            findViewById<ConstraintLayout>(R.id.game_main_2).layoutParams.width = (this.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat()).toInt()
+        findViewById<ConstraintLayout>(R.id.game_main_2).apply {
+            layoutParams.height = 0
+            layoutParams.width = 0
         }
 
         // @todo 確認用背景色
-        findViewById<ConstraintLayout>(R.id.game_main_1).findViewById<RelativeLayout>(R.id.full_space).apply {
+        findViewById<ConstraintLayout>(R.id.game_main_1).apply {
             this.setBackgroundColor(Color.BLUE)
         }
-        findViewById<ConstraintLayout>(R.id.game_main_2).findViewById<RelativeLayout>(R.id.full_space).apply {
+        findViewById<ConstraintLayout>(R.id.game_main_2).apply {
             this.setBackgroundColor(Color.GREEN)
         }
     }
