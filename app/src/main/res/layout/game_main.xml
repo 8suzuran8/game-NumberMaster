@@ -129,15 +129,4 @@
         android:src="@drawable/effect_magic_square"
         android:visibility="visible"
         android:stateListAnimator="@xml/animate_game_success" />
-
-    <ImageView
-        android:id="@+id/effect2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/effect2"
-        android:scaleType="centerCrop"
-        android:alpha="0"
-        android:src="@drawable/thunder1"
-        android:visibility="visible"
-        android:stateListAnimator="@xml/animate_game_thunder" />
 </androidx.constraintlayout.widget.ConstraintLayout>

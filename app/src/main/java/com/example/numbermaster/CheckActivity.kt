@@ -11,7 +11,7 @@ import com.example.numbermaster.databinding.ActivityCheckBinding
 
 class CheckActivity : NumberMasterActivity() {
     var numberMaster: NumberMaster? = null
-    val puzzleNumber = 0 // simul mode非対応なので0固定
+    private val puzzleNumber = 0 // simul mode非対応なので0固定
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,16 +86,16 @@ class CheckActivity : NumberMasterActivity() {
                 this.finish()
             }
             R.id.button_swipe_top -> {
-                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeTop()
+                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeTop(this.puzzleNumber)
             }
             R.id.button_swipe_right -> {
-                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeRight()
+                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeRight(this.puzzleNumber)
             }
             R.id.button_swipe_bottom -> {
-                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeBottom()
+                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeBottom(this.puzzleNumber)
             }
             R.id.button_swipe_left -> {
-                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeLeft()
+                this.numberMaster!!.numberMasterOnSwipeTouchListener!!.onSwipeLeft(this.puzzleNumber)
             }
         }
     }
@@ -115,7 +115,7 @@ class CheckActivity : NumberMasterActivity() {
 
         // 時間のかかる初期表示を行っておく
         this.numberMaster!!.numberMasterRenderer!!.rotateStart(this.numberMaster!!.numberMasterRenderer!!.rotateDown)
-        this.numberMaster!!.invisibleCubeEvent()
+        this.numberMaster!!.invisibleCubeEvent(this.puzzleNumber)
     }
 
     override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
@@ -180,6 +180,6 @@ class CheckActivity : NumberMasterActivity() {
             }
         }
 
-        this.numberMaster!!.updateNumberPanel()
+        this.numberMaster!!.updateNumberPanel(this.puzzleNumber)
     }
 }
