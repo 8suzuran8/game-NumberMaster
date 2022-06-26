@@ -242,22 +242,26 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
                 return true
             }
-            override fun onSwipeTop(puzzleIdNumber: Int) {
+            override fun onSwipeTop(puzzleIdNumberDefault: Int, x: Float?, y: Float?) {
+                val puzzleIdNumber = that.getPuzzleIdNumberByXy(puzzleIdNumberDefault, x, y)
                 if (!this.swipeProcess(puzzleIdNumber)) return
                 that.setCubeSideNumber(puzzleIdNumber, "top")
                 that.numberMasterRenderer!!.rotateStart(that.numberMasterRenderer!!.rotateUp)
             }
-            override fun onSwipeRight(puzzleIdNumber: Int) {
+            override fun onSwipeRight(puzzleIdNumberDefault: Int, x: Float?, y: Float?) {
+                val puzzleIdNumber = that.getPuzzleIdNumberByXy(puzzleIdNumberDefault, x, y)
                 if (!this.swipeProcess(puzzleIdNumber)) return
                 that.setCubeSideNumber(puzzleIdNumber, "right")
                 that.numberMasterRenderer!!.rotateStart(that.numberMasterRenderer!!.rotateRight)
             }
-            override fun onSwipeBottom(puzzleIdNumber: Int) {
+            override fun onSwipeBottom(puzzleIdNumberDefault: Int, x: Float?, y: Float?) {
+                val puzzleIdNumber = that.getPuzzleIdNumberByXy(puzzleIdNumberDefault, x, y)
                 if (!this.swipeProcess(puzzleIdNumber)) return
                 that.setCubeSideNumber(puzzleIdNumber, "bottom")
                 that.numberMasterRenderer!!.rotateStart(that.numberMasterRenderer!!.rotateDown)
             }
-            override fun onSwipeLeft(puzzleIdNumber: Int) {
+            override fun onSwipeLeft(puzzleIdNumberDefault: Int, x: Float?, y: Float?) {
+                val puzzleIdNumber = that.getPuzzleIdNumberByXy(puzzleIdNumberDefault, x, y)
                 if (!this.swipeProcess(puzzleIdNumber)) return
                 that.setCubeSideNumber(puzzleIdNumber,"left")
                 that.numberMasterRenderer!!.rotateStart(that.numberMasterRenderer!!.rotateLeft)
@@ -309,6 +313,27 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             0
         } else {
             1
+        }
+    }
+
+    fun getPuzzleIdNumberByXy(puzzleIdNumberDefault: Int, x: Float? = null, y: Float? = null): Int {
+        if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 0 && this.statusPuzzle[1]["useCubeMode"]!!.toInt() == 0) return puzzleIdNumberDefault
+        if (x == null || y == null) return puzzleIdNumberDefault
+        if (this.statusGame["simulMode"]!!.toInt() == 0) return puzzleIdNumberDefault
+
+        return if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            // 縦
+            if (y < (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2)) {
+                0
+            } else {
+                1
+            }
+        } else {
+            if (x < (this.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat() / 2)) {
+                0
+            } else {
+                1
+            }
         }
     }
 
@@ -618,7 +643,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
             this.shuffle(puzzleIdNumber)
             this.updateNumberPanel(puzzleIdNumber)
-            this.numberMasterOnSwipeTouchListener!!.onSwipeBottom(puzzleIdNumber)
+
+            if (puzzleIdNumber == 0 || this.statusGame["simulMode"]!!.toInt() == 1) {
+                this.numberMasterOnSwipeTouchListener!!.onSwipeBottom(puzzleIdNumber)
+            }
         }
     }
 
@@ -751,24 +779,42 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         if (result && this.dbHelper!!.exists) {
             this.settings["counterStopCount"] = this.dbHelper!!.dataGame["settings"]!!["counter_stop_count"].toString()
             this.settings["enabledCube"] = this.dbHelper!!.dataGame["settings"]!!["enabled_cube"].toString()
-            this.statusPuzzle[0]["useCubeMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["use_cube_mode"].toString()
-            this.statusPuzzle[0]["blindfoldMode"] = this.dbHelper!!.dataGame["current_game_status"]!!["blindfold_mode"].toString()
-            this.statusPuzzle[0]["size"] = this.dbHelper!!.dataGame["current_game_status"]!!["size"].toString()
-            this.statusPuzzle[0]["cubeSideNumber"] = this.dbHelper!!.dataGame["current_game_status"]!!["cube_side_number"].toString()
             this.statusGame["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
             this.statusGame["time"] = this.dbHelper!!.dataGame["current_game_status"]!!["time"].toString()
 
-            this.nonNumberPanelPosition[0] = this.dbHelper!!.dataNonNumberPanelPosition
-            this.numbers[0] = this.dbHelper!!.dataNumbers
+            for (puzzleIdNumber in 0..1) {
+                this.statusPuzzle[puzzleIdNumber]["useCubeMode"] =
+                    this.dbHelper!!.dataGame["current_game_status"]!!["use_cube_mode"].toString()
+                this.statusPuzzle[puzzleIdNumber]["blindfoldMode"] =
+                    this.dbHelper!!.dataGame["current_game_status"]!!["blindfold_mode"].toString()
+                this.statusPuzzle[puzzleIdNumber]["size"] =
+                    this.dbHelper!!.dataGame["current_game_status"]!!["size"].toString()
+                this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"] =
+                    this.dbHelper!!.dataGame["current_game_status"]!!["cube_side_number"].toString()
 
-            if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 1) {
-                for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
-                    this.buttonsPuzzle[0][buttonName]!!.isEnabled = true
-                    this.buttonsPuzzle[0][buttonName]!!.visibility = View.VISIBLE
+                this.nonNumberPanelPosition[puzzleIdNumber] =
+                    this.dbHelper!!.dataNonNumberPanelPosition
+
+                if (puzzleIdNumber == 0) {
+                    this.numbers[puzzleIdNumber] = this.dbHelper!!.dataNumbers
+                } else {
+                    this.shuffle(1)
                 }
+
+                if (this.statusPuzzle[puzzleIdNumber]["useCubeMode"]!!.toInt() == 1) {
+                    for (buttonName in listOf(
+                        "swipe_top",
+                        "swipe_right",
+                        "swipe_bottom",
+                        "swipe_left"
+                    )) {
+                        this.buttonsPuzzle[puzzleIdNumber][buttonName]!!.isEnabled = true
+                        this.buttonsPuzzle[puzzleIdNumber][buttonName]!!.visibility = View.VISIBLE
+                    }
+                }
+                this.numberMasterRenderer!!.changeTexture(this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt())
             }
 
-            this.numberMasterRenderer!!.changeTexture(this.statusPuzzle[0]["size"]!!.toInt())
 
             this.updateStatus()
 
@@ -788,7 +834,12 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.numbers[puzzleIdNumber]
         )
 
-        this.dbHelper!!.writeGameStartNumbers(this.nonNumberPanelPosition[puzzleIdNumber], this.numbers[puzzleIdNumber])
+        if (puzzleIdNumber == 0) {
+            this.dbHelper!!.writeGameStartNumbers(
+                this.nonNumberPanelPosition[puzzleIdNumber],
+                this.numbers[puzzleIdNumber]
+            )
+        }
     }
 
     private fun updateNumberPanelByMove(puzzleIdNumber: Int, beforeNonNumberPanelPosition: MutableMap<String, Int>, afterNonNumberPanelPosition: MutableMap<String, Int>) {

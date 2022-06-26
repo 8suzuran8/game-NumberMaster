@@ -172,9 +172,9 @@ class GameActivity : NumberMasterActivity() {
                 this.numberMaster!!.buttonClickSecretProcess()
             }
             R.id.button_simul -> {
+                val that = this
                 if (this.numberMaster!!.statusGame["simulMode"]!!.toInt() == 0) {
                     this.numberMaster!!.statusGame["simulMode"] = 1.toString()
-                    val that = this
                     findViewById<ConstraintLayout>(R.id.game_main_2).apply {
                         updateLayoutParams {
                             width = that.gameMainSize
@@ -334,6 +334,8 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle[i]["size"]!!.toInt())
         }
 
+        this.numberMaster!!.cube[1]!!.visibility = View.INVISIBLE
+
         this.numberMaster!!.effect2 = findViewById<ImageView>(R.id.effect2).apply {
             visibility = ImageView.INVISIBLE
         }
@@ -351,7 +353,6 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.shuffle(0)
             this.numberMaster!!.shuffle(1)
         }
-        this.numberMaster!!.shuffle(1)
         this.numberMaster!!.updateNumberPanel(0)
 
         // elseの場合はxmlでOK

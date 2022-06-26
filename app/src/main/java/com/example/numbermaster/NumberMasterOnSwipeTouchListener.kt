@@ -4,14 +4,12 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import kotlin.math.abs
 
 open class NumberMasterOnSwipeTouchListener(context: AppCompatActivity): View.OnTouchListener {
 
     private val gestureDetector: GestureDetector
     var flingResult: Boolean? = null
-    var firstTouchLayout: ConstraintLayout? = null
 
     companion object {
         private const val SWIPE_THRESHOLD = 100
@@ -42,17 +40,17 @@ open class NumberMasterOnSwipeTouchListener(context: AppCompatActivity): View.On
                 if (abs(diffX) > abs(diffY)) {
                     if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-                            onSwipeRight(0)
+                            onSwipeRight(0, e1.x, e1.y)
                         } else {
-                            onSwipeLeft(0)
+                            onSwipeLeft(0, e1.x, e1.y)
                         }
                         result = true
                     }
                 } else if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffY > 0) {
-                        onSwipeBottom(0)
+                        onSwipeBottom(0, e1.x, e1.y)
                     } else {
-                        onSwipeTop(0)
+                        onSwipeTop(0, e1.x, e1.y)
                     }
                     result = true
                 }
@@ -65,8 +63,8 @@ open class NumberMasterOnSwipeTouchListener(context: AppCompatActivity): View.On
         }
     }
 
-    open fun onSwipeRight(puzzleIdNumber: Int) {}
-    open fun onSwipeLeft(puzzleIdNumber: Int) {}
-    open fun onSwipeTop(puzzleIdNumber: Int) {}
-    open fun onSwipeBottom(puzzleIdNumber: Int) {}
+    open fun onSwipeRight(puzzleIdNumberDefault: Int, x: Float? = null, y: Float? = null) {}
+    open fun onSwipeLeft(puzzleIdNumberDefault: Int, x: Float? = null, y: Float? = null) {}
+    open fun onSwipeTop(puzzleIdNumberDefault: Int, x: Float? = null, y: Float? = null) {}
+    open fun onSwipeBottom(puzzleIdNumberDefault: Int, x: Float? = null, y: Float? = null) {}
 }
