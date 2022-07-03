@@ -607,8 +607,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.updateStatus()
     }
 
-    fun buttonClickSizeProcess(sizeKey: Int) {
+    fun buttonClickSizeProcess(sizeKey: Int, onlyOne: Boolean = false) {
         for (puzzleIdNumber in 0..1) {
+            if (onlyOne && puzzleIdNumber == 0) continue
+
             if (this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() != sizeKey) {
                 this.statusPuzzle[puzzleIdNumber]["size"] = sizeKey.toString()
                 this.numberMasterRenderer!!.changeTexture(sizeKey)
@@ -621,20 +623,23 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         }
     }
 
-    fun buttonClickCubeProcess() {
+    fun buttonClickCubeProcess(onlyOne: Boolean = false) {
         if (this.settings["enabledCube"]!!.toInt() == 0) return
 
+        var useCubeMode = 1
+        var swipeButtonEnabled = true
+        var swipeButtonVisibility = View.VISIBLE
+        if (this.statusPuzzle[0]["useCubeMode"]!!.toInt() == 1) {
+            useCubeMode = 0
+            swipeButtonEnabled = false
+            swipeButtonVisibility = View.INVISIBLE
+        }
+
         for (puzzleIdNumber in 0..1) {
-            var swipeButtonEnabled = true
-            var swipeButtonVisibility = View.VISIBLE
-            if (this.statusPuzzle[puzzleIdNumber]["useCubeMode"]!!.toInt() == 1) {
-                this.statusPuzzle[puzzleIdNumber]["useCubeMode"] = 0.toString()
-                this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"] = 0.toString()
-                swipeButtonEnabled = false
-                swipeButtonVisibility = View.INVISIBLE
-            } else {
-                this.statusPuzzle[puzzleIdNumber]["useCubeMode"] = 1.toString()
-            }
+            if (onlyOne && puzzleIdNumber == 0) continue
+
+            this.statusPuzzle[puzzleIdNumber]["useCubeMode"] = useCubeMode.toString()
+            this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"] = 0.toString()
 
             for (buttonName in listOf("swipe_top", "swipe_right", "swipe_bottom", "swipe_left")) {
                 this.buttonsPuzzle[puzzleIdNumber][buttonName]!!.isEnabled = swipeButtonEnabled

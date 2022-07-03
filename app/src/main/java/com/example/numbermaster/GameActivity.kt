@@ -8,6 +8,7 @@ import android.graphics.PixelFormat
 import android.media.AudioManager
 import android.opengl.GLSurfaceView
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -126,6 +127,27 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.bgmMediaPlayer!!.reset()
             this.numberMaster!!.bgmMediaPlayer!!.release()
             this.numberMaster!!.bgmMediaPlayer = null
+        }
+    }
+
+    fun buttonLongClickListener(view: View) {
+        if (this.numberMaster!!.statusGame["stop"]!!.toInt() == 0) return
+        if (this.numberMaster!!.settings["counterStopCount"]!!.toInt() == 0) return
+        if (this.numberMaster!!.statusGame["simulMode"]!!.toInt() == 0) return
+
+        when (view.id) {
+            R.id.button_3x3 -> {
+                this.numberMaster!!.buttonClickSizeProcess(1, true)
+            }
+            R.id.button_6x6 -> {
+                this.numberMaster!!.buttonClickSizeProcess(2, true)
+            }
+            R.id.button_9x9 -> {
+                this.numberMaster!!.buttonClickSizeProcess(3, true)
+            }
+            R.id.button_cube -> {
+                this.numberMaster!!.buttonClickCubeProcess(true)
+            }
         }
     }
 
@@ -264,6 +286,33 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.buttonsGame[key]!!.isEnabled = true
         }
         this.numberMaster!!.buttonsGame["prev"] = findViewById(R.id.prev_button)
+
+        // longClick
+        for (key in listOf("3x3", "6x6", "9x9", "cube")) {
+            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            findViewById<ImageButton>(id).apply {
+                setOnTouchListener(object : View.OnTouchListener {
+                    private var runLongClickListener = false
+                    private val handler = getHandler()
+
+                    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                        if (event?.action == MotionEvent.ACTION_DOWN) {
+                            handler.postDelayed({
+                                this.runLongClickListener = true
+                                that.buttonLongClickListener(v!!)
+                            }, 5000L)
+                        } else if (event?.action == MotionEvent.ACTION_UP) {
+                            handler.removeCallbacksAndMessages(null)
+                            if (!this.runLongClickListener) {
+                                v!!.performClick()
+                            }
+                            this.runLongClickListener = false
+                        }
+                        return true
+                    }
+                })
+            }
+        }
 
         for (i in 0..1) {
             val puzzleId = this.resources.getIdentifier(
