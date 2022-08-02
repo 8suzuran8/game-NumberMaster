@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/background_number1"
         android:scaleType="centerCrop"
+        android:alpha="0.25"
         android:contentDescription="@string/numbers" />
 
     <ImageView
@@ -20,6 +21,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/background_number2"
         android:scaleType="centerCrop"
+        android:alpha="0.25"
         android:contentDescription="@string/numbers" />
 
     <ImageView
@@ -28,6 +30,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/background_number3"
         android:scaleType="centerCrop"
+        android:alpha="0.25"
         android:contentDescription="@string/numbers" />
 
     <!-- prev button start -->
