@@ -58,4 +58,7 @@ class NumberMasterListAdapter(val context: Context, private val rankingList: Arr
     override fun getCount(): Int {
         return rankingList.size
     }
+
+    fun buttonClickListener() {
+    }
 }

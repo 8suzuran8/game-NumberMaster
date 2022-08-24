@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/button_9x9"
-            android:gravity="right"
+            android:gravity="end"
             android:orientation="horizontal">
 
             <ImageButton
