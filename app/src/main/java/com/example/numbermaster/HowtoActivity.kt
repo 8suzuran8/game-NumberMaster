@@ -1,5 +1,6 @@
 package com.example.numbermaster
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.numbermaster.databinding.ActivityHowtoBinding
 class HowtoActivity : NumberMasterActivity() {
     private lateinit var viewPager: ViewPager2
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)
@@ -53,17 +55,6 @@ class HowtoActivity : NumberMasterActivity() {
             "enabled_cube" to settings["enabled_cube"].toString(),
             "add_icon_read" to 1.toString(), // 既読にする
         ))
-    }
-
-    override fun onBackPressed() {
-        if (viewPager.currentItem == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed()
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.currentItem = viewPager.currentItem - 1
-        }
     }
 
     fun buttonClickListener(view: View) {

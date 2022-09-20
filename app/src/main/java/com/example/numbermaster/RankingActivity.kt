@@ -84,17 +84,6 @@ class RankingActivity : NumberMasterActivity() {
         this.viewPager = this.numberMasterViewPager.viewPager
     }
 
-    override fun onBackPressed() {
-        if (viewPager.currentItem == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed()
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.currentItem = viewPager.currentItem - 1
-        }
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 

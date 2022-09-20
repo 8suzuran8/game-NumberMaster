@@ -1,6 +1,7 @@
 package com.example.numbermaster
 
 import android.animation.*
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -30,6 +31,7 @@ class MenuActivity : NumberMasterActivity() {
     private var menuY: Float? = null
 
     // prevボタンで戻った時には実行されない
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)

@@ -1,6 +1,7 @@
 package com.example.numbermaster
 
 import android.animation.AnimatorInflater
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 class InputActivity : NumberMasterActivity() {
     private var checkActivityIntent: Intent? = null
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)

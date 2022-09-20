@@ -1,11 +1,11 @@
 package com.example.numbermaster
 
+import android.annotation.SuppressLint
 import android.graphics.PixelFormat
 import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.setPadding
 import com.example.numbermaster.databinding.ActivityCheckBinding
 
@@ -13,6 +13,7 @@ class CheckActivity : NumberMasterActivity() {
     var numberMaster: NumberMaster? = null
     private val puzzleNumber = 0 // simul mode非対応なので0固定
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)
@@ -21,7 +22,7 @@ class CheckActivity : NumberMasterActivity() {
 
         val that = this
 
-        val inflateRootLayout = findViewById<ConstraintLayout>(R.id.root_layout)
+        val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_check, inflateRootLayout)
         val layoutBinding: ActivityCheckBinding = ActivityCheckBinding.bind(activityLayout).apply {
             fullSpace.layoutParams.width = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() - (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 2)).toInt()
@@ -118,6 +119,7 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent(this.puzzleNumber)
     }
 
+    @SuppressLint("DiscouragedApi")
     override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
         super.initialProcess(globalActivityInfo, prevButtonAnimation)
 

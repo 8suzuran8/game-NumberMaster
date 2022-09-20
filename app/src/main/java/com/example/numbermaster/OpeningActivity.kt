@@ -1,5 +1,6 @@
 package com.example.numbermaster
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.core.view.updateLayoutParams
 open class OpeningActivity : NumberMasterActivity() {
     private var menuActivityIntent: Intent? = null
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)
@@ -62,7 +64,7 @@ open class OpeningActivity : NumberMasterActivity() {
         this.makeGlobalActivityInfo()
         this.convertGlobalActivityInfoToIntentExtra(this.menuActivityIntent!!)
 
-        super.onWindowFocusChanged(hasFocus)
+        super.onWindowFocusChanged(true)
     }
 
     fun buttonClickListener(view: View) {

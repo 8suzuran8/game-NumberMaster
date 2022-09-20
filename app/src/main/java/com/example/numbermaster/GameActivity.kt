@@ -1,6 +1,7 @@
 package com.example.numbermaster
 
 import android.animation.AnimatorInflater
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -28,6 +29,7 @@ class GameActivity : NumberMasterActivity() {
         "finish" to null,
     )
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)
@@ -232,6 +234,7 @@ class GameActivity : NumberMasterActivity() {
         }
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun drawCube(puzzleIdNumber: Int) {
         val that = this
 
@@ -252,6 +255,7 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent(puzzleIdNumber)
     }
 
+    @SuppressLint("DiscouragedApi")
     override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
         super.initialProcess(globalActivityInfo, false)
 

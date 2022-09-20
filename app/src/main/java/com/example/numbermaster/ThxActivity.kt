@@ -1,5 +1,6 @@
 package com.example.numbermaster
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.core.view.setPadding
 import com.example.numbermaster.databinding.ActivityThxBinding
 
 class ThxActivity : NumberMasterActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base)
