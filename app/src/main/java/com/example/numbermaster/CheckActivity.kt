@@ -119,7 +119,6 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent(this.puzzleNumber)
     }
 
-    @SuppressLint("DiscouragedApi")
     override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
         super.initialProcess(globalActivityInfo, prevButtonAnimation)
 
@@ -171,7 +170,7 @@ class CheckActivity : NumberMasterActivity() {
         this.numberMaster!!.numberMasterRenderer!!.changeTexture(status["size"]!!.toInt())
 
         for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
-            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            val id = this.getResourceId("button_$key")
             this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key] = findViewById(id)
             if (that.numberMaster!!.statusPuzzle[this.puzzleNumber]["useCubeMode"] == 1.toString()) {
                 this.numberMaster!!.buttonsPuzzle[this.puzzleNumber][key]!!.isEnabled = true

@@ -355,7 +355,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "add_icon_read" to 1    .toString(),
         ), database)
 
-        if (!result) return result
+        if (!result) return false
 
         return this.insertBase("current_game_status", mapOf(
             "use_cube_mode" to 0.toString(),
@@ -503,7 +503,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "add_icon_read" to settings["addIconRead"].toString(),
         ))
 
-        if (!result) return result
+        if (!result) return false
 
 
         return this.writeCurrentGameStatus(mutableMapOf(

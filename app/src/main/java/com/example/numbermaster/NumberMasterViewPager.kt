@@ -53,6 +53,36 @@ class NumberMasterViewPager constructor(activity: FragmentActivity, pageName: St
 class NumberMasterFragment(private val rootLayoutWidth: Float, private val otherSize: Int) : Fragment() {
     var layout: View? = null
 
+    private fun getResourceLayout(name: String): Int {
+        when (name) {
+            "fragment_howto_page0" -> {
+                return R.layout.fragment_howto_page0
+            }
+
+            "fragment_howto_page1" -> {
+                return R.layout.fragment_howto_page1
+            }
+
+            "fragment_howto_page2" -> {
+                return R.layout.fragment_howto_page2
+            }
+
+            "fragment_howto_page3" -> {
+                return R.layout.fragment_howto_page3
+            }
+
+            "fragment_ranking_detail" -> {
+                return R.layout.fragment_ranking_detail
+            }
+
+            "fragment_ranking_page" -> {
+                return R.layout.fragment_ranking_page
+            }
+        }
+
+        return -1
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,11 +102,7 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
             pageNumber = ""
         }
 
-        val layoutId = this.resources.getIdentifier(
-            "fragment$pageName" + "_page$pageNumber",
-            "layout",
-            this.requireActivity().packageName
-        )
+        val layoutId = this.getResourceLayout("fragment$pageName" + "_page$pageNumber")
 
         val layout = inflater.inflate(layoutId, container, false)
         this.layout = layout

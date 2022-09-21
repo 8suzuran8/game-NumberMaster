@@ -234,7 +234,6 @@ class GameActivity : NumberMasterActivity() {
         }
     }
 
-    @SuppressLint("DiscouragedApi")
     private fun drawCube(puzzleIdNumber: Int) {
         val that = this
 
@@ -247,7 +246,7 @@ class GameActivity : NumberMasterActivity() {
             visibility = View.VISIBLE
         }
 
-        val puzzleId = this.resources.getIdentifier(this.numberMaster!!.puzzleIdName[puzzleIdNumber], "id", this.packageName)
+        val puzzleId = this.getResourceId(this.numberMaster!!.puzzleIdName[puzzleIdNumber])
         findViewById<ConstraintLayout>(puzzleId).findViewById<RelativeLayout>(R.id.full_space).addView(this.numberMaster!!.cube[puzzleIdNumber])
 
         // 時間のかかる初期表示を行っておく
@@ -255,7 +254,6 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.invisibleCubeEvent(puzzleIdNumber)
     }
 
-    @SuppressLint("DiscouragedApi")
     override fun initialProcess(globalActivityInfo: MutableMap<String, String>, prevButtonAnimation: Boolean) {
         super.initialProcess(globalActivityInfo, false)
 
@@ -283,7 +281,7 @@ class GameActivity : NumberMasterActivity() {
         }
 
         for (key in listOf("3x3", "6x6", "9x9", "secret", "simul", "blindfold", "cube", "finish", "stop")) {
-            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            val id = this.getResourceId("button_$key")
             this.numberMaster!!.buttonsGame[key] = findViewById(id)
             this.numberMaster!!.buttonsGame[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
             this.numberMaster!!.buttonsGame[key]!!.layoutParams.height = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
@@ -293,7 +291,7 @@ class GameActivity : NumberMasterActivity() {
 
         // longClick
         for (key in listOf("3x3", "6x6", "9x9", "cube")) {
-            val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+            val id = this.getResourceId("button_$key")
             findViewById<ImageButton>(id).apply {
                 setOnTouchListener(object : View.OnTouchListener {
                     private var runLongClickListener = false
@@ -319,13 +317,9 @@ class GameActivity : NumberMasterActivity() {
         }
 
         for (i in 0..1) {
-            val puzzleId = this.resources.getIdentifier(
-                this.numberMaster!!.puzzleIdName[i],
-                "id",
-                this.packageName
-            )
+            val puzzleId = this.getResourceId(this.numberMaster!!.puzzleIdName[i])
             for (key in listOf("swipe_bottom", "swipe_left", "swipe_right", "swipe_top")) {
-                val id = this.resources.getIdentifier("button_$key", "id", this.packageName)
+                val id = this.getResourceId("button_$key")
                 this.numberMaster!!.buttonsPuzzle[i][key] =
                     findViewById<ConstraintLayout>(puzzleId).findViewById(id)
 
@@ -411,7 +405,7 @@ class GameActivity : NumberMasterActivity() {
         // elseの場合はxmlでOK
         // loadGameの後で行わなければならない。
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
-            val id = this.resources.getIdentifier("button_enabled_menu", "drawable", this.packageName)
+            val id = R.drawable.button_enabled_menu
             this.numberMaster!!.buttonsGame["secret"]!!.setImageResource(id)
         }
 

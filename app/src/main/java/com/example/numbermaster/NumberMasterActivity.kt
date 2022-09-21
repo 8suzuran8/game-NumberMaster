@@ -155,4 +155,56 @@ open class NumberMasterActivity : AppCompatActivity() {
             isEnabled = true
         }
     }
+
+    open fun getResourceId(name: String): Int {
+        when (name) {
+            "button_swipe_bottom" -> {
+                return R.id.button_swipe_bottom
+            }
+            "button_swipe_left" -> {
+                return R.id.button_swipe_left
+            }
+            "button_swipe_right" -> {
+                return R.id.button_swipe_right
+            }
+            "button_swipe_top" -> {
+                return R.id.button_swipe_top
+            }
+            "game_main_1" -> {
+                return R.id.game_main_1
+            }
+            "game_main_2" -> {
+                return R.id.game_main_2
+            }
+            "button_3x3" -> {
+                return R.id.button_3x3
+            }
+            "button_6x6" -> {
+                return R.id.button_6x6
+            }
+            "button_9x9" -> {
+                return R.id.button_9x9
+            }
+            "button_secret" -> {
+                return R.id.button_secret
+            }
+            "button_simul" -> {
+                return R.id.button_simul
+            }
+            "button_blindfold" -> {
+                return R.id.button_blindfold
+            }
+            "button_cube" -> {
+                return R.id.button_cube
+            }
+            "button_finish" -> {
+                return R.id.button_finish
+            }
+            "button_stop" -> {
+                return R.id.button_stop
+            }
+        }
+
+        return -1
+    }
 }

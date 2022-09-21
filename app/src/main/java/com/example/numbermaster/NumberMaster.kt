@@ -571,7 +571,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 }
             }
 
-            val id = this.resources.getIdentifier(imageName, "drawable", this.activity.packageName)
+            val id = this.getResourceDrawable(imageName)
             this.buttonsGame[buttonKey]!!.setImageResource(id)
         }
     }
@@ -1200,5 +1200,48 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             Rect(startX, startY, endX, endY),
             null
         )
+    }
+
+    private fun getResourceDrawable(name: String): Int {
+        when (name) {
+            "button_enabled_finish" -> {
+                return R.drawable.button_enabled_finish
+            }
+            "button_disabled_finish" -> {
+                return R.drawable.button_disabled_finish
+            }
+            "button_enabled_secret" -> {
+                return R.drawable.button_enabled_menu
+            }
+            "button_disabled_secret" -> {
+                return R.drawable.button_disabled_secret
+            }
+            "button_enabled_menu" -> {
+                return R.drawable.button_enabled_menu
+            }
+            "button_disabled_menu" -> {
+                return R.drawable.button_disabled_menu
+            }
+            "button_enabled_3x3" -> {
+                return R.drawable.button_enabled_3x3
+            }
+            "button_disabled_3x3" -> {
+                return R.drawable.button_disabled_3x3
+            }
+            "button_enabled_6x6" -> {
+                return R.drawable.button_enabled_6x6
+            }
+            "button_disabled_6x6" -> {
+                return R.drawable.button_disabled_6x6
+            }
+            "button_enabled_9x9" -> {
+                return R.drawable.button_enabled_9x9
+            }
+            "button_disabled_9x9" -> {
+                return R.drawable.button_disabled_9x9
+            }
+        }
+
+        return -1
     }
 }
