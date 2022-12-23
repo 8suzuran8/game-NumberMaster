@@ -191,6 +191,9 @@ open class NumberMasterActivity : AppCompatActivity() {
             "button_simul" -> {
                 return R.id.button_simul
             }
+            "button_semi_blindfold" -> {
+                return R.id.button_semi_blindfold
+            }
             "button_blindfold" -> {
                 return R.id.button_blindfold
             }

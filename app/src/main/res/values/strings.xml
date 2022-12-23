@@ -30,6 +30,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="_cube_button">cube mode</string>
     <string name="_simul_button">simul mode</string>
     <string name="_blindfold_button">blindfold mode</string>
+    <string name="_semi_blindfold_button">semi blindfold mode</string>
     <string name="secret_button">secret</string>
     <string name="finish_button">finish</string>
     <string name="stop_button">stop</string>

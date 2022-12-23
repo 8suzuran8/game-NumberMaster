@@ -68,6 +68,16 @@
                 android:src="@drawable/button_enabled_simul" />
 
             <ImageButton
+                android:id="@+id/button_semi_blindfold"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/_semi_blindfold_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_semiblindfold" />
+
+            <ImageButton
                 android:id="@+id/button_blindfold"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

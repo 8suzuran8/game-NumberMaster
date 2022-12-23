@@ -110,7 +110,7 @@ class NumberMasterCheckSuccess {
             for (indexY in 0..sizeMax) {
                 for (indexX in 0..sizeMax) {
                     for (checkPattern in checkPatterns) {
-                        if (result && number[indexY][indexX] != number[indexY][indexX + checkPattern]) result = false
+                        if (number[indexY][indexX] != number[indexY][indexX + checkPattern]) result = false
                         if (result && number[indexY][indexX] != number[indexY + checkPattern][indexX]) result = false
                         if (result && number[indexY][indexX] != number[indexY + checkPattern][indexX + checkPattern]) result = false
 
@@ -298,7 +298,6 @@ class NumberMasterCheckSuccess {
                 // 1ライン1..9整列&左上から右へ-1&一段下がると+1start
                 if (checkPatternResults[7]) {
                     answer = ((this.sizeMax!! - indexX + indexY) % 9) + 1
-                    if (answer > 9) answer -= 9
                     checkPatternResults[7] =
                         number[indexY][indexX] == answer
                 }
@@ -322,7 +321,6 @@ class NumberMasterCheckSuccess {
                 // 1ライン1..9整列&左上から下へ-1&一段下がると+1start
                 if (checkPatternResults[11]) {
                     answer = ((this.sizeMax!! - indexY + indexX) % 9) + 1
-                    if (answer > 9) answer -= 9
                     checkPatternResults[11] =
                         number[indexY][indexX] == answer
                 }

@@ -215,6 +215,9 @@ class GameActivity : NumberMasterActivity() {
                     }
                 }
             }
+            R.id.button_semi_blindfold -> {
+                this.numberMaster!!.buttonClickSemiBlindfoldProcess()
+            }
             R.id.button_blindfold -> {
                 this.numberMaster!!.buttonClickBlindfoldProcess()
             }
@@ -280,7 +283,7 @@ class GameActivity : NumberMasterActivity() {
             }
         }
 
-        for (key in listOf("3x3", "6x6", "9x9", "secret", "simul", "blindfold", "cube", "finish", "stop")) {
+        for (key in listOf("3x3", "6x6", "9x9", "secret", "simul", "semi_blindfold", "blindfold", "cube", "finish", "stop")) {
             val id = this.getResourceId("button_$key")
             this.numberMaster!!.buttonsGame[key] = findViewById(id)
             this.numberMaster!!.buttonsGame[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
