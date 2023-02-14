@@ -621,7 +621,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     fun buttonClickSizeProcess(sizeKey: Int, onlyOne: Boolean = false) {
         for (puzzleIdNumber in 0..1) {
-            if (onlyOne && puzzleIdNumber == 0) continue
+            if (onlyOne && puzzleIdNumber == 1) continue
 
             if (this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() != sizeKey) {
                 this.statusPuzzle[puzzleIdNumber]["size"] = sizeKey.toString()

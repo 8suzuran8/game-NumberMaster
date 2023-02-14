@@ -490,7 +490,11 @@ class GameActivity : NumberMasterActivity() {
                         that.numberMaster!!.buttonClickCubeProcess()
                     }
                     else -> {
-                        that.numberMaster!!.buttonClickSizeProcess(size)
+                        if (that.numberMaster!!.statusGame["simulMode"]!!.toInt() == 0) {
+                            that.numberMaster!!.buttonClickSizeProcess(size, true)
+                        } else {
+                            that.numberMaster!!.buttonClickSizeProcess(size)
+                        }
                     }
                 }
             }
