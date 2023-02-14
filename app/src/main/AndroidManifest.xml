@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.numbermaster">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -10,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NumberMaster">
         <meta-data
-            android:name="com.google.android.actions"
+            android:name="com.google.android.shortcuts"
             android:resource="@xml/animate_all_prev" />
         <activity
             android:name=".OpeningActivity"

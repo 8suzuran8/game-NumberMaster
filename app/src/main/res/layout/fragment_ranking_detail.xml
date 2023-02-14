@@ -67,5 +67,6 @@
         android:contentDescription="@string/copy_start_numbers"
         android:onClick="buttonClickListener"
         android:scaleType="fitCenter"
-        android:src="@drawable/copy_icon" />
+        android:src="@drawable/copy_icon"
+        android:visibility="invisible" />
 </LinearLayout>

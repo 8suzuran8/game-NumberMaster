@@ -10,7 +10,7 @@ import androidx.core.view.setPadding
 import com.example.numbermaster.databinding.ActivityCheckBinding
 
 class CheckActivity : NumberMasterActivity() {
-    var numberMaster: NumberMaster? = null
+    private var numberMaster: NumberMaster? = null
     private val puzzleNumber = 0 // simul mode非対応なので0固定
 
     @SuppressLint("MissingInflatedId")

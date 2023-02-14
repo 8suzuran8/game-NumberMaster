@@ -35,6 +35,7 @@ class NumberMasterListAdapter(val context: Context, private val rankingList: Arr
         }
         view.findViewById<ImageButton>(R.id.copy_button).apply {
             contentDescription = ranking.id.toString()
+            visibility = ImageButton.VISIBLE
         }
         view.findViewById<ImageButton>(R.id.recycle_button).apply {
             contentDescription = ranking.id.toString()

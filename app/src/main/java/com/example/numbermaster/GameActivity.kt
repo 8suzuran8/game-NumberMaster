@@ -18,7 +18,7 @@ import androidx.core.view.updateLayoutParams
 import com.example.numbermaster.databinding.ActivityGameBinding
 
 class GameActivity : NumberMasterActivity() {
-    var numberMaster: NumberMaster? = null
+    private var numberMaster: NumberMaster? = null
     private var gameMainSize: Int = 0
 
     private val dialogs: MutableMap<String, AlertDialog.Builder?> = mutableMapOf(
