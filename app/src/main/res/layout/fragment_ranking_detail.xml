@@ -15,27 +15,69 @@
         android:padding="10sp"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/score"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
-            android:gravity="start"
-            android:lines="1" />
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
-            android:gravity="start"
-            android:lines="1" />
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:lines="1" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:lines="1" />
+
+                <TextView
+                    android:id="@+id/tap_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:lines="1" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/recycle_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:contentDescription="@string/recycle"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/recycle_icon"
+                android:visibility="invisible"/>
+            <ImageButton
+                android:id="@+id/copy_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:contentDescription="@string/copy_start_numbers"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/copy_icon"
+                android:visibility="invisible" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/play_date"
@@ -46,27 +88,4 @@
             android:gravity="start"
             android:lines="1" />
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/recycle_button"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:background="@color/transparent"
-        android:contentDescription="@string/recycle"
-        android:onClick="buttonClickListener"
-        android:scaleType="fitCenter"
-        android:src="@drawable/recycle_icon"
-        android:visibility="invisible"/>
-    <ImageButton
-        android:id="@+id/copy_button"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:background="@color/transparent"
-        android:contentDescription="@string/copy_start_numbers"
-        android:onClick="buttonClickListener"
-        android:scaleType="fitCenter"
-        android:src="@drawable/copy_icon"
-        android:visibility="invisible" />
 </LinearLayout>

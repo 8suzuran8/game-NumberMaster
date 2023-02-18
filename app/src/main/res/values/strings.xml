@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NumberMaster</string>
-    <string name="status">"SCORE %05d TIME %03d%s%02d%s"</string>
+    <string name="status">"%05d %03d%s%02d%s %010d"</string>
     <string name="button_text_finish">FINISH</string>
     <string name="button_prev">PREVIOUS</string>
     <string name="thx">"SOUND\nhttps://soundeffect-lab.info/

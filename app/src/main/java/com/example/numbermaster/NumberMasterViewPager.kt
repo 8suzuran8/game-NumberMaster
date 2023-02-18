@@ -188,10 +188,11 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
         for (childIndex in successHistories.indices) {
             val idText = successHistories[childIndex]["id"]!!.toInt()
             val noText = "No. " + (successHistoryIndex + 1).toString()
-            val scoreText = "SCORE " + successHistories[childIndex]["score"]!!.toInt()
-            val timeText = "TIME " + this.timeToString(successHistories[childIndex]["time"]!!.toInt())
+            val scoreText = successHistories[childIndex]["score"]!!.toString()
+            val timeText = this.timeToString(successHistories[childIndex]["time"]!!.toInt())
+            val tapCount = successHistories[childIndex]["tap_count"]!!.toString()
             val playDateText = successHistories[childIndex]["created_at"].toString()
-            rankingList.add(NumberMasterRanking(idText, noText, scoreText, timeText, playDateText))
+            rankingList.add(NumberMasterRanking(idText, noText, scoreText, timeText, tapCount, playDateText))
 
             successHistoryIndex += 1
         }

@@ -25,6 +25,7 @@ class NumberMasterOpenHelper(context: Context) : SQLiteOpenHelper(context, DATAB
             "cube_side_number" to 0,
             "score" to 0,
             "time" to 0,
+            "tap_count" to 0,
         ),
     )
     /**
@@ -43,7 +44,7 @@ class NumberMasterOpenHelper(context: Context) : SQLiteOpenHelper(context, DATAB
     // DBがない時はNumberMasterOpenHelperのinitialInsertの値が使われる。(以下は使われない。)
     companion object {
         private const val DATABASE_NAME = "NumberMasterDB.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
 
         private const val CREATE_TABLE_QUERY_SETTINGS = """
 CREATE TABLE IF NOT EXISTS settings
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS current_game_status
     cube_side_number INTEGER NOT NULL DEFAULT 0, -- 0 to 5
     score INTEGER NOT NULL DEFAULT 0,
     time INTEGER NOT NULL DEFAULT 0,
+    tap_count INTEGER NOT NULL DEFAULT 0,
     start_numbers TEXT NOT NULL,
     finish_numbers TEXT NOT NULL
 )
@@ -80,6 +82,7 @@ CREATE TABLE IF NOT EXISTS success_history
     size INTEGER NOT NULL DEFAULT 1,
     score INTEGER NOT NULL DEFAULT 0,
     time INTEGER NOT NULL DEFAULT 0,
+    tap_count INTEGER NOT NULL DEFAULT 0,
     start_numbers TEXT NOT NULL,
     finish_numbers TEXT NOT NULL
 )
@@ -112,6 +115,20 @@ CREATE TABLE IF NOT EXISTS success_history
                     """
                     ALTER TABLE success_history
                     add blindfold_mode INTEGER NOT NULL DEFAULT 0
+                """
+                )
+            }
+            if (oldVersion == 2 && newVersion == 3) {
+                database!!.execSQL(
+                    """
+                    ALTER TABLE current_game_status
+                    add tap_count INTEGER NOT NULL DEFAULT 0
+                """
+                )
+                database.execSQL(
+                    """
+                    ALTER TABLE success_history
+                    add tap_count INTEGER NOT NULL DEFAULT 0
                 """
                 )
             }
@@ -256,7 +273,7 @@ CREATE TABLE IF NOT EXISTS success_history
         return result
     }
 
-    private fun loadCurrentGameStatus(columns: List<String> = listOf("id", "use_cube_mode", "blindfold_mode", "size", "cube_side_number", "score", "time", "start_numbers", "finish_numbers")): MutableMap<String, String> {
+    private fun loadCurrentGameStatus(columns: List<String> = listOf("id", "use_cube_mode", "blindfold_mode", "size", "cube_side_number", "score", "time", "tap_count", "start_numbers", "finish_numbers")): MutableMap<String, String> {
         this.exists = false
 
         val result = this.loadBase("current_game_status", columns)
@@ -270,7 +287,7 @@ CREATE TABLE IF NOT EXISTS success_history
         return result[0].toMutableMap()
     }
 
-    private fun loadSuccessHistories(orderColumnName: String = "created_at", orderOption: String = "DESC", count: Int = 9, whereString: String = "", whereValues: Array<String>? = null, columns: List<String> = listOf("id", "created_at", "use_cube_mode", "blindfold_mode", "size", "score", "time", "start_numbers", "finish_numbers")): MutableList<MutableMap<String, String>> {
+    private fun loadSuccessHistories(orderColumnName: String = "created_at", orderOption: String = "DESC", count: Int = 9, whereString: String = "", whereValues: Array<String>? = null, columns: List<String> = listOf("id", "created_at", "use_cube_mode", "blindfold_mode", "size", "score", "time", "tap_count", "start_numbers", "finish_numbers")): MutableList<MutableMap<String, String>> {
         return this.loadBase("success_history", columns, orderColumnName, orderOption, count, whereString, whereValues)
     }
 
@@ -281,11 +298,11 @@ CREATE TABLE IF NOT EXISTS success_history
         return this.updateBase("settings", values)
     }
 
-    private fun writeCurrentGameStatus(values: MutableMap<String, String?> = mutableMapOf("id" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "cube_side_number" to 0.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
+    private fun writeCurrentGameStatus(values: MutableMap<String, String?> = mutableMapOf("id" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "cube_side_number" to 0.toString(), "score" to 0.toString(), "time" to 0.toString(), "tap_count" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
         return this.updateBase("current_game_status", values)
     }
 
-    private fun writeSuccessHistory(values: MutableMap<String, String?> = mutableMapOf("id" to null, "created_at" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "score" to 0.toString(), "time" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
+    private fun writeSuccessHistory(values: MutableMap<String, String?> = mutableMapOf("id" to null, "created_at" to null, "use_cube_mode" to 0.toString(), "blindfold_mode" to 0.toString(), "size" to 1.toString(), "score" to 0.toString(), "time" to 0.toString(), "tap_count" to 0.toString(), "start_numbers" to null, "finish_numbers" to null)): Boolean {
         return this.insertBase("success_history", values)
     }
 
@@ -364,6 +381,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "cube_side_number" to 0.toString(),
             "score" to 0.toString(),
             "time" to 0.toString(),
+            "tap_count" to 0.toString(),
             "start_numbers" to this.numbersToString(this.dataNumbers, this.dataNonNumberPanelPosition),
             "finish_numbers" to this.numbersToString(this.dataNumbers, this.dataNonNumberPanelPosition),
         ), database)
@@ -390,6 +408,7 @@ CREATE TABLE IF NOT EXISTS success_history
             this.dataGame["current_game_status"]!!["cube_side_number"] = currentGameStatus["cube_side_number"]!!.toInt()
             this.dataGame["current_game_status"]!!["score"] = currentGameStatus["score"]!!.toInt()
             this.dataGame["current_game_status"]!!["time"] = currentGameStatus["time"]!!.toInt()
+            this.dataGame["current_game_status"]!!["tap_count"] = currentGameStatus["tap_count"]!!.toInt()
             this.dataNumbers = this.stringToNumbers(currentGameStatus["finish_numbers"]!!)
         }
 
@@ -467,6 +486,7 @@ CREATE TABLE IF NOT EXISTS success_history
                     "cube_side_number" to 0.toString(),
                     "score" to 0.toString(),
                     "time" to 0.toString(),
+                    "tap_count" to 0.toString(),
                     "start_numbers" to numbersString,
                     "finish_numbers" to numbersString,
                 )
@@ -490,6 +510,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "cube_side_number" to 0.toString(),
             "score" to 0.toString(),
             "time" to 0.toString(),
+            "tap_count" to 0.toString(),
             "start_numbers" to numbers,
             "finish_numbers" to numbers,
         ))
@@ -513,6 +534,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "cube_side_number" to statusPuzzle["cubeSideNumber"].toString(),
             "score" to statusGame["score"].toString(),
             "time" to statusGame["time"].toString(),
+            "tap_count" to statusGame["tapCount"].toString(),
             "start_numbers" to this.loadGameStartNumbers(),
             "finish_numbers" to this.numbersToString(numbers, nonNumberPanelPosition),
         ))
@@ -555,6 +577,7 @@ CREATE TABLE IF NOT EXISTS success_history
             "size" to statusPuzzle["size"].toString(),
             "score" to statusGame["score"].toString(),
             "time" to statusGame["time"].toString(),
+            "tap_count" to statusGame["tapCount"].toString(),
             "start_numbers" to this.loadGameStartNumbers(),
             "finish_numbers" to this.numbersToString(numbers, nonNumberPanelPosition),
         ))

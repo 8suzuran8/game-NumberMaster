@@ -102,6 +102,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "stop" to "1", // STOP中か?
         "score" to "0",
         "time" to "0",
+        "tapCount" to "0",
     )
 
     private var images = mutableMapOf(
@@ -391,6 +392,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
         }
 
+        this.statusGame["tapCount"] = (this.statusGame["tapCount"]!!.toInt() + 1).toString()
+        this.updateStatus()
+
         // 移動アニメーション設定
         ObjectAnimator.ofPropertyValuesHolder(
             imageView,
@@ -615,6 +619,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         // ステータスを初期化する
         this.statusGame["score"] = 0.toString()
         this.statusGame["time"] = 0.toString()
+        this.statusGame["tapCount"] = 0.toString()
 
         this.updateStatus()
     }
@@ -797,7 +802,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             value1,
             unit1,
             value2,
-            unit2)
+            unit2,
+            this.statusGame["tapCount"]!!.toInt())
 
         this.statusText!!.visibility = TextView.VISIBLE
     }
@@ -813,6 +819,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.settings["enabledCube"] = this.dbHelper!!.dataGame["settings"]!!["enabled_cube"].toString()
             this.statusGame["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
             this.statusGame["time"] = this.dbHelper!!.dataGame["current_game_status"]!!["time"].toString()
+            this.statusGame["tapCount"] = this.dbHelper!!.dataGame["current_game_status"]!!["tap_count"].toString()
 
             for (puzzleIdNumber in 0..1) {
                 this.statusPuzzle[puzzleIdNumber]["useCubeMode"] =

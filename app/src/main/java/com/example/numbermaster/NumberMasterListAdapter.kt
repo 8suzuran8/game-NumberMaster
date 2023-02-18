@@ -30,6 +30,9 @@ class NumberMasterListAdapter(val context: Context, private val rankingList: Arr
         view.findViewById<TextView>(R.id.time).apply {
             text = ranking.time
         }
+        view.findViewById<TextView>(R.id.tap_count).apply {
+            text = ranking.tapCount
+        }
         view.findViewById<TextView>(R.id.play_date).apply {
             text = ranking.playDate
         }
