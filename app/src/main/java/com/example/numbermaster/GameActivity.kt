@@ -150,6 +150,9 @@ class GameActivity : NumberMasterActivity() {
             R.id.button_cube -> {
                 this.numberMaster!!.buttonClickCubeProcess(true)
             }
+            R.id.button_autoslide -> {
+                this.numberMaster!!.buttonClickAutoslideProcess(true)
+            }
         }
     }
 
@@ -194,6 +197,9 @@ class GameActivity : NumberMasterActivity() {
             }
             R.id.button_secret -> {
                 this.numberMaster!!.buttonClickSecretProcess()
+            }
+            R.id.button_autoslide -> {
+                this.numberMaster!!.buttonClickAutoslideProcess()
             }
             R.id.button_simul -> {
                 val that = this
@@ -283,7 +289,7 @@ class GameActivity : NumberMasterActivity() {
             }
         }
 
-        for (key in listOf("3x3", "6x6", "9x9", "secret", "simul", "semi_blindfold", "blindfold", "cube", "finish", "stop")) {
+        for (key in listOf("3x3", "6x6", "9x9", "secret", "autoslide", "simul", "semi_blindfold", "blindfold", "cube", "finish", "stop")) {
             val id = this.getResourceId("button_$key")
             this.numberMaster!!.buttonsGame[key] = findViewById(id)
             this.numberMaster!!.buttonsGame[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()

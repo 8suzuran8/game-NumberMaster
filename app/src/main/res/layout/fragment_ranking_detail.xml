@@ -55,28 +55,35 @@
                     android:lines="1" />
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/recycle_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@color/transparent"
-                android:contentDescription="@string/recycle"
-                android:onClick="buttonClickListener"
-                android:scaleType="fitCenter"
-                android:src="@drawable/recycle_icon"
-                android:visibility="invisible"/>
-            <ImageButton
-                android:id="@+id/copy_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@color/transparent"
-                android:contentDescription="@string/copy_start_numbers"
-                android:onClick="buttonClickListener"
-                android:scaleType="fitCenter"
-                android:src="@drawable/copy_icon"
-                android:visibility="invisible" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/recycle_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/recycle"
+                    android:onClick="buttonClickListener"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/recycle_icon"
+                    android:visibility="invisible" />
+                <ImageButton
+                    android:id="@+id/copy_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/copy_start_numbers"
+                    android:onClick="buttonClickListener"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/copy_icon"
+                    android:visibility="invisible" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView

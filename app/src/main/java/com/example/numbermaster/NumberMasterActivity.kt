@@ -188,6 +188,9 @@ open class NumberMasterActivity : AppCompatActivity() {
             "button_secret" -> {
                 return R.id.button_secret
             }
+            "button_autoslide" -> {
+                return R.id.button_autoslide
+            }
             "button_simul" -> {
                 return R.id.button_simul
             }

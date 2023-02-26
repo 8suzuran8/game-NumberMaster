@@ -29,6 +29,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="_9x9_button">9x9</string>
     <string name="_cube_button">cube mode</string>
     <string name="_simul_button">simul mode</string>
+    <string name="_autoslide_button">auto slide mode</string>
     <string name="_blindfold_button">blindfold mode</string>
     <string name="_semi_blindfold_button">semi blindfold mode</string>
     <string name="secret_button">secret</string>

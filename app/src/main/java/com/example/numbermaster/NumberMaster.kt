@@ -89,12 +89,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             "blindfoldMode" to "0", // 目隠しモード使用中か？(1:目隠しモード使用中 | 2:一色モード使用中)
             "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
             "cubeSideNumber" to "0", // 立方体面番号
+            "autoslide" to "0", // 0: 無効 | 1以上: スライドする行番号
         ),
         mutableMapOf(
             "useCubeMode" to "0", // 立方体モード使用中か?
             "blindfoldMode" to "0", // 目隠しモード使用中か？(1:目隠しモード使用中 | 2:一色モード使用中)
             "size" to "1", // 現在の面サイズ(1: 3x3 | 2: 6x6 | 3: 9x9)
             "cubeSideNumber" to "0", // 立方体面番号
+            "autoslide" to "0", // 0: 無効 | 1以上: スライドする行番号
         ),
     )
     var statusGame: MutableMap<String, String> = mutableMapOf(
@@ -134,6 +136,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "9x9" to null,
         "secret" to null,
         "cube" to null,
+        "autoslide" to null,
         "semi_blindfold" to null, // 画像操作事のみ使用
         "blindfold" to null,
         "finish" to null,
@@ -392,7 +395,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
         }
 
-        this.statusGame["tapCount"] = (this.statusGame["tapCount"]!!.toInt() + 1).toString()
+        var tapCount = this.statusGame["tapCount"]!!.toInt() + 1
+        if (tapCount > Int.MAX_VALUE) tapCount = 0
+        this.statusGame["tapCount"] = tapCount.toString()
         this.updateStatus()
 
         // 移動アニメーション設定
@@ -433,7 +438,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     if (successType == null) {
                         // 効果音
                         that.soundPool!!.play(that.soundMove, 1F, 1F, 0, 0, 1F)
-
+                        that.autoSlide()
                         return
                     }
 
@@ -653,7 +658,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         }
 
         for (puzzleIdNumber in 0..1) {
-            if (onlyOne && puzzleIdNumber == 0) continue
+            if (onlyOne && puzzleIdNumber == 1) continue
 
             this.statusPuzzle[puzzleIdNumber]["useCubeMode"] = useCubeMode.toString()
             this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"] = 0.toString()
@@ -706,7 +711,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         val that = this
         this.activity.findViewById<RelativeLayout>(R.id.button_container).apply {
             if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 5).toInt()
+                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         height =
@@ -715,11 +720,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         height =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 5).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
                     }
                 }
             } else {
-                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 5).toInt()
+                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         width =
@@ -728,10 +733,61 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         width =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 5).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
                     }
                 }
             }
+        }
+    }
+
+    private fun autoSlide() {
+        for (puzzleIdNumber in 0..1) {
+            var nextLine = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()
+
+            if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() != 0) {
+                when {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
+                        if (this.statusGame["tapCount"]!!.toInt() % 5 == 0) {
+                            nextLine += 1
+                            if (nextLine > 3) nextLine = 1
+                        }
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 6 -> {
+                        if (this.statusGame["tapCount"]!!.toInt() % 10 == 0) {
+                            nextLine += 1
+                            if (nextLine > 6) nextLine = 1
+                        }
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 9 -> {
+                        if (this.statusGame["tapCount"]!!.toInt() % 20 == 0) {
+                            nextLine += 1
+                            if (nextLine > 9) nextLine = 1
+                        }
+                    }
+                }
+
+                this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
+            }
+        }
+    }
+
+    fun buttonClickAutoslideProcess(onlyOne: Boolean = false) {
+        var buttonEnabled = false
+        for (puzzleIdNumber in 0..1) {
+            if (onlyOne && puzzleIdNumber == 1) continue
+
+            if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() == 0) {
+                this.statusPuzzle[puzzleIdNumber]["autoslide"] = 1.toString()
+                buttonEnabled = true
+            } else {
+                this.statusPuzzle[puzzleIdNumber]["autoslide"] = 0.toString()
+            }
+        }
+
+        if (buttonEnabled) {
+            this.buttonsGame["autoslide"]!!.setImageResource(+R.drawable.button_enabled_autoslide)
+        } else {
+            this.buttonsGame["autoslide"]!!.setImageResource(+R.drawable.button_disabled_autoslide)
         }
     }
 
