@@ -742,23 +742,26 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     private fun autoSlide() {
         for (puzzleIdNumber in 0..1) {
-            var nextLine = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()
+            if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() > 0) {
+                val sizeMax = numberMasterCalculator.getSizeMax(this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt())
+                val yIndex = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() - 1
 
-            if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() != 0) {
+                // calc next line
+                var nextLine = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()
                 when {
-                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 1 -> {
                         if (this.statusGame["tapCount"]!!.toInt() % 5 == 0) {
                             nextLine += 1
                             if (nextLine > 3) nextLine = 1
                         }
                     }
-                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 6 -> {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 2 -> {
                         if (this.statusGame["tapCount"]!!.toInt() % 10 == 0) {
                             nextLine += 1
                             if (nextLine > 6) nextLine = 1
                         }
                     }
-                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 9 -> {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
                         if (this.statusGame["tapCount"]!!.toInt() % 20 == 0) {
                             nextLine += 1
                             if (nextLine > 9) nextLine = 1
@@ -766,25 +769,48 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     }
                 }
 
-                this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
+                if (nextLine != this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()) {
+                    // set non number panel position
+                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
+                        && this.nonNumberPanelPosition[puzzleIdNumber]["y"] == yIndex
+                    ) {
+                        if (this.nonNumberPanelPosition[puzzleIdNumber]["x"] == 0) {
+                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] = sizeMax
+                        } else {
+                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] =
+                                this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1
+                        }
+                    }
+
+                    // set numbers
+                    val xTmp =
+                        this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][0]
+                    for (xIndex in 0 until sizeMax) {
+                        this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex] =
+                            this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex + 1]
+                    }
+                    this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][sizeMax] =
+                        xTmp
+                    this.updateNumberPanel(puzzleIdNumber)
+
+                    this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
+                }
             }
         }
     }
 
     fun buttonClickAutoslideProcess(onlyOne: Boolean = false) {
-        var buttonEnabled = false
+        var autoslide = "0"
+        if (this.statusPuzzle[0]["autoslide"]!!.toInt() == 0) autoslide = "1"
+
         for (puzzleIdNumber in 0..1) {
             if (onlyOne && puzzleIdNumber == 1) continue
 
-            if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() == 0) {
-                this.statusPuzzle[puzzleIdNumber]["autoslide"] = 1.toString()
-                buttonEnabled = true
-            } else {
-                this.statusPuzzle[puzzleIdNumber]["autoslide"] = 0.toString()
-            }
+            this.statusPuzzle[puzzleIdNumber]["autoslide"] = autoslide
         }
 
-        if (buttonEnabled) {
+        if (this.statusPuzzle[0]["autoslide"]!! == "1"
+            || this.statusPuzzle[1]["autoslide"]!! == "1") {
             this.buttonsGame["autoslide"]!!.setImageResource(+R.drawable.button_enabled_autoslide)
         } else {
             this.buttonsGame["autoslide"]!!.setImageResource(+R.drawable.button_disabled_autoslide)

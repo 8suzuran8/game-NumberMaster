@@ -299,7 +299,7 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.buttonsGame["prev"] = findViewById(R.id.prev_button)
 
         // longClick
-        for (key in listOf("3x3", "6x6", "9x9", "cube")) {
+        for (key in listOf("3x3", "6x6", "9x9", "cube", "autoslide")) {
             val id = this.getResourceId("button_$key")
             findViewById<ImageButton>(id).apply {
                 setOnTouchListener(object : View.OnTouchListener {
