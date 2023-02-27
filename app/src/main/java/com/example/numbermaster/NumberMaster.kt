@@ -745,6 +745,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() > 0) {
                 val sizeMax = numberMasterCalculator.getSizeMax(this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt())
                 val yIndex = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() - 1
+                val currentCubeSideNumber = this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
 
                 // calc next line
                 var nextLine = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()
@@ -771,26 +772,25 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
                 if (nextLine != this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()) {
                     // set non number panel position
-                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
+                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == currentCubeSideNumber
                         && this.nonNumberPanelPosition[puzzleIdNumber]["y"] == yIndex
                     ) {
                         if (this.nonNumberPanelPosition[puzzleIdNumber]["x"] == 0) {
                             this.nonNumberPanelPosition[puzzleIdNumber]["x"] = sizeMax
                         } else {
-                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] =
-                                this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1
+                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] = this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1
                         }
                     }
 
                     // set numbers
                     val xTmp =
-                        this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][0]
+                        this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][0]
+
                     for (xIndex in 0 until sizeMax) {
-                        this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex] =
-                            this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex + 1]
+                        this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex] =
+                            this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex + 1]
                     }
-                    this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][sizeMax] =
-                        xTmp
+                    this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][sizeMax] = xTmp
                     this.updateNumberPanel(puzzleIdNumber)
 
                     this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
@@ -800,8 +800,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun buttonClickAutoslideProcess(onlyOne: Boolean = false) {
-        var autoslide = "0"
-        if (this.statusPuzzle[0]["autoslide"]!!.toInt() == 0) autoslide = "1"
+        val autoslide = if (this.statusPuzzle[0]["autoslide"]!!.toInt() == 0) {
+            "1"
+        } else {
+            "0"
+        }
 
         for (puzzleIdNumber in 0..1) {
             if (onlyOne && puzzleIdNumber == 1) continue
