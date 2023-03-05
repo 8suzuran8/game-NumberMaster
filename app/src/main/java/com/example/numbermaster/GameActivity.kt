@@ -364,7 +364,8 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.boardStandForeground[i] = findViewById<ConstraintLayout>(puzzleId).findViewById(R.id.board_stand_foreground)
 
             // 0 is background
-            for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[i]!!.childCount) {
+            // -1 is autoslide
+            for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[i]!!.childCount - 1) {
                 this.numberMaster!!.numberPanels[i][numberPanelIndex - 1] =
                     this.numberMaster!!.boardStandLayout[i]!!.getChildAt(numberPanelIndex) as ImageButton
                 this.numberMaster!!.numberPanels[i][numberPanelIndex - 1]!!.apply {
@@ -379,6 +380,9 @@ class GameActivity : NumberMasterActivity() {
                     y = 0F
                 }
             }
+
+            // autoslide
+            this.numberMaster!!.autoslideImages[i] = findViewById<ConstraintLayout>(puzzleId).findViewById<ImageView>(R.id.autoslide_animate)
 
             // effectの設定
             this.numberMaster!!.effect[i] = findViewById<ConstraintLayout>(puzzleId).findViewById<ImageView>(R.id.effect).apply {

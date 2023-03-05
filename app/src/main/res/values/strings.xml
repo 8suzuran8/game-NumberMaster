@@ -168,4 +168,5 @@ on Counter Stop.
 2. The secret button has changed to a cube mode button on the game screen.
 
 ※ Now, if you achieve more counter stops, something will happen in you."</string>
+    <string name="autoslide_animate">autoslide animate</string>
 </resources>

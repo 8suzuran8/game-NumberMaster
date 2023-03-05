@@ -172,6 +172,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         MutableList(4) {null},
     )
 
+    var autoslideImages: MutableList<ImageView?> = mutableListOf(
+        null,
+        null,
+    )
+
     var buttonsPuzzle: MutableList<MutableMap<String, ImageButton?>> = mutableListOf(
         mutableMapOf(
             "swipe_top" to null,
@@ -630,6 +635,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun buttonClickSizeProcess(sizeKey: Int, onlyOne: Boolean = false) {
+        val that = this
         for (puzzleIdNumber in 0..1) {
             if (onlyOne && puzzleIdNumber == 1) continue
 
@@ -642,6 +648,12 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.updateNumberPanel(puzzleIdNumber)
 
             this.numberMasterOnSwipeTouchListener!!.onSwipeBottom(puzzleIdNumber)
+
+            val oneNumberPanelSize = globalActivityInfo["numberPanelSize:" + that.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat().toInt()
+            autoslideImages[puzzleIdNumber]!!.updateLayoutParams{
+                height = globalActivityInfo["numberPanelSize:" + that.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat().toInt()
+                width = (that.numberMasterCalculator.getSizeMax(that.statusPuzzle[puzzleIdNumber]["size"]!!.toInt()) + 2) * oneNumberPanelSize
+            }
         }
     }
 
@@ -741,11 +753,15 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     private fun autoSlide() {
+        val that = this
         for (puzzleIdNumber in 0..1) {
             if (this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() > 0) {
                 val sizeMax = numberMasterCalculator.getSizeMax(this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt())
                 val yIndex = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() - 1
                 val currentCubeSideNumber = this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
+
+                val newNonNumberPanelPosition = this.nonNumberPanelPosition[puzzleIdNumber].toMutableMap()
+                val newNumbers = this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex].toMutableList()
 
                 // calc next line
                 var nextLine = this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()
@@ -771,26 +787,115 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 }
 
                 if (nextLine != this.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt()) {
-                    // set non number panel position
-                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == currentCubeSideNumber
-                        && this.nonNumberPanelPosition[puzzleIdNumber]["y"] == yIndex
+                    val oneNumberPanelSize = globalActivityInfo["numberPanelSize:" + that.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat().toInt()
+
+                    val bitmap = Bitmap.createBitmap(
+                        autoslideImages[puzzleIdNumber]!!.background.toBitmap(
+                            this.boardStandLayout[puzzleIdNumber]!!.width + oneNumberPanelSize,
+                            oneNumberPanelSize,
+                            Bitmap.Config.ARGB_8888
+                        )
+                    )
+                    val canvas = Canvas(bitmap)
+
+                    // set non number panel position animation
+                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!!.toInt() == currentCubeSideNumber
+                        && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!!.toInt() == yIndex
                     ) {
-                        if (this.nonNumberPanelPosition[puzzleIdNumber]["x"] == 0) {
-                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] = sizeMax
+                        var startX = this.nonNumberPanelPosition[puzzleIdNumber]["x"]!!.toInt() * oneNumberPanelSize
+                        val startY = 0
+                        var endX = startX + oneNumberPanelSize
+                        val endY = startY + oneNumberPanelSize
+                        canvas.drawBitmap(
+                            this.images["board_stand_once"]!!,
+                            Rect(0, 0, this.images["board_stand_once"]!!.width, this.images["board_stand_once"]!!.height),
+                            Rect(
+                                startX,
+                                startY,
+                                endX,
+                                endY
+                            ),
+                            null
+                        )
+
+                        if (this.nonNumberPanelPosition[puzzleIdNumber]["x"]!!.toInt() == 0) {
+                            startX = (sizeMax + 1) * oneNumberPanelSize
+                            endX = startX + oneNumberPanelSize
+                            canvas.drawBitmap(
+                                this.images["board_stand_once"]!!,
+                                Rect(0, 0, this.images["board_stand_once"]!!.width, this.images["board_stand_once"]!!.height),
+                                Rect(
+                                    startX,
+                                    startY,
+                                    endX,
+                                    endY
+                                ),
+                                null
+                            )
+                            newNonNumberPanelPosition["x"] = sizeMax
                         } else {
-                            this.nonNumberPanelPosition[puzzleIdNumber]["x"] = this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1
+                            newNonNumberPanelPosition["x"] = this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1
                         }
                     }
 
                     // set numbers
-                    val xTmp =
-                        this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][0]
-
-                    for (xIndex in 0 until sizeMax) {
-                        this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex] =
-                            this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex + 1]
+                    if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!!.toInt() != currentCubeSideNumber
+                        || this.nonNumberPanelPosition[puzzleIdNumber]["y"]!!.toInt() != yIndex
+                        || this.nonNumberPanelPosition[puzzleIdNumber]["x"]!!.toInt() != 0
+                    ) {
+                        this.updateNumberPanelForegroundOnce(
+                            puzzleIdNumber,
+                            canvas,
+                            0,
+                            sizeMax + 1,
+                            this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][0],
+                            0
+                        )
                     }
-                    this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][sizeMax] = xTmp
+                    newNumbers[sizeMax] = this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][0]
+                    for (xIndex in 0 .. sizeMax) {
+                        if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!!.toInt() != currentCubeSideNumber
+                            || this.nonNumberPanelPosition[puzzleIdNumber]["y"]!!.toInt() != yIndex
+                            || this.nonNumberPanelPosition[puzzleIdNumber]["x"]!!.toInt() != xIndex
+                        ) {
+                            this.updateNumberPanelForegroundOnce(
+                                puzzleIdNumber,
+                                canvas,
+                                0,
+                                xIndex,
+                                this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex],
+                                0
+                            )
+                        }
+
+                        if (xIndex > 0) {
+                            newNumbers[xIndex - 1] = this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex][xIndex]
+                        }
+                    }
+
+                    this.autoslideImages[puzzleIdNumber]!!.background = bitmap.toDrawable(this.resources)
+                    autoslideImages[puzzleIdNumber]!!.apply {
+                        visibility = ImageView.VISIBLE
+                    }
+                    ObjectAnimator.ofPropertyValuesHolder(
+                        autoslideImages[puzzleIdNumber]!!,
+                        PropertyValuesHolder.ofFloat("translationX", -oneNumberPanelSize.toFloat())
+                    ).apply {
+                        duration = 200
+                        addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                autoslideImages[puzzleIdNumber]!!.apply {
+                                    translationX = 0.toFloat()
+                                    translationY = ((that.statusPuzzle[puzzleIdNumber]["autoslide"]!!.toInt() - 1) * oneNumberPanelSize).toFloat()
+                                    visibility = ImageView.INVISIBLE
+                                }
+                            }
+                        })
+                        start()
+                    }
+
+                    this.nonNumberPanelPosition[puzzleIdNumber] = newNonNumberPanelPosition.toMutableMap()
+                    this.numbers[puzzleIdNumber][currentCubeSideNumber][yIndex] = newNumbers.toMutableList()
                     this.updateNumberPanel(puzzleIdNumber)
 
                     this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
@@ -800,6 +905,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     }
 
     fun buttonClickAutoslideProcess(onlyOne: Boolean = false) {
+        val that = this
+
         val autoslide = if (this.statusPuzzle[0]["autoslide"]!!.toInt() == 0) {
             "1"
         } else {
@@ -810,6 +917,19 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             if (onlyOne && puzzleIdNumber == 1) continue
 
             this.statusPuzzle[puzzleIdNumber]["autoslide"] = autoslide
+
+            val oneNumberPanelSize = globalActivityInfo["numberPanelSize:" + that.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat().toInt()
+            autoslideImages[puzzleIdNumber]!!.updateLayoutParams{
+                height = globalActivityInfo["numberPanelSize:" + that.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat().toInt()
+                width = (that.numberMasterCalculator.getSizeMax(that.statusPuzzle[puzzleIdNumber]["size"]!!.toInt()) + 2) * oneNumberPanelSize
+            }
+
+            if (autoslide == "1") {
+                autoslideImages[puzzleIdNumber]!!.top = 0
+                autoslideImages[puzzleIdNumber]!!.apply {
+                    translationY = 0.toFloat()
+                }
+            }
         }
 
         if (this.statusPuzzle[0]["autoslide"]!! == "1"
@@ -1295,12 +1415,12 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         )
     }
 
-    private fun updateNumberPanelForegroundOnce(puzzleIdNumber: Int, canvas: Canvas, y: Int, x: Int) {
+    private fun updateNumberPanelForegroundOnce(puzzleIdNumber: Int, canvas: Canvas, y: Int, x: Int, number: Int? = this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][y][x], margin: Int = this.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt()) {
         val numberPanelSize =
             this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[puzzleIdNumber]["size"]!!]!!.toFloat()
 
-        val startX = (numberPanelSize * x + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
-        val startY = (numberPanelSize * y + this.globalActivityInfo["boardFrameWidth"]!!.toFloat()).toInt()
+        val startX = (numberPanelSize * x + margin).toInt()
+        val startY = (numberPanelSize * y + margin).toInt()
         val endX = (startX + numberPanelSize).toInt()
         val endY = (startY + numberPanelSize).toInt()
 
@@ -1312,10 +1432,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         )
 
         val numberPanelImage = if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 0 || this.buttonsGame["3x3"]!!.isEnabled) {
-            this.images["number" + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][y][x]]!!
+            this.images["number$number"]!!
         } else {
             if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 2) {
-                this.images["mark" + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][y][x]]!!
+                this.images["mark$number"]!!
             } else {
                 this.images["number_question"]!!
             }

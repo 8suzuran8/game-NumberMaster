@@ -90,6 +90,13 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/number4"
                     android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/autoslide_animate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/autoslide_animate"
+                    android:background="@color/transparent"
+                    android:visibility="invisible"/>
             </FrameLayout>
 
             <ImageButton
