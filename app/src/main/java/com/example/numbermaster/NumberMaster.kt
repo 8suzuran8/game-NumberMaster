@@ -1025,7 +1025,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.statusGame["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
             this.statusGame["time"] = this.dbHelper!!.dataGame["current_game_status"]!!["time"].toString()
             this.statusGame["tapCount"] = this.dbHelper!!.dataGame["current_game_status"]!!["tap_count"].toString()
-            this.statusGame["score"] = 99999.toString()
 
             for (puzzleIdNumber in 0..1) {
                 this.statusPuzzle[puzzleIdNumber]["useCubeMode"] =
