@@ -125,6 +125,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "effect_puzzle3x3" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle3x3),
         "effect_puzzle6x6" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle6x6),
         "effect_puzzle9x9" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_puzzle9x9),
+        "effect_multi_success" to BitmapFactory.decodeResource(this.resources, R.drawable.effect_multi_success),
     )
 
     var statusText: TextView? = null
@@ -191,10 +192,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             "swipe_left" to null,
         ),
     )
+
+    private var lastSuccessTime: Double = 0.toDouble()
     var effectSuccess: MutableList<ImageView?> = mutableListOf( // 魔方陣
         null,
         null,
     )
+    var effectMultiSuccess: ImageView? = null
+    var effectMultiSuccessObjectAnimator: ObjectAnimator? = null
     var effectCounterStop: ImageView? = null // 稲妻
     var cube: MutableList<GLSurfaceView?> = mutableListOf(
         null,
@@ -481,6 +486,37 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.effectSuccess[puzzleIdNumber]!!.visibility = View.VISIBLE
         this.effectSuccess[puzzleIdNumber]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
 
+        // 連続完成アニメーション
+        if (this.settings["counterStopCount"]!!.toInt() >= 1
+            && this.effectMultiSuccess!!.visibility == View.INVISIBLE
+            && this.lastSuccessTime + 10 > this.statusGame["time"]!!.toDouble()) {
+            this.effectMultiSuccess!!.apply {
+                visibility = View.VISIBLE
+                alpha = 1.toFloat()
+            }
+
+            ObjectAnimator.ofPropertyValuesHolder(
+                this.effectMultiSuccess!!,
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.toFloat(), 1.toFloat())
+            ).apply {
+                duration = 10000
+                addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        that.effectMultiSuccessObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                            that.effectMultiSuccess!!,
+                            PropertyValuesHolder.ofFloat(View.ALPHA, 0.toFloat(), 1.toFloat())
+                        ).apply {
+                            duration = 500
+                            repeatCount = 100
+                            repeatMode = ObjectAnimator.REVERSE
+                            start()
+                        }
+                    }
+                })
+                start()
+            }
+        }
+
         // スコアの計算
         var addScore = 0
         if (successType == 1) {
@@ -524,6 +560,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.soundPool!!.play(this.soundSuccess, 1F, 1F, 0, 0, 1F)
         }
 
+        this.lastSuccessTime = this.statusGame["time"]!!.toDouble()
         this.statusGame["score"] = newScore.toString()
         this.updateStatus()
     }
@@ -948,6 +985,22 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             timer(name = "timer", period = 1000) {
                 if (that.statusGame["stop"]!!.toInt() == 1) return@timer
                 that.statusGame["time"] = (that.statusGame["time"]!!.toDouble() + 1).toString()
+
+                for (puzzleIdNumber in 0..1) {
+                    if (that.effectMultiSuccess!!.visibility == View.VISIBLE
+                        && that.lastSuccessTime + 10 <= that.statusGame["time"]!!.toDouble()) {
+                        that.effectMultiSuccess!!.apply {
+                            visibility = View.INVISIBLE
+                            scaleY = 0.toFloat()
+                        }
+
+                        if (that.effectMultiSuccessObjectAnimator != null
+                            && that.effectMultiSuccessObjectAnimator!!.isRunning) {
+                            that.effectMultiSuccessObjectAnimator!!.repeatCount = 0
+                        }
+                    }
+                }
+
                 Handler(Looper.getMainLooper()).post {
                     that.updateStatus()
                 }

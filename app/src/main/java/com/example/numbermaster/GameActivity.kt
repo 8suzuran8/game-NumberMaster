@@ -394,6 +394,11 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.numberMasterRenderer!!.changeTexture(this.numberMaster!!.statusPuzzle[i]["size"]!!.toInt())
         }
 
+        this.numberMaster!!.effectMultiSuccess = findViewById<ImageView>(R.id.effect_multi_success).apply {
+            visibility = ImageView.INVISIBLE
+            translationY = 0.toFloat()
+        }
+
         this.numberMaster!!.cube[1]!!.visibility = View.INVISIBLE
 
         this.numberMaster!!.effectCounterStop = findViewById<ImageView>(R.id.effect_counter_stop).apply {

@@ -46,5 +46,14 @@
         android:visibility="visible"
         android:stateListAnimator="@xml/animate_game_thunder" />
 
+    <ImageView
+        android:id="@+id/effect_multi_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/effect_multi_success"
+        android:scaleType="fitCenter"
+        android:src="@drawable/effect_multi_success"
+        android:visibility="visible" />
+
     <include layout="@layout/game_button" />
 </FrameLayout>
