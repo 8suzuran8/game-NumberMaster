@@ -191,11 +191,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             "swipe_left" to null,
         ),
     )
-    var effect: MutableList<ImageView?> = mutableListOf( // 魔方陣
+    var effectSuccess: MutableList<ImageView?> = mutableListOf( // 魔方陣
         null,
         null,
     )
-    var effect2: ImageView? = null // 稲妻
+    var effectCounterStop: ImageView? = null // 稲妻
     var cube: MutableList<GLSurfaceView?> = mutableListOf(
         null,
         null,
@@ -465,21 +465,21 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         if (successType == 1) {
             when {
                 this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 1 -> {
-                    this.effect[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle3x3"]!!)
+                    this.effectSuccess[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle3x3"]!!)
                 }
                 this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 2 -> {
-                    this.effect[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle6x6"]!!)
+                    this.effectSuccess[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle6x6"]!!)
                 }
                 this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
-                    this.effect[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle9x9"]!!)
+                    this.effectSuccess[puzzleIdNumber]!!.setImageBitmap(this.images["effect_puzzle9x9"]!!)
                 }
             }
         } else {
-            this.effect[puzzleIdNumber]!!.setImageBitmap(this.images["effect_magic_square"]!!)
+            this.effectSuccess[puzzleIdNumber]!!.setImageBitmap(this.images["effect_magic_square"]!!)
         }
 
-        this.effect[puzzleIdNumber]!!.visibility = View.VISIBLE
-        this.effect[puzzleIdNumber]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
+        this.effectSuccess[puzzleIdNumber]!!.visibility = View.VISIBLE
+        this.effectSuccess[puzzleIdNumber]!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_success)
 
         // スコアの計算
         var addScore = 0
@@ -531,20 +531,20 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     private fun counterStopEffect() {
         val that = this
 
-        this.effect2!!.visibility = ImageView.VISIBLE
-        this.effect2!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(this.activity, R.xml.animate_game_thunder)
+        this.effectCounterStop!!.visibility = ImageView.VISIBLE
+        this.effectCounterStop!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(this.activity, R.xml.animate_game_thunder)
 
         // 上記animation時間100 * 3loop + 100
         timer(name = "thunder", initialDelay = 400, period = 500) {
             Handler(Looper.getMainLooper()).post {
                 this.cancel()
-                that.effect2!!.setImageResource(R.drawable.thunder2)
-                that.effect2!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(that.activity, R.xml.animate_game_thunder)
+                that.effectCounterStop!!.setImageResource(R.drawable.thunder2)
+                that.effectCounterStop!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(that.activity, R.xml.animate_game_thunder)
                 timer(name = "thunder", initialDelay = 300, period = 500) {
                     Handler(Looper.getMainLooper()).post {
-                        that.effect2!!.setImageResource(R.drawable.thunder1)
+                        that.effectCounterStop!!.setImageResource(R.drawable.thunder1)
                         this.cancel()
-                        that.effect2!!.visibility = ImageView.INVISIBLE
+                        that.effectCounterStop!!.visibility = ImageView.INVISIBLE
                     }
                 }
             }
@@ -1025,6 +1025,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.statusGame["score"] = this.dbHelper!!.dataGame["current_game_status"]!!["score"].toString()
             this.statusGame["time"] = this.dbHelper!!.dataGame["current_game_status"]!!["time"].toString()
             this.statusGame["tapCount"] = this.dbHelper!!.dataGame["current_game_status"]!!["tap_count"].toString()
+            this.statusGame["score"] = 99999.toString()
 
             for (puzzleIdNumber in 0..1) {
                 this.statusPuzzle[puzzleIdNumber]["useCubeMode"] =

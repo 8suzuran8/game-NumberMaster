@@ -36,10 +36,10 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/effect2"
+        android:id="@+id/effect_counter_stop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/effect2"
+        android:contentDescription="@string/effect_counter_stop"
         android:scaleType="centerCrop"
         android:alpha="0"
         android:src="@drawable/thunder1"

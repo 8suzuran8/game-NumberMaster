@@ -128,10 +128,10 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/effect"
+        android:id="@+id/effect_success"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/effect"
+        android:contentDescription="@string/effect_success"
         android:scaleType="fitCenter"
         android:src="@drawable/effect_magic_square"
         android:visibility="visible"
