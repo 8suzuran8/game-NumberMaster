@@ -188,4 +188,17 @@ class NumberMasterCalculator {
 
         return 0
     }
+
+    fun copy(numbers: MutableList<MutableList<MutableList<Int>>>): MutableList<MutableList<MutableList<Int>>> {
+        val newNumbers = MutableList(6) {MutableList(9) {MutableList(9) {0} } }
+        for (cubeSideNumber in 0 until numbers.size) {
+            for (yIndex in 0 until numbers[cubeSideNumber].size) {
+                for (xIndex in 0 until numbers[cubeSideNumber][yIndex].size) {
+                    newNumbers[cubeSideNumber][yIndex][xIndex] = numbers[cubeSideNumber][yIndex][xIndex]
+                }
+            }
+        }
+
+        return newNumbers
+    }
 }

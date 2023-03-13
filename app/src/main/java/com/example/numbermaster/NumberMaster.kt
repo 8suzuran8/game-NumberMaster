@@ -193,13 +193,18 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         ),
     )
 
-    private var lastSuccessTime: Double = 0.toDouble()
     var effectSuccess: MutableList<ImageView?> = mutableListOf( // 魔方陣
         null,
         null,
     )
+
+    private val multiSuccessMaxTime: Double = 30.toDouble()
+    private val multiSuccessMaxCount: Int = 4
+    private var lastSuccessNumbers = MutableList(6) {MutableList(9) {MutableList(9) {0} } }
+    private var multiSuccessCount: Int = 0
+    private var multiSuccessStartTime: Double = 0.toDouble()
     var effectMultiSuccess: ImageView? = null
-    var effectMultiSuccessObjectAnimator: ObjectAnimator? = null
+
     var effectCounterStop: ImageView? = null // 稲妻
     var cube: MutableList<GLSurfaceView?> = mutableListOf(
         null,
@@ -489,28 +494,33 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         // 連続完成アニメーション
         if (this.settings["counterStopCount"]!!.toInt() >= 1
             && this.effectMultiSuccess!!.visibility == View.INVISIBLE
-            && this.lastSuccessTime + 10 > this.statusGame["time"]!!.toDouble()) {
+            && this.multiSuccessCount >= this.multiSuccessMaxCount
+            && this.multiSuccessStartTime + this.multiSuccessMaxTime > this.statusGame["time"]!!.toDouble()) {
             this.effectMultiSuccess!!.apply {
                 visibility = View.VISIBLE
-                alpha = 1.toFloat()
             }
 
             ObjectAnimator.ofPropertyValuesHolder(
                 this.effectMultiSuccess!!,
-                PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.toFloat(), 1.toFloat())
+                PropertyValuesHolder.ofFloat(View.ALPHA, 0.3.toFloat(), 0.8.toFloat())
             ).apply {
-                duration = 10000
+                duration = 100
+                repeatCount = 5
+                repeatMode = ObjectAnimator.REVERSE
+                start()
+            }
+            ObjectAnimator.ofPropertyValuesHolder(
+                this.effectMultiSuccess!!,
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.toFloat(), (-that.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 4)),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.toFloat(), 1.toFloat()),
+                PropertyValuesHolder.ofFloat(View.SCALE_X, 0.toFloat(), 0.6.toFloat())
+            ).apply {
+                duration = 500
                 addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        that.effectMultiSuccessObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(
-                            that.effectMultiSuccess!!,
-                            PropertyValuesHolder.ofFloat(View.ALPHA, 0.toFloat(), 1.toFloat())
-                        ).apply {
-                            duration = 500
-                            repeatCount = 100
-                            repeatMode = ObjectAnimator.REVERSE
-                            start()
-                        }
+                        that.effectMultiSuccess!!.visibility = View.INVISIBLE
+                        that.multiSuccessCount = 0
+                        that.multiSuccessStartTime = 0.toDouble()
                     }
                 })
                 start()
@@ -560,7 +570,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.soundPool!!.play(this.soundSuccess, 1F, 1F, 0, 0, 1F)
         }
 
-        this.lastSuccessTime = this.statusGame["time"]!!.toDouble()
+        if (this.multiSuccessStartTime == 0.toDouble()) this.multiSuccessStartTime = this.statusGame["time"]!!.toDouble()
+        if (this.lastSuccessNumbers != this.numbers[puzzleIdNumber]) {
+            this.multiSuccessCount += 1
+            this.lastSuccessNumbers = this.numberMasterCalculator.copy(this.numbers[puzzleIdNumber])
+        } else {
+            this.multiSuccessCount = 1
+            this.multiSuccessStartTime = this.statusGame["time"]!!.toDouble()
+        }
         this.statusGame["score"] = newScore.toString()
         this.updateStatus()
     }
@@ -986,19 +1003,16 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 if (that.statusGame["stop"]!!.toInt() == 1) return@timer
                 that.statusGame["time"] = (that.statusGame["time"]!!.toDouble() + 1).toString()
 
-                for (puzzleIdNumber in 0..1) {
-                    if (that.effectMultiSuccess!!.visibility == View.VISIBLE
-                        && that.lastSuccessTime + 10 <= that.statusGame["time"]!!.toDouble()) {
-                        that.effectMultiSuccess!!.apply {
-                            visibility = View.INVISIBLE
-                            scaleY = 0.toFloat()
-                        }
-
-                        if (that.effectMultiSuccessObjectAnimator != null
-                            && that.effectMultiSuccessObjectAnimator!!.isRunning) {
-                            that.effectMultiSuccessObjectAnimator!!.repeatCount = 0
-                        }
+                if (that.multiSuccessStartTime > 0
+                    && that.multiSuccessStartTime + that.multiSuccessMaxTime <= that.statusGame["time"]!!.toDouble()) {
+                    that.effectMultiSuccess!!.apply {
+                        visibility = View.INVISIBLE
+                        scaleY = 0.toFloat()
+                        scaleX = 0.toFloat()
                     }
+
+                    that.multiSuccessCount = 0
+                    that.multiSuccessStartTime = 0.toDouble()
                 }
 
                 Handler(Looper.getMainLooper()).post {
