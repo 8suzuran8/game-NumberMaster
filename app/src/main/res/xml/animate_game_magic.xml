@@ -1,0 +1,30 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:repeatCount="-1"
+                android:propertyName="rotation"
+                android:startOffset="0"
+                android:duration="2000"
+                android:valueTo="359"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:repeatCount="-1"
+                android:repeatMode="reverse"
+                android:propertyName="scaleX"
+                android:startOffset="0"
+                android:duration="500"
+                android:valueTo="1.3"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:repeatCount="-1"
+                android:repeatMode="reverse"
+                android:propertyName="scaleY"
+                android:startOffset="300"
+                android:duration="300"
+                android:valueTo="1.3"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

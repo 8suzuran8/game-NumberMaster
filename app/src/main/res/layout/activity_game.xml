@@ -48,16 +48,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/effect_multi_success_magic"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:alpha="0.5"
         android:background="@color/effect_multi_success_magic_fire"
         android:contentDescription="@string/effect_multi_success_magic"
         android:scaleType="fitCenter"
         android:src="@drawable/effect_multi_success_magic"
+        android:adjustViewBounds="true"
         android:visibility="visible"
-        app:shapeAppearanceOverlay="@style/circleImageView" />
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        android:stateListAnimator="@xml/animate_game_magic" />
     <ImageView
         android:id="@+id/effect_multi_success"
         android:layout_width="match_parent"
