@@ -38,6 +38,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="board_stand">board stand</string>
     <string name="effect_success">effect success</string>
     <string name="effect_multi_success">effect multi success</string>
+    <string name="effect_multi_success_magic">effect multi success magic</string>
     <string name="button_swipe_top">button swipe top</string>
     <string name="button_swipe_right">button swipe right</string>
     <string name="button_swipe_bottom">button swipe bottom</string>
