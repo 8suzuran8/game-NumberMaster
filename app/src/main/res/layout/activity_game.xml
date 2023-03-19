@@ -53,7 +53,18 @@
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/effect_multi_success_magic"
         android:scaleType="fitCenter"
-        android:src="@drawable/effect_multi_success_magic"
+        android:background="@drawable/effect_multi_success_magic"
+        android:visibility="visible"
+        app:shapeAppearanceOverlay="@style/circleImageView" />
+
+    <ImageView
+        android:id="@+id/effect_multi_success_magic_thunder"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/effect_multi_success_magic_thunder"
+        android:scaleType="matrix"
+        android:src="@drawable/thunder1"
         android:visibility="visible"
         app:shapeAppearanceOverlay="@style/circleImageView" />
     <ImageView

@@ -408,6 +408,22 @@ class GameActivity : NumberMasterActivity() {
             alpha = 0F
         }
 
+        this.numberMaster!!.effectMultiSuccessMagicThunder = findViewById<ImageView>(R.id.effect_multi_success_magic_thunder).apply {
+            layoutParams.apply {
+                width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
+                height = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
+            }
+            visibility = ImageView.INVISIBLE
+            imageMatrix = this.imageMatrix.apply {
+                setScale(
+                    0.1F, // @todo デバイスによって大きさが変わるので計算で出さなければならない
+                    0.1F,
+                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat(),
+                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat()
+                )
+            }
+        }
+
         this.numberMaster!!.cube[1]!!.visibility = View.INVISIBLE
 
         this.numberMaster!!.effectCounterStop = findViewById<ImageView>(R.id.effect_counter_stop).apply {

@@ -205,6 +205,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     private var multiSuccessStartTime: Double = 0.toDouble()
     var effectMultiSuccess: ImageView? = null
     var effectMultiSuccessMagic: ImageView? = null
+    var effectMultiSuccessMagicThunder: ImageView? = null
 
     var effectCounterStop: ImageView? = null // 稲妻
     var cube: MutableList<GLSurfaceView?> = mutableListOf(
@@ -502,7 +503,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success)
             }
 
-            this.effectMultiSuccessMagic!!.imageTintList = this.activity.getColorStateList(R.color.effect_multi_success_magic_fire)
+            this.effectMultiSuccessMagic!!.backgroundTintList = this.activity.getColorStateList(R.color.effect_multi_success_magic_fire)
 
             ObjectAnimator.ofPropertyValuesHolder(
                 this.effectMultiSuccess!!,
@@ -520,6 +521,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                             translationY = that.globalActivityInfo["gameSpaceSize"]!!.toFloat()
                             visibility = View.VISIBLE
                             stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success_magic)
+                        }
+                        that.effectMultiSuccessMagicThunder!!.apply {
+                            translationY = that.globalActivityInfo["gameSpaceSize"]!!.toFloat()
+                            visibility = View.VISIBLE
+                            stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success_magic_thunder)
                         }
                     }
                 })
