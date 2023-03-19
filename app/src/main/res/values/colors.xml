@@ -8,5 +8,7 @@
     <color name="text_box_background_ok">#FF00C0FF</color>
     <color name="text_box_background_ng">#FFFF5050</color>
     <color name="text_link">#0040FF</color>
+    <color name="effect_multi_success_magic_base">#55FFFFFF</color>
     <color name="effect_multi_success_magic_fire">#FFEA2532</color>
+    <color name="effect_multi_success_magic_ice">#FF00FFFF</color>
 </resources>

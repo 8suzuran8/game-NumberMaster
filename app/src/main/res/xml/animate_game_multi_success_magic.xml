@@ -3,10 +3,29 @@
     <item>
         <set>
             <objectAnimator
+                android:propertyName="alpha"
+                android:startOffset="500"
+                android:duration="0"
+                android:valueTo="0.6"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:propertyName="alpha"
+                android:startOffset="1000"
+                android:duration="0"
+                android:valueTo="0"
+                android:valueType="floatType"/>
+
+            <objectAnimator
+                android:propertyName="translationY"
+                android:startOffset="500"
+                android:duration="1000"
+                android:valueTo="0dp"
+                android:valueType="floatType"/>
+            <objectAnimator
                 android:repeatCount="-1"
                 android:propertyName="rotation"
                 android:startOffset="0"
-                android:duration="2000"
+                android:duration="800"
                 android:valueTo="359"
                 android:valueType="floatType"/>
             <objectAnimator
@@ -14,7 +33,8 @@
                 android:repeatMode="reverse"
                 android:propertyName="scaleX"
                 android:startOffset="0"
-                android:duration="500"
+                android:duration="200"
+                android:valueFrom="1.0"
                 android:valueTo="1.3"
                 android:valueType="floatType"/>
             <objectAnimator
@@ -22,7 +42,8 @@
                 android:repeatMode="reverse"
                 android:propertyName="scaleY"
                 android:startOffset="300"
-                android:duration="300"
+                android:duration="100"
+                android:valueFrom="1.0"
                 android:valueTo="1.3"
                 android:valueType="floatType"/>
         </set>

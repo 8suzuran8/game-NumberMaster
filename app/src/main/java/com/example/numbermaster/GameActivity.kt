@@ -382,7 +382,7 @@ class GameActivity : NumberMasterActivity() {
             }
 
             // autoslide
-            this.numberMaster!!.autoslideImages[i] = findViewById<ConstraintLayout>(puzzleId).findViewById<ImageView>(R.id.autoslide_animate)
+            this.numberMaster!!.autoslideImages[i] = findViewById<ConstraintLayout>(puzzleId).findViewById(R.id.autoslide_animate)
 
             // effectの設定
             this.numberMaster!!.effectSuccess[i] = findViewById<ConstraintLayout>(puzzleId).findViewById<ImageView>(R.id.effect_success).apply {
@@ -397,6 +397,15 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.effectMultiSuccess = findViewById<ImageView>(R.id.effect_multi_success).apply {
             visibility = ImageView.INVISIBLE
             translationY = 0.toFloat()
+        }
+
+        this.numberMaster!!.effectMultiSuccessMagic = findViewById<ImageView>(R.id.effect_multi_success_magic).apply {
+            layoutParams.apply {
+                width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
+                height = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
+            }
+            visibility = ImageView.INVISIBLE
+            alpha = 0F
         }
 
         this.numberMaster!!.cube[1]!!.visibility = View.INVISIBLE

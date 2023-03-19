@@ -204,6 +204,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     private var multiSuccessCount: Int = 0
     private var multiSuccessStartTime: Double = 0.toDouble()
     var effectMultiSuccess: ImageView? = null
+    var effectMultiSuccessMagic: ImageView? = null
 
     var effectCounterStop: ImageView? = null // 稲妻
     var cube: MutableList<GLSurfaceView?> = mutableListOf(
@@ -498,29 +499,28 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             && this.multiSuccessStartTime + this.multiSuccessMaxTime > this.statusGame["time"]!!.toDouble()) {
             this.effectMultiSuccess!!.apply {
                 visibility = View.VISIBLE
+                stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success)
             }
+
+            this.effectMultiSuccessMagic!!.imageTintList = this.activity.getColorStateList(R.color.effect_multi_success_magic_fire)
 
             ObjectAnimator.ofPropertyValuesHolder(
                 this.effectMultiSuccess!!,
-                PropertyValuesHolder.ofFloat(View.ALPHA, 0.3.toFloat(), 0.8.toFloat())
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.toFloat(), (-that.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 4))
             ).apply {
-                duration = 100
-                repeatCount = 5
-                repeatMode = ObjectAnimator.REVERSE
-                start()
-            }
-            ObjectAnimator.ofPropertyValuesHolder(
-                this.effectMultiSuccess!!,
-                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.toFloat(), (-that.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 4)),
-                PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.toFloat(), 1.toFloat()),
-                PropertyValuesHolder.ofFloat(View.SCALE_X, 0.toFloat(), 0.6.toFloat())
-            ).apply {
-                duration = 500
+                duration = 800
                 addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         that.effectMultiSuccess!!.visibility = View.INVISIBLE
                         that.multiSuccessCount = 0
                         that.multiSuccessStartTime = 0.toDouble()
+                    }
+                    override fun onAnimationStart(animation: Animator) {
+                        that.effectMultiSuccessMagic!!.apply {
+                            translationY = that.globalActivityInfo["gameSpaceSize"]!!.toFloat()
+                            visibility = View.VISIBLE
+                            stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success_magic)
+                        }
                     }
                 })
                 start()
