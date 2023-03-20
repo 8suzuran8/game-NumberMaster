@@ -12,7 +12,9 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import com.example.numbermaster.databinding.ActivityGameBinding
@@ -410,16 +412,17 @@ class GameActivity : NumberMasterActivity() {
 
         this.numberMaster!!.effectMultiSuccessMagicThunder = findViewById<ImageView>(R.id.effect_multi_success_magic_thunder).apply {
             layoutParams.apply {
-                width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
-                height = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
+                width = (that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 0.8).toInt()
+                height = (that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 0.8).toInt()
             }
             visibility = ImageView.INVISIBLE
+            val thunderRatio = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() / AppCompatResources.getDrawable(that, R.drawable.thunder1)?.toBitmap()?.width!!.toFloat()
             imageMatrix = this.imageMatrix.apply {
-                setScale(
-                    0.1F, // @todo デバイスによって大きさが変わるので計算で出さなければならない
-                    0.1F,
-                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat(),
-                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat()
+                preScale(
+                    thunderRatio * 3,
+                    thunderRatio * 3,
+                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 1.2F,
+                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 1.2F
                 )
             }
         }
