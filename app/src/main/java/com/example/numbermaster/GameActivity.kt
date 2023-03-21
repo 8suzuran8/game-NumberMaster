@@ -419,10 +419,10 @@ class GameActivity : NumberMasterActivity() {
             val thunderRatio = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() / AppCompatResources.getDrawable(that, R.drawable.thunder1)?.toBitmap()?.width!!.toFloat()
             imageMatrix = this.imageMatrix.apply {
                 preScale(
-                    thunderRatio * 3,
-                    thunderRatio * 3,
+                    thunderRatio * 2.5F,
+                    thunderRatio * 2.5F,
                     -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 1.2F,
-                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 1.2F
+                    -that.globalActivityInfo["numberPanelSize:1"]!!.toFloat() * 0.8F
                 )
             }
         }

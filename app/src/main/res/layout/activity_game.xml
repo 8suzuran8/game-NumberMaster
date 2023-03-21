@@ -66,6 +66,7 @@
         android:scaleType="matrix"
         android:src="@drawable/thunder1"
         android:visibility="visible"
+        android:alpha="0"
         app:shapeAppearanceOverlay="@style/circleImageView" />
     <ImageView
         android:id="@+id/effect_multi_success"

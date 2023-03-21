@@ -507,7 +507,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
             ObjectAnimator.ofPropertyValuesHolder(
                 this.effectMultiSuccess!!,
-                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.toFloat(), (-that.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 4))
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.toFloat(), (-that.globalActivityInfo["gameSpaceSize"]!!.toFloat() / 2))
             ).apply {
                 duration = 800
                 addListener(object : AnimatorListenerAdapter() {
