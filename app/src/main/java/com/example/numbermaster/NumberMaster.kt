@@ -198,7 +198,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         null,
     )
 
-    private val multiSuccessMaxTime: Double = 30.toDouble()
+    private var multiSuccessMaxTime: Double = 40.toDouble() // buttonClickSizeProcessでサイズに応じて変更
     private val multiSuccessMaxCount: Int = 4
     private var lastSuccessNumbers = MutableList(6) {MutableList(9) {MutableList(9) {0} } }
     private var multiSuccessCount: Int = 0
@@ -503,7 +503,38 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_multi_success)
             }
 
-            this.effectMultiSuccessMagic!!.backgroundTintList = this.activity.getColorStateList(R.color.effect_multi_success_magic_fire)
+            // 魔法の使い分け
+            if (successType == 1) {
+                when {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 1 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_red)
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 2 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_yellow)
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_white)
+                    }
+                }
+            } else {
+                when {
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 1 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_green)
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 2 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_blue)
+                    }
+                    this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt() == 3 -> {
+                        this.effectMultiSuccessMagic!!.backgroundTintList =
+                            this.activity.getColorStateList(R.color.effect_multi_success_magic_black)
+                    }
+                }
+            }
 
             ObjectAnimator.ofPropertyValuesHolder(
                 this.effectMultiSuccess!!,
@@ -576,13 +607,19 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             this.soundPool!!.play(this.soundSuccess, 1F, 1F, 0, 0, 1F)
         }
 
-        if (this.multiSuccessStartTime == 0.toDouble()) this.multiSuccessStartTime = this.statusGame["time"]!!.toDouble()
-        if (this.lastSuccessNumbers != this.numbers[puzzleIdNumber]) {
-            this.multiSuccessCount += 1
-            this.lastSuccessNumbers = this.numberMasterCalculator.copy(this.numbers[puzzleIdNumber])
-        } else {
+        if (this.multiSuccessStartTime == 0.toDouble()
+            || this.multiSuccessStartTime + (this.multiSuccessCount * this.multiSuccessMaxTime / 4) <= this.statusGame["time"]!!.toDouble()) {
             this.multiSuccessCount = 1
             this.multiSuccessStartTime = this.statusGame["time"]!!.toDouble()
+        } else {
+            if (this.lastSuccessNumbers != this.numbers[puzzleIdNumber]) {
+                this.multiSuccessCount += 1
+                this.lastSuccessNumbers =
+                    this.numberMasterCalculator.copy(this.numbers[puzzleIdNumber])
+            } else {
+                this.multiSuccessCount = 1
+                this.multiSuccessStartTime = this.statusGame["time"]!!.toDouble()
+            }
         }
         this.statusGame["score"] = newScore.toString()
         this.updateStatus()
@@ -696,6 +733,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     fun buttonClickSizeProcess(sizeKey: Int, onlyOne: Boolean = false) {
         val that = this
+        this.multiSuccessMaxTime = (sizeKey * 40).toDouble()
         for (puzzleIdNumber in 0..1) {
             if (onlyOne && puzzleIdNumber == 1) continue
 
@@ -1008,18 +1046,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             timer(name = "timer", period = 1000) {
                 if (that.statusGame["stop"]!!.toInt() == 1) return@timer
                 that.statusGame["time"] = (that.statusGame["time"]!!.toDouble() + 1).toString()
-
-                if (that.multiSuccessStartTime > 0
-                    && that.multiSuccessStartTime + that.multiSuccessMaxTime <= that.statusGame["time"]!!.toDouble()) {
-                    that.effectMultiSuccess!!.apply {
-                        visibility = View.INVISIBLE
-                        scaleY = 0.toFloat()
-                        scaleX = 0.toFloat()
-                    }
-
-                    that.multiSuccessCount = 0
-                    that.multiSuccessStartTime = 0.toDouble()
-                }
 
                 Handler(Looper.getMainLooper()).post {
                     that.updateStatus()
