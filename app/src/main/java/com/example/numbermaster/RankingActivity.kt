@@ -35,7 +35,7 @@ class RankingActivity : NumberMasterActivity() {
 
         val that = this
 
-        val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
+        val inflateRootLayout = this.findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_ranking, inflateRootLayout)
         val layoutBinding: ActivityRankingBinding = ActivityRankingBinding.bind(activityLayout).apply {
             updateButton.apply {

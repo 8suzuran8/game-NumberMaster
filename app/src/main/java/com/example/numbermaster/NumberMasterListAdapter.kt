@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
 
-class NumberMasterListAdapter(val context: Context, private val rankingList: ArrayList<NumberMasterRanking>, private val settings: MutableMap<String, Int>): BaseAdapter() {
+class NumberMasterListAdapter(private val context: Context, private val rankingList: ArrayList<NumberMasterRanking>, private val settings: MutableMap<String, Int>): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View? = if (convertView != null) {
             convertView
@@ -21,34 +21,34 @@ class NumberMasterListAdapter(val context: Context, private val rankingList: Arr
 
         val ranking = rankingList[position]
 
-        view!!.findViewById<TextView>(R.id.no).apply {
-            text = ranking.no
-        }
-        view.findViewById<TextView>(R.id.score).apply {
-            text = ranking.score
-        }
-        view.findViewById<TextView>(R.id.time).apply {
-            text = ranking.time
-        }
-        view.findViewById<TextView>(R.id.tap_count).apply {
-            text = ranking.tapCount
-        }
-        view.findViewById<TextView>(R.id.play_date).apply {
-            text = ranking.playDate
-        }
-        view.findViewById<ImageButton>(R.id.copy_button).apply {
-            contentDescription = ranking.id.toString()
-            visibility = ImageButton.VISIBLE
-        }
-        view.findViewById<ImageButton>(R.id.recycle_button).apply {
-            contentDescription = ranking.id.toString()
-            if (settings["counter_stop_count"]!!.toInt() > 0) {
+        return view!!.apply {
+            findViewById<TextView>(R.id.no).apply {
+                text = ranking.no
+            }
+            findViewById<TextView>(R.id.score).apply {
+                text = ranking.score
+            }
+            findViewById<TextView>(R.id.time).apply {
+                text = ranking.time
+            }
+            findViewById<TextView>(R.id.tap_count).apply {
+                text = ranking.tapCount
+            }
+            findViewById<TextView>(R.id.play_date).apply {
+                text = ranking.playDate
+            }
+            findViewById<ImageButton>(R.id.copy_button).apply {
+                contentDescription = ranking.id.toString()
                 visibility = ImageButton.VISIBLE
-                isEnabled = true
+            }
+            findViewById<ImageButton>(R.id.recycle_button).apply {
+                contentDescription = ranking.id.toString()
+                if (settings["counter_stop_count"]!!.toInt() > 0) {
+                    visibility = ImageButton.VISIBLE
+                    isEnabled = true
+                }
             }
         }
-
-        return view
     }
 
     override fun getItem(position: Int): Any {

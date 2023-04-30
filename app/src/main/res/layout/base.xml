@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/base_root_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -13,16 +14,18 @@
         android:src="@drawable/background_number1"
         android:scaleType="centerCrop"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers" />
+        android:contentDescription="@string/numbers"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/background_image2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/background_number2"
-        android:scaleType="centerCrop"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers" />
+        android:contentDescription="@string/numbers"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_number2"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/background_image3"
@@ -31,7 +34,8 @@
         android:src="@drawable/background_number3"
         android:scaleType="centerCrop"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers" />
+        android:contentDescription="@string/numbers"
+        tools:ignore="ImageContrastCheck" />
 
     <!-- prev button start -->
     <ImageView
