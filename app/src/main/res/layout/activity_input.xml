@@ -22,6 +22,7 @@
             android:inputType="text"
             android:background="@color/white"
             android:textColorHint="@color/black"
+            android:textColor="@color/black"
             tools:ignore="VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 

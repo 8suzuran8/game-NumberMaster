@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:autoSizeTextType="uniform"
         android:lines="1"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:padding="10sp"/>
 
