@@ -14,7 +14,7 @@
         android:src="@drawable/background_number1"
         android:scaleType="centerCrop"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers"
+        android:importantForAccessibility="no"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
@@ -22,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers"
         android:scaleType="centerCrop"
         android:src="@drawable/background_number2"
+        android:importantForAccessibility="no"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
@@ -34,7 +34,7 @@
         android:src="@drawable/background_number3"
         android:scaleType="centerCrop"
         android:alpha="0.25"
-        android:contentDescription="@string/numbers"
+        android:importantForAccessibility="no"
         tools:ignore="ImageContrastCheck" />
 
     <!-- prev button start -->

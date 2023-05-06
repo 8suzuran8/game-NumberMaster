@@ -39,22 +39,22 @@
         android:id="@+id/effect_counter_stop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/effect_counter_stop"
         android:scaleType="centerCrop"
         android:alpha="0"
         android:src="@drawable/thunder1"
         android:visibility="visible"
-        android:stateListAnimator="@xml/animate_game_thunder" />
+        android:stateListAnimator="@xml/animate_game_thunder"
+        android:importantForAccessibility="no" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/effect_multi_success_magic"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/effect_multi_success_magic"
         android:scaleType="fitCenter"
         android:background="@drawable/effect_multi_success_magic"
         android:visibility="visible"
+        android:importantForAccessibility="no"
         app:shapeAppearanceOverlay="@style/circleImageView" />
 
     <ImageView
@@ -62,20 +62,20 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/effect_multi_success_magic_thunder"
         android:scaleType="matrix"
         android:src="@drawable/thunder1"
         android:visibility="visible"
         android:alpha="0"
+        android:importantForAccessibility="no"
         app:shapeAppearanceOverlay="@style/circleImageView" />
     <ImageView
         android:id="@+id/effect_multi_success"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/effect_multi_success"
         android:scaleType="fitCenter"
         android:src="@drawable/effect_multi_success"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:importantForAccessibility="no" />
 
     <include layout="@layout/game_button" />
 </FrameLayout>

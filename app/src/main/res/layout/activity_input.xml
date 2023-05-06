@@ -65,7 +65,7 @@
             android:layout_gravity="center_horizontal"
             android:alpha="1"
             android:background="@color/transparent"
-            android:contentDescription="@string/update_button"
+            android:contentDescription="@string/check_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_check"

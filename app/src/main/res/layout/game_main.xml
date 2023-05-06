@@ -53,7 +53,7 @@
                     android:id="@+id/board_stand_foreground"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/board_stand"/>
+                    android:importantForAccessibility="no" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -94,9 +94,9 @@
                     android:id="@+id/autoslide_animate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/autoslide_animate"
                     android:background="@color/transparent"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:importantForAccessibility="no"/>
             </FrameLayout>
 
             <ImageButton
@@ -131,9 +131,9 @@
         android:id="@+id/effect_success"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/effect_success"
         android:scaleType="fitCenter"
         android:src="@drawable/effect_magic_square"
         android:visibility="visible"
-        android:stateListAnimator="@xml/animate_game_success" />
+        android:stateListAnimator="@xml/animate_game_success"
+        android:importantForAccessibility="no" />
 </androidx.constraintlayout.widget.ConstraintLayout>

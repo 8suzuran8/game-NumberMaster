@@ -1108,7 +1108,16 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             value2,
             unit2,
             this.statusGame["tapCount"]!!.toInt())
-
+        this.statusText!!.contentDescription =
+            "score is " +
+            this.statusGame["score"]!!.toInt() + "." +
+            "time is " +
+            value1 +
+            unit1 +
+            value2 +
+            unit2 + "." +
+            "tap count is " +
+            this.statusGame["tapCount"]!!.toInt() + "."
         this.statusText!!.visibility = TextView.VISIBLE
     }
 

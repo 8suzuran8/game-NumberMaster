@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/no_menu"
+                android:contentDescription="@string/quest_menu"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
 
@@ -64,7 +64,8 @@
                 android:background="@color/transparent"
                 android:contentDescription="@string/no_menu"
                 android:onClick="buttonClickListener"
-                android:src="@drawable/transparent" />
+                android:src="@drawable/transparent"
+                android:importantForAccessibility="no" />
 
             <ImageButton
                 android:id="@+id/menu_ranking_button"
@@ -82,7 +83,8 @@
                 android:background="@color/transparent"
                 android:contentDescription="@string/no_menu"
                 android:onClick="buttonClickListener"
-                android:src="@drawable/transparent" />
+                android:src="@drawable/transparent"
+                android:importantForAccessibility="no" />
 
         </TableRow>
 
