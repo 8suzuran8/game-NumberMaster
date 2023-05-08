@@ -128,12 +128,11 @@ class CheckActivity : NumberMasterActivity() {
 
         // boardStandの設定
         this.numberMaster!!.boardStandLayout[this.puzzleNumber] = findViewById(R.id.board_stand_layout)
-        this.numberMaster!!.boardStandForeground[this.puzzleNumber] = findViewById(R.id.board_stand_foreground)
 
         // 0 is background
-        for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.childCount) {
-            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex - 1] = this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.getChildAt(numberPanelIndex) as ImageButton
-            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex - 1]!!.apply {
+        for (numberPanelIndex in 0 until this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.childCount) {
+            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex] = this.numberMaster!!.boardStandLayout[this.puzzleNumber]!!.getChildAt(numberPanelIndex) as ImageButton
+            this.numberMaster!!.numberPanels[this.puzzleNumber][numberPanelIndex]!!.apply {
                 layoutParams.apply {
                     width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()
                     height = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()

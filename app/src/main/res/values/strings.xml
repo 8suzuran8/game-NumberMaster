@@ -15,7 +15,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="you_can_swipe">you can swipe</string>
     <string name="suujishi_number_master">title suujishi in japanese means number master in English.</string>
     <string name="no_menu">no menu</string>
-    <string name="quest_menu">quest</string>
+    <string name="quest_menu">Open your browser and go to the quest page.</string>
     <string name="input_menu">input</string>
     <string name="ranking_menu">ranking</string>
     <string name="ranking_type1">SCORE RANKING</string>
@@ -44,7 +44,8 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="tap_to_start">Where do you tap to start? Please guess.</string>
     <string name="tap_to_start_for_accessibility">please tap center.</string>
     <string name="howto_screen_shot">howto screen shot</string>
-    <string name="number_panel_noN">number panel no. %d</string>
+    <string name="all_number_panel">all number panel.</string> <!-- Dynamically set and speak the placement of all numbers -->
+    <string name="number_panel_noN">%d</string>
     <string name="please_enter_the_start_number">please enter the start number in input menu</string>
     <string name="message_title_game">BEEP BEEP !!</string>
     <string name="message_resize_and_shuffle">Resize and shuffle</string>
@@ -110,6 +111,9 @@ At that time, people knew that manipulating numbers would cause a mysterious phe
  A number master, who instinctively knows the original numbers.
  You may just not be awake.
  Discard the conceptual numbers and wake up to the real numbers."</string>
+    <string name="hint_for_accessibility">This game is sliding puzzle.
+However, you are free to decide where to start and in which direction.
+Also, if all of the vertical total, horizontal total, and diagonal total match, the score will be higher.</string>
     <string name="hint">"123 147 816
 456 258 357
 789 369 492

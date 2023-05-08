@@ -152,10 +152,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         null,
         null,
     )
-    var boardStandForeground: MutableList<ImageView?> = mutableListOf(
-        null,
-        null,
-    )
 
     // 数字の管理
     // 神ステージの6面 x 9 x 9 = 81 * 6 = 486
@@ -375,7 +371,6 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
     fun numberPanelClickListener(puzzleIdNumber: Int, imageView: View) {
         if (this.statusGame["stop"]!!.toInt() == 1) return
-        if (!imageView.contentDescription.startsWith("number panel")) return
 
         val numberPanelSize = this.globalActivityInfo["numberPanelSize:" + this.statusPuzzle[puzzleIdNumber]["size"]]!!.toFloat()
 

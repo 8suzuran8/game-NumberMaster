@@ -363,14 +363,13 @@ class GameActivity : NumberMasterActivity() {
                         that.globalActivityInfo["gameSpaceSize"]!!.toFloat().toInt()
                     setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
                 }
-            this.numberMaster!!.boardStandForeground[i] = findViewById<ConstraintLayout>(puzzleId).findViewById(R.id.board_stand_foreground)
 
             // 0 is background
             // -1 is autoslide
-            for (numberPanelIndex in 1 until this.numberMaster!!.boardStandLayout[i]!!.childCount - 1) {
-                this.numberMaster!!.numberPanels[i][numberPanelIndex - 1] =
+            for (numberPanelIndex in 0 until this.numberMaster!!.boardStandLayout[i]!!.childCount - 1) {
+                this.numberMaster!!.numberPanels[i][numberPanelIndex] =
                     this.numberMaster!!.boardStandLayout[i]!!.getChildAt(numberPanelIndex) as ImageButton
-                this.numberMaster!!.numberPanels[i][numberPanelIndex - 1]!!.apply {
+                this.numberMaster!!.numberPanels[i][numberPanelIndex]!!.apply {
                     setOnTouchListener(that.numberMaster!!.numberMasterOnSwipeTouchListener)
                     layoutParams.apply {
                         width = that.globalActivityInfo["numberPanelSize:1"]!!.toFloat().toInt()

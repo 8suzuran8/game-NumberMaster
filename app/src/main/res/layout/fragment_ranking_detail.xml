@@ -67,6 +67,7 @@
                     android:id="@+id/ranking_id"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:visibility="invisible"
                     android:importantForAccessibility="no"/>
 
                 <ImageButton

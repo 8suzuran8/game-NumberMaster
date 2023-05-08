@@ -49,11 +49,6 @@
                 android:layout_toEndOf="@id/button_swipe_left"
                 android:visibility="invisible"
                 android:background="@drawable/transparent">
-                <ImageView
-                    android:id="@+id/board_stand_foreground"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:importantForAccessibility="no" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

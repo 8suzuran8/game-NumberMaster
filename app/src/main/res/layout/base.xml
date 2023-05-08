@@ -45,7 +45,8 @@
         android:layout_gravity="bottom"
         android:contentDescription="@string/previous_background"
         android:src="@drawable/menu_previous_moving_background"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/prev_button_text"
@@ -59,7 +60,8 @@
         android:text="@string/button_prev"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:importantForAccessibility="no" />
 
     <ImageButton
         android:id="@+id/prev_button"
