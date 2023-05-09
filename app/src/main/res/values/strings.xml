@@ -35,7 +35,8 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="_semi_blindfold_button">change semi blindfold mode</string>
     <string name="secret_button">secret</string>
     <string name="finish_button">finish</string>
-    <string name="stop_button">start</string>
+    <string name="start_button">start</string>
+    <string name="stop_button">stop</string>
     <string name="button_swipe_top">rotate top</string>
     <string name="button_swipe_right">rotate right</string>
     <string name="button_swipe_bottom">rotate bottom</string>

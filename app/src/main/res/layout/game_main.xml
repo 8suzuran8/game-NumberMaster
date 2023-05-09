@@ -51,37 +51,45 @@
                 android:background="@drawable/transparent">
 
                 <ImageButton
+                    android:id="@+id/number_button1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/number_background"
                     android:contentDescription="@string/number_panel_noN"
+                    android:onClick="buttonClickListener"
                     android:scaleType="fitStart"
                     android:src="@drawable/number1"
                     android:visibility="visible"/>
 
                 <ImageButton
+                    android:id="@+id/number_button2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/number_background"
                     android:contentDescription="@string/number_panel_noN"
+                    android:onClick="buttonClickListener"
                     android:scaleType="fitStart"
                     android:src="@drawable/number2"
                     android:visibility="visible" />
 
                 <ImageButton
+                    android:id="@+id/number_button3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/number_background"
                     android:contentDescription="@string/number_panel_noN"
+                    android:onClick="buttonClickListener"
                     android:scaleType="fitStart"
                     android:src="@drawable/number3"
                     android:visibility="visible" />
 
                 <ImageButton
+                    android:id="@+id/number_button4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/number_background"
                     android:contentDescription="@string/number_panel_noN"
+                    android:onClick="buttonClickListener"
                     android:scaleType="fitStart"
                     android:src="@drawable/number4"
                     android:visibility="visible"/>

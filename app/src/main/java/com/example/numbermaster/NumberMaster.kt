@@ -650,6 +650,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             if (this.statusGame["stop"]!!.toInt() == 0) {
                 this.statusGame["stop"] = 1.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_enabled_stop)
+                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.start_button)
 
                 // simul modeの場合は保存しない
                 if (this.statusGame["simulMode"]!!.toInt() == 0) {
@@ -665,6 +666,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             } else {
                 this.statusGame["stop"] = 0.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_disabled_stop)
+                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.stop_button)
             }
         }
 

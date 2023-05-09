@@ -11,6 +11,7 @@ import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -241,6 +242,13 @@ class GameActivity : NumberMasterActivity() {
                 }
 
                 this.numberMaster!!.buttonClickStopProcess()
+            }
+            R.id.number_button1, R.id.number_button2, R.id.number_button3, R.id.number_button4 -> {
+                val accessibility : AccessibilityManager = this.getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
+                if (accessibility.isEnabled) {
+                    val parentLayout = view.parent.parent.parent.parent as ConstraintLayout
+                    this.numberMaster!!.numberPanelClickListener(if (parentLayout.id == R.id.game_main_1) { 0 } else { 1 }, view)
+                }
             }
         }
     }
