@@ -1106,15 +1106,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             unit2,
             this.statusGame["tapCount"]!!.toInt())
         this.statusText!!.contentDescription =
-            "score is " +
-            this.statusGame["score"]!!.toInt() + "." +
-            "time is " +
-            value1 +
-            unit1 +
-            value2 +
-            unit2 + "." +
-            "tap count is " +
-            this.statusGame["tapCount"]!!.toInt() + "."
+            this.activity.getString(R.string.read_status_score_for_accessibility, this.statusGame["score"]!!) + "." +
+            this.activity.getString(R.string.read_status_time_for_accessibility, (value1.toString() + unit1 + value2 + unit2)) + "." +
+            this.activity.getString(R.string.read_status_tap_count_for_accessibility, this.statusGame["tapCount"]!!) + "."
         this.statusText!!.visibility = TextView.VISIBLE
     }
 
@@ -1318,14 +1312,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         var description = ""
 
         for (yIndex in 0..sizeMax) {
-            description += (yIndex + 1).toString() + " row, from left"
+            description += this.activity.getString(R.string.read_numbers_for_accessibility, (yIndex + 1))
             for (xIndex in 0..sizeMax) {
                 if (
                     this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
                     && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
                     && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
                 ) {
-                    description += ", space"
+                    description += this.activity.getString(R.string.read_space_for_accessibility)
                     continue
                 }
                 description += ", " + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex].toString()
@@ -1454,14 +1448,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         var description = ""
 
         for (yIndex in 0..sizeMax) {
-            description += (yIndex + 1).toString() + " row, from left"
+            description += this.activity.getString(R.string.read_numbers_for_accessibility, (yIndex + 1))
             for (xIndex in 0..sizeMax) {
                 if (
                     this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
                     && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
                     && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
                 ) {
-                    description += ", space"
+                    description += this.activity.getString(R.string.read_space_for_accessibility)
                     this.updateNumberPanelBackgroundOnce(puzzleIdNumber, canvas, yIndex, xIndex)
                     continue
                 }

@@ -260,7 +260,6 @@ class GameActivity : NumberMasterActivity() {
             setEGLConfigChooser(8, 8, 8, 8, 16, 0)
             setRenderer(that.numberMaster!!.numberMasterRenderer)
             setZOrderOnTop(true)
-            contentDescription = "cube"
             holder.setFormat(PixelFormat.TRANSPARENT)
             visibility = View.VISIBLE
         }

@@ -49,6 +49,12 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="all_number_panel">all number panel.</string> <!-- Dynamically set and speak the placement of all numbers -->
     <string name="number_panel_noN">%d</string>
     <string name="please_enter_the_start_number">please enter the start number in input menu</string>
+    <string name="read_numbers_for_accessibility">%d row, from left</string>
+    <string name="read_space_for_accessibility">, space</string>
+    <string name="read_status_score_for_accessibility">score is %s</string>
+    <string name="read_status_time_for_accessibility">time is %s</string>
+    <string name="read_status_tap_count_for_accessibility">tap count is %s</string>
+    <string name="read_status_play_date_for_accessibility">play date is %s</string>
     <string name="message_title_game">BEEP BEEP !!</string>
     <string name="message_resize_and_shuffle">Resize and shuffle</string>
     <string name="message_complete_this_game">Complete this game</string>

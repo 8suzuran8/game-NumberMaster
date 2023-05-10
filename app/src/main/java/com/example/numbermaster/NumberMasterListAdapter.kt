@@ -38,19 +38,19 @@ class NumberMasterListAdapter(private val context: Context, private val rankingL
             }
             findViewById<TextView>(R.id.score).apply {
                 text = ranking.score
-                contentDescription = "score is $text."
+                contentDescription = context.getString(R.string.read_status_score_for_accessibility, text)
             }
             findViewById<TextView>(R.id.time).apply {
                 text = ranking.time
-                contentDescription = "time is $text."
+                contentDescription = context.getString(R.string.read_status_time_for_accessibility, text)
             }
             findViewById<TextView>(R.id.tap_count).apply {
                 text = ranking.tapCount
-                contentDescription = "tap count is $text."
+                contentDescription = context.getString(R.string.read_status_tap_count_for_accessibility, text)
             }
             findViewById<TextView>(R.id.play_date).apply {
                 text = ranking.playDate
-                contentDescription = "play date is $text."
+                contentDescription = context.getString(R.string.read_status_play_date_for_accessibility, text)
             }
             findViewById<ImageButton>(R.id.copy_button).apply {
                 visibility = ImageButton.VISIBLE
