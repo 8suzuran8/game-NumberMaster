@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
+import android.view.accessibility.AccessibilityManager
 import android.widget.*
 import androidx.core.view.*
 import com.example.numbermaster.databinding.ActivityMenuBinding
@@ -62,6 +63,8 @@ class MenuActivity : NumberMasterActivity() {
         val dbHelper = NumberMasterOpenHelper(this)
         val settings = dbHelper.loadSettings()
 
+        val accessibility : AccessibilityManager = this.getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
+
         val inflateRootLayout = findViewById<FrameLayout>(R.id.root_layout)
         val activityLayout = layoutInflater.inflate(R.layout.activity_menu, inflateRootLayout)
         val layoutBinding: ActivityMenuBinding = ActivityMenuBinding.bind(activityLayout).apply {
@@ -72,12 +75,21 @@ class MenuActivity : NumberMasterActivity() {
                 titleImage.pivotX = 0F
                 titleImage.pivotY = (that.globalActivityInfo["meta:rootLayoutShort"]!!.toFloat() / 2) - that.globalActivityInfo["meta:otherSize"]!!.toFloat()
             }
-            titleImage.stateListAnimator = AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_title)
             menuLayout.setPadding(that.globalActivityInfo["boardFrameWidth"]!!.toFloat().toInt())
-            menuLayout.stateListAnimator = AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_menu)
             menuLayout.layoutParams.width = that.menuSize!!
             menuLayout.layoutParams.height = that.menuSize!!
             menuLayout.translationY = that.menuY!!
+            if (!accessibility.isEnabled) {
+                titleImage.stateListAnimator =
+                    AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_title)
+                menuLayout.stateListAnimator =
+                    AnimatorInflater.loadStateListAnimator(that, R.xml.animate_menu_menu)
+            } else {
+                titleImage.alpha = 1.0F
+                titleImage.scaleX = 0.4F
+                titleImage.scaleY = 0.4F
+                menuLayout.alpha = 1.0F
+            }
 
             if (settings.containsKey("add_icon_read") && settings["add_icon_read"]!!.toInt() == 0) {
                 menuHowtoButton.setImageResource(R.drawable.add_icon)

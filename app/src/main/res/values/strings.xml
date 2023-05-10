@@ -47,6 +47,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="howto_screen_shot">howto screen shot</string>
     <string name="all_number_panel">all number panel.</string> <!-- Dynamically set and speak the placement of all numbers -->
     <string name="number_panel_noN">%d</string>
+    <string name="screen_title_menu_accessibility">This screen is the menu screen. Please select a menu.</string>
     <string name="please_enter_the_start_number">please enter the start number in input menu</string>
     <string name="message_title_game">BEEP BEEP !!</string>
     <string name="message_resize_and_shuffle">Resize and shuffle</string>

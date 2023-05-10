@@ -1315,6 +1315,27 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             numberPanelViewIndex += 1
         }
 
+        var description = ""
+
+        for (yIndex in 0..sizeMax) {
+            description += (yIndex + 1).toString() + " row, from left"
+            for (xIndex in 0..sizeMax) {
+                if (
+                    this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
+                    && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
+                    && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
+                ) {
+                    description += ", space"
+                    continue
+                }
+                description += ", " + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex].toString()
+            }
+
+            description += " ,"
+        }
+
+        this.boardStandLayout[puzzleIdNumber]!!.contentDescription = description
+
         for (numberPanelIndex in numberPanelViewIndex until this.numberPanels[puzzleIdNumber].size) {
             this.numberPanels[puzzleIdNumber][numberPanelIndex]!!.apply {
                 visibility = ImageButton.INVISIBLE
@@ -1430,16 +1451,22 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             null
         )
 
+        var description = ""
+
         for (yIndex in 0..sizeMax) {
+            description += (yIndex + 1).toString() + " row, from left"
             for (xIndex in 0..sizeMax) {
                 if (
                     this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
                     && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
                     && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
                 ) {
+                    description += ", space"
                     this.updateNumberPanelBackgroundOnce(puzzleIdNumber, canvas, yIndex, xIndex)
                     continue
                 }
+
+                description += ", " + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex].toString()
 
                 if (this.isNumberPanelPosition(puzzleIdNumber, this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt(), yIndex, xIndex)) {
                     this.updateNumberPanelButtonOnce(
@@ -1463,7 +1490,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     xIndex
                 )
             }
+
+            description += " ,"
         }
+
+        this.boardStandLayout[puzzleIdNumber]!!.contentDescription = description
 
         for (numberPanelIndex in numberPanelViewIndex until this.numberPanels[puzzleIdNumber].size) {
             this.numberPanels[puzzleIdNumber][numberPanelIndex]!!.apply {
