@@ -87,7 +87,8 @@
                 android:contentDescription="@string/_semi_blindfold_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
-                android:src="@drawable/button_enabled_semiblindfold" />
+                android:src="@drawable/button_enabled_semiblindfold"
+                android:importantForAccessibility="no" />
 
             <ImageButton
                 android:id="@+id/button_blindfold"
@@ -97,7 +98,8 @@
                 android:contentDescription="@string/_blindfold_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
-                android:src="@drawable/button_enabled_blindfold" />
+                android:src="@drawable/button_enabled_blindfold"
+                android:importantForAccessibility="no" />
 
             <ImageButton
                 android:id="@+id/button_cube"
