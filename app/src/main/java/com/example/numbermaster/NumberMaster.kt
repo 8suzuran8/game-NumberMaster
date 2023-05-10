@@ -195,7 +195,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         null,
     )
 
-    private var multiSuccessMaxTime: Double = 40.toDouble() // buttonClickSizeProcessでサイズに応じて変更
+    var multiSuccessMaxTime: Double = 40.toDouble() // buttonClickSizeProcessでサイズに応じて変更
     private val multiSuccessMaxCount: Int = 4
     private var lastSuccessNumbers = MutableList(6) {MutableList(9) {MutableList(9) {0} } }
     private var multiSuccessCount: Int = 0

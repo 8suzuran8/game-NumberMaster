@@ -511,6 +511,11 @@ class GameActivity : NumberMasterActivity() {
             layoutParams.height = 0
             layoutParams.width = 0
         }
+
+        val accessibility : AccessibilityManager = this.getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
+        if (accessibility.isEnabled) {
+            this.numberMaster!!.multiSuccessMaxTime = Double.MAX_VALUE
+        }
     }
 
     private fun createDialog(buttonId: Int): AlertDialog.Builder {
