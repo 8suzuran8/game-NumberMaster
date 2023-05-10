@@ -48,6 +48,7 @@ import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
+import android.view.accessibility.AccessibilityEvent
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -439,6 +440,8 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
 
                     // numberPanelと背景の更新
                     that.updateNumberPanelByMove(puzzleIdNumber, beforeNonNumberPanelPosition, clickPanelPosition)
+
+                    that.statusText!!.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
                     // 完成の確認
                     val successType = that.numberMasterCheckSuccess.checkAll(
