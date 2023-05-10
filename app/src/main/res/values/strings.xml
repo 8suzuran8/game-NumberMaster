@@ -33,6 +33,7 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="_autoslide_button">change auto slide mode</string>
     <string name="_blindfold_button">change blindfold mode</string>
     <string name="_semi_blindfold_button">change semi blindfold mode</string>
+    <string name="_accordion_button">Open a submenu</string>
     <string name="secret_button">secret</string>
     <string name="finish_button">finish</string>
     <string name="start_button">start</string>
@@ -47,7 +48,6 @@ BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
     <string name="howto_screen_shot">howto screen shot</string>
     <string name="all_number_panel">all number panel.</string> <!-- Dynamically set and speak the placement of all numbers -->
     <string name="number_panel_noN">%d</string>
-    <string name="screen_title_menu_accessibility">This screen is the menu screen. Please select a menu.</string>
     <string name="please_enter_the_start_number">please enter the start number in input menu</string>
     <string name="message_title_game">BEEP BEEP !!</string>
     <string name="message_resize_and_shuffle">Resize and shuffle</string>

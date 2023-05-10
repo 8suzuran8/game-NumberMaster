@@ -460,6 +460,7 @@ class GameActivity : NumberMasterActivity() {
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
             val id = R.drawable.button_enabled_menu
             this.numberMaster!!.buttonsGame["secret"]!!.setImageResource(id)
+            this.numberMaster!!.buttonsGame["secret"]!!.contentDescription = this.getString(R.string._accordion_button)
         }
 
         // ステータスの文字色
