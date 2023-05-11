@@ -459,7 +459,7 @@ class GameActivity : NumberMasterActivity() {
         if (this.numberMaster!!.settings["enabledCube"]!!.toInt() == 1) {
             val id = R.drawable.button_enabled_menu
             this.numberMaster!!.buttonsGame["secret"]!!.setImageResource(id)
-            this.numberMaster!!.buttonsGame["secret"]!!.contentDescription = this.getString(R.string._accordion_button)
+            this.numberMaster!!.buttonsGame["secret"]!!.contentDescription = this.getString(R.string.game_menu_secret_active_button)
         }
 
         // ステータスの文字色
@@ -522,8 +522,8 @@ class GameActivity : NumberMasterActivity() {
         val that = this
 
         val messageId = when (buttonId) {
-            R.id.button_finish -> R.string.message_complete_this_game
-            else -> R.string.message_resize_and_shuffle
+            R.id.button_finish -> R.string.game_dialog_complete_message
+            else -> R.string.game_dialog_resize_message
         }
 
         val size = when (buttonId) {
@@ -534,9 +534,9 @@ class GameActivity : NumberMasterActivity() {
         }
 
         return AlertDialog.Builder(this).apply {
-            setTitle(R.string.message_title_game)
+            setTitle(R.string.common_dialog_title)
             setMessage(messageId)
-            setPositiveButton(R.string.message_button_text_ok) { _, _ ->
+            setPositiveButton(R.string.common_dialog_ok) { _, _ ->
                 when (buttonId) {
                     R.id.button_finish -> {
                         that.numberMaster!!.buttonClickFinishProcess()
@@ -553,7 +553,7 @@ class GameActivity : NumberMasterActivity() {
                     }
                 }
             }
-            setNegativeButton(R.string.message_button_text_cancel) { _, _ ->
+            setNegativeButton(R.string.common_dialog_cancel) { _, _ ->
             }
 
             create()

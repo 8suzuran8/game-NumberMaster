@@ -38,19 +38,19 @@ class NumberMasterListAdapter(private val context: Context, private val rankingL
             }
             findViewById<TextView>(R.id.score).apply {
                 text = ranking.score
-                contentDescription = context.getString(R.string.read_status_score_for_accessibility, text)
+                contentDescription = context.getString(R.string.common_read_status_score_for_accessibility, text)
             }
             findViewById<TextView>(R.id.time).apply {
                 text = ranking.time
-                contentDescription = context.getString(R.string.read_status_time_for_accessibility, text)
+                contentDescription = context.getString(R.string.common_read_status_time_for_accessibility, text)
             }
             findViewById<TextView>(R.id.tap_count).apply {
                 text = ranking.tapCount
-                contentDescription = context.getString(R.string.read_status_tap_count_for_accessibility, text)
+                contentDescription = context.getString(R.string.common_read_status_tap_count_for_accessibility, text)
             }
             findViewById<TextView>(R.id.play_date).apply {
                 text = ranking.playDate
-                contentDescription = context.getString(R.string.read_status_play_date_for_accessibility, text)
+                contentDescription = context.getString(R.string.ranking_read_status_play_date_for_accessibility, text)
             }
             findViewById<ImageButton>(R.id.copy_button).apply {
                 visibility = ImageButton.VISIBLE
@@ -90,10 +90,10 @@ class NumberMasterListAdapter(private val context: Context, private val rankingL
         val dbHelper = NumberMasterOpenHelper(this.context)
 
         return AlertDialog.Builder(that.context).apply {
-            setTitle(R.string.message_title_game)
+            setTitle(R.string.common_dialog_title)
             if (dialogType == RankingActivity.DIALOG_TYPE_COPY) {
-                setMessage(R.string.message_title_copy)
-                setNegativeButton(R.string.message_copy_start_number) { _, _ ->
+                setMessage(R.string.ranking_dialog_copy_message)
+                setNegativeButton(R.string.ranking_dialog_copy_start_message) { _, _ ->
                     val startNumber = dbHelper.loadHistoryStartNumber(buttonId)
                     val clipboardManager: ClipboardManager =
                         that.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -104,7 +104,7 @@ class NumberMasterListAdapter(private val context: Context, private val rankingL
                         )
                     )
                 }
-                setPositiveButton(R.string.message_copy_finish_number) { _, _ ->
+                setPositiveButton(R.string.ranking_dialog_copy_finish_message) { _, _ ->
                     val finishNumber = dbHelper.loadHistoryFinishNumber(buttonId)
                     val clipboardManager: ClipboardManager =
                         that.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -116,10 +116,10 @@ class NumberMasterListAdapter(private val context: Context, private val rankingL
                     )
                 }
             } else if (dialogType == RankingActivity.DIALOG_TYPE_DELETE) {
-                setMessage(R.string.message_delete_complete_data)
-                setNegativeButton(R.string.message_button_text_cancel) { _, _ ->
+                setMessage(R.string.ranking_dialog_delete_message)
+                setNegativeButton(R.string.common_dialog_cancel) { _, _ ->
                 }
-                setPositiveButton(R.string.message_button_text_ok) { _, _ ->
+                setPositiveButton(R.string.common_dialog_ok) { _, _ ->
                     dbHelper.deleteHistory(buttonId)
                     parent!!.rootView.findViewById<ImageView>(R.id.update_button).performClick()
                 }

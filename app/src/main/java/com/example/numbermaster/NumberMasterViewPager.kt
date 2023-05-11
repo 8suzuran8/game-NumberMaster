@@ -160,7 +160,7 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
             0 -> {
                 successHistories = dbHelper.loadHistory("score", "DESC", startNumber) // scoreが大きい順
                 this.layout!!.findViewById<TextView>(R.id.title).apply {
-                    text = getText(R.string.ranking_type1)
+                    text = getText(R.string.ranking_type1_title)
                     layoutParams.height = that.otherSize
                 }
             }
@@ -168,7 +168,7 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
             1 -> {
                 successHistories = dbHelper.loadHistory("time", "ASC", startNumber) // timeが小さい順
                 this.layout!!.findViewById<TextView>(R.id.title).apply {
-                    text = getText(R.string.ranking_type2)
+                    text = getText(R.string.ranking_type2_title)
                     layoutParams.height = that.otherSize
                 }
             }
@@ -176,7 +176,7 @@ class NumberMasterFragment(private val rootLayoutWidth: Float, private val other
             2 -> {
                 successHistories = dbHelper.loadHistory("created_at", "DESC", startNumber) // 登録日時が大きい準備
                 this.layout!!.findViewById<TextView>(R.id.title).apply {
-                    text = getText(R.string.ranking_type3)
+                    text = getText(R.string.ranking_type3_title)
                     layoutParams.height = that.otherSize
                 }
             }

@@ -11,7 +11,7 @@
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/howto31"
+        android:text="@string/howto_type4_contents1"
         android:textAlignment="center"
         tools:ignore="TextSizeCheck"/>
     <ScrollView
@@ -22,7 +22,7 @@
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/howto32"
+            android:text="@string/howto_type4_contents2"
             tools:ignore="TextSizeCheck" />
     </ScrollView>
 </RelativeLayout>

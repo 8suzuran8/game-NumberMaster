@@ -96,7 +96,7 @@ open class OpeningActivity : NumberMasterActivity() {
         }
 
         findViewById<TextView>(R.id.prev_button_text).apply {
-            text = that.getString(R.string.button_text_finish)
+            text = that.getString(R.string.opening_prev_text)
         }
     }
 }

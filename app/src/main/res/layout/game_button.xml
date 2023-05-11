@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/transparent"
-            android:contentDescription="@string/_3x3_button"
+            android:contentDescription="@string/game_menu_3x3_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_3x3" />
@@ -33,7 +33,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_3x3"
             android:background="@color/transparent"
-            android:contentDescription="@string/_6x6_button"
+            android:contentDescription="@string/game_menu_6x6_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_6x6" />
@@ -45,7 +45,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_6x6"
             android:background="@color/transparent"
-            android:contentDescription="@string/_9x9_button"
+            android:contentDescription="@string/game_menu_9x9_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_9x9" />
@@ -64,7 +64,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/_autoslide_button"
+                android:contentDescription="@string/game_menu_secret_autoslide_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_disabled_autoslide" />
@@ -74,7 +74,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/_simul_button"
+                android:contentDescription="@string/game_menu_secret_simul_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_enabled_simul" />
@@ -84,7 +84,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/_semi_blindfold_button"
+                android:contentDescription="@string/game_menu_secret_semi_blindfold_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_enabled_semiblindfold"
@@ -95,7 +95,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/_blindfold_button"
+                android:contentDescription="@string/game_menu_secret_blindfold_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_enabled_blindfold"
@@ -106,7 +106,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/_cube_button"
+                android:contentDescription="@string/game_menu_secret_cube_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_enabled_cube" />
@@ -116,7 +116,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@color/transparent"
-                android:contentDescription="@string/secret_button"
+                android:contentDescription="@string/game_menu_secret_inactive_button"
                 android:onClick="buttonClickListener"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_disabled_secret" />
@@ -129,7 +129,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/submenu_layout"
             android:background="@color/transparent"
-            android:contentDescription="@string/finish_button"
+            android:contentDescription="@string/game_menu_finish_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitCenter"
             android:src="@drawable/button_enabled_finish" />
@@ -141,7 +141,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/button_finish"
             android:background="@color/transparent"
-            android:contentDescription="@string/start_button"
+            android:contentDescription="@string/game_menu_start_button"
             android:onClick="buttonClickListener"
             android:scaleType="fitStart"
             android:src="@drawable/button_enabled_stop" />

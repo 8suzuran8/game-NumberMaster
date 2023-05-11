@@ -14,8 +14,8 @@
         android:gravity="center"
         android:lines="3"
         android:onClick="buttonClickListener"
-        android:text="@string/tap_to_start"
-        android:contentDescription="@string/tap_to_start_for_accessibility"
+        android:text="@string/opening_contents"
+        android:contentDescription="@string/opening_contents_accessibility"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="invisible" />

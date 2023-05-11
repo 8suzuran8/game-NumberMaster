@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
-        android:contentDescription="@string/suujishi_number_master"
+        android:contentDescription="@string/menu_title"
         android:src="@drawable/title_normal_mode"
         android:transformPivotY="0dp" />
 
@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/start_menu"
+                android:contentDescription="@string/menu_start_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/quest_menu"
+                android:contentDescription="@string/menu_quest_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
 
@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/input_menu"
+                android:contentDescription="@string/menu_input_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
         </TableRow>
@@ -62,7 +62,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/no_menu"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent"
                 android:importantForAccessibility="no" />
@@ -72,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/ranking_menu"
+                android:contentDescription="@string/menu_ranking_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
 
@@ -81,7 +80,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/no_menu"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent"
                 android:importantForAccessibility="no" />
@@ -96,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/howto_menu"
+                android:contentDescription="@string/menu_howto_button"
                 android:scaleType="matrix"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
@@ -106,7 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/story_menu"
+                android:contentDescription="@string/menu_story_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
 
@@ -115,7 +113,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:contentDescription="@string/thanks_hint_menu"
+                android:contentDescription="@string/menu_thanks_hint_button"
                 android:onClick="buttonClickListener"
                 android:src="@drawable/transparent" />
         </TableRow>

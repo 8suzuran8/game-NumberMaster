@@ -76,7 +76,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@color/transparent"
-                    android:contentDescription="@string/recycle"
+                    android:contentDescription="@string/ranking_recycle_button"
                     android:scaleType="fitCenter"
                     android:src="@drawable/recycle_icon"
                     android:visibility="invisible" />
@@ -86,7 +86,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@color/transparent"
-                    android:contentDescription="@string/copy_start_numbers"
+                    android:contentDescription="@string/ranking_copy_button"
                     android:scaleType="fitCenter"
                     android:src="@drawable/copy_icon"
                     android:visibility="invisible" />

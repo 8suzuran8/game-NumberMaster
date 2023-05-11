@@ -18,7 +18,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/howto1"
+                android:text="@string/howto_type1_contents"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -30,8 +30,8 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:alpha="0.5"
-            android:contentDescription="@string/you_can_swipe"
             android:src="@drawable/finger_icon"
-            android:stateListAnimator="@xml/animate_all_swipe" />
+            android:stateListAnimator="@xml/animate_all_swipe"
+            android:importantForAccessibility="no" />
     </FrameLayout>
 </ScrollView>

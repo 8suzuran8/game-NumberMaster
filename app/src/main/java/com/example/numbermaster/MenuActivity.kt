@@ -199,7 +199,7 @@ class MenuActivity : NumberMasterActivity() {
                 return
             }
             R.id.menu_quest_button -> {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(this.getString(R.string.quest_link)))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(this.getString(R.string.menu_quest_url)))
                 startActivity(intent)
             }
             else -> {

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/thx"
+            android:text="@string/thx_contents"
             android:textColor="@color/black"
             tools:ignore="TextSizeCheck" />
     </ScrollView>
@@ -26,8 +26,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hint"
-            android:contentDescription="@string/hint_for_accessibility"
+            android:text="@string/thx_hint"
+            android:contentDescription="@string/thx_hint_for_accessibility"
             android:textColor="@color/black_transparent"
             tools:ignore="TextSizeCheck" />
     </ScrollView>

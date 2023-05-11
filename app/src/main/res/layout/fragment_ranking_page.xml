@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:lines="1"
-        android:text="@string/ranking_type1"
+        android:text="@string/ranking_type1_title"
         android:textAlignment="center"
         android:textColor="@color/white" />
     <FrameLayout
@@ -30,8 +30,8 @@
             android:alpha="0.5"
             android:src="@drawable/finger_icon"
             android:stateListAnimator="@xml/animate_all_swipe"
-            android:contentDescription="@string/you_can_swipe"
-            tools:ignore="VisualLintBounds" />
+            tools:ignore="VisualLintBounds"
+            android:importantForAccessibility="no" />
 
     </FrameLayout>
 </RelativeLayout>

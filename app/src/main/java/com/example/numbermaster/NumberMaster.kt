@@ -653,7 +653,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             if (this.statusGame["stop"]!!.toInt() == 0) {
                 this.statusGame["stop"] = 1.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_enabled_stop)
-                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.start_button)
+                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.game_menu_start_button)
 
                 // simul modeの場合は保存しない
                 if (this.statusGame["simulMode"]!!.toInt() == 0) {
@@ -669,7 +669,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             } else {
                 this.statusGame["stop"] = 0.toString()
                 this.buttonsGame["stop"]!!.setImageResource(+R.drawable.button_disabled_stop)
-                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.stop_button)
+                this.buttonsGame["stop"]!!.contentDescription = this.activity.getString(R.string.game_menu_stop_button)
             }
         }
 
@@ -1101,7 +1101,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             value2 = (minutes % 60)
         }
         this.statusText!!.text = this.activity.getString(
-            R.string.status,
+            R.string.game_status,
             this.statusGame["score"]!!.toInt(),
             value1,
             unit1,
@@ -1109,9 +1109,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             unit2,
             this.statusGame["tapCount"]!!.toInt())
         this.statusText!!.contentDescription =
-            this.activity.getString(R.string.read_status_score_for_accessibility, this.statusGame["score"]!!) + "." +
-            this.activity.getString(R.string.read_status_time_for_accessibility, (value1.toString() + unit1 + value2 + unit2)) + "." +
-            this.activity.getString(R.string.read_status_tap_count_for_accessibility, this.statusGame["tapCount"]!!) + "."
+            this.activity.getString(R.string.common_read_status_score_for_accessibility, this.statusGame["score"]!!) + "." +
+            this.activity.getString(R.string.common_read_status_time_for_accessibility, (value1.toString() + unit1 + value2 + unit2)) + "." +
+            this.activity.getString(R.string.common_read_status_tap_count_for_accessibility, this.statusGame["tapCount"]!!) + "."
         this.statusText!!.visibility = TextView.VISIBLE
     }
 
@@ -1315,14 +1315,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         var description = ""
 
         for (yIndex in 0..sizeMax) {
-            description += this.activity.getString(R.string.read_numbers_for_accessibility, (yIndex + 1))
+            description += this.activity.getString(R.string.game_read_numbers_for_accessibility, (yIndex + 1))
             for (xIndex in 0..sizeMax) {
                 if (
                     this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
                     && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
                     && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
                 ) {
-                    description += this.activity.getString(R.string.read_space_for_accessibility)
+                    description += this.activity.getString(R.string.game_read_space_for_accessibility)
                     continue
                 }
                 description += ", " + this.numbers[puzzleIdNumber][this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()][yIndex][xIndex].toString()
@@ -1451,14 +1451,14 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         var description = ""
 
         for (yIndex in 0..sizeMax) {
-            description += this.activity.getString(R.string.read_numbers_for_accessibility, (yIndex + 1))
+            description += this.activity.getString(R.string.game_read_numbers_for_accessibility, (yIndex + 1))
             for (xIndex in 0..sizeMax) {
                 if (
                     this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"]!! == this.statusPuzzle[puzzleIdNumber]["cubeSideNumber"]!!.toInt()
                     && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! == xIndex
                     && this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == yIndex
                 ) {
-                    description += this.activity.getString(R.string.read_space_for_accessibility)
+                    description += this.activity.getString(R.string.game_read_space_for_accessibility)
                     this.updateNumberPanelBackgroundOnce(puzzleIdNumber, canvas, yIndex, xIndex)
                     continue
                 }
@@ -1525,7 +1525,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     setImageBitmap(that.images["number_question"]!!)
                 }
             }
-            contentDescription = that.activity.getString(R.string.number_panel_noN, number)
+            contentDescription = that.activity.getString(R.string.game_number_button, number)
             visibility = ImageButton.VISIBLE
             isEnabled = true
         }

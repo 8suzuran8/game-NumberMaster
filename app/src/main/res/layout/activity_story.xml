@@ -11,7 +11,7 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/story"
+        android:text="@string/story_contents"
         android:textColor="@color/black"
         tools:ignore="VisualLintLongText" />
 </ScrollView>
