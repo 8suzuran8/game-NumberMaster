@@ -11,6 +11,7 @@ import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
@@ -239,6 +240,7 @@ class GameActivity : NumberMasterActivity() {
                     } else {
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     }
+                    this.numberMaster!!.statusText!!.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
 
                 this.numberMaster!!.buttonClickStopProcess()
