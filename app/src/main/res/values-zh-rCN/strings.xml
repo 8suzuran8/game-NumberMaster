@@ -2,130 +2,129 @@
     <!-- name="fileOrActivityName_type1_type2..." -->
     <!-- 中国語 簡体字 -->
     <string name="manifest_app_name">NumberMaster</string>
-    <string name="base_prev_text">戻る</string>
-    <string name="opening_prev_text">終了する</string>
-    <string name="opening_contents">どこをタップすれば開始するか? 推測してください</string>
-    <string name="opening_contents_accessibility">画面中央をタップしてください</string>
+    <string name="base_prev_text">返回</string>
+    <string name="opening_prev_text">结束</string>
+    <string name="opening_contents">我从哪里开始? 猜测</string>
+    <string name="opening_contents_accessibility">点击屏幕中央</string>
     <string name="menu_title">数字師</string>
     <string name="menu_start_button">start</string>
-    <string name="menu_quest_button">ブラウザを立ちあげてクエストページへアクセスします</string>
+    <string name="menu_quest_button">打开浏览器并转到任务页面</string>
     <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
     <string name="menu_input_button">input</string>
     <string name="menu_ranking_button">ranking</string>
     <string name="menu_howto_button">howto</string>
     <string name="menu_story_button">story</string>
     <string name="menu_thanks_hint_button">"Thanks &amp; Hint"</string>
-    <string name="common_read_status_score_for_accessibility">スコアは%s</string>
-    <string name="common_read_status_time_for_accessibility">時間は%s</string>
-    <string name="common_read_status_tap_count_for_accessibility">タップ回数は%s</string>
+    <string name="common_read_status_score_for_accessibility">分数是%s</string>
+    <string name="common_read_status_time_for_accessibility">时间是%s</string>
+    <string name="common_read_status_tap_count_for_accessibility">点击是%s</string>
     <string name="common_dialog_title">BEEP BEEP !!</string>
     <string name="common_dialog_ok">OK</string>
     <string name="common_dialog_cancel">Cancel</string>
     <string name="game_status">"%05d %03d%s%02d%s %010d"</string>
-    <string name="game_menu_3x3_button">行数と列数を3に変更し、シャッフルする</string>
-    <string name="game_menu_6x6_button">行数と列数を6に変更し、シャッフルする</string>
-    <string name="game_menu_9x9_button">行数と列数を9に変更し、シャッフルする</string>
-    <string name="game_menu_secret_cube_button">キューブモードを変更し、シャッフルする</string>
-    <string name="game_menu_secret_simul_button">多面モードを変更し、シャッフルする</string>
-    <string name="game_menu_secret_autoslide_button">オートスライドモードを変更する</string>
-    <string name="game_menu_secret_blindfold_button">目隠しモードを変更する</string>
-    <string name="game_menu_secret_semi_blindfold_button">半目隠しモードを変更する</string>
-    <string name="game_menu_secret_active_button">サブメニューを開く</string>
+    <string name="game_menu_3x3_button">将行数和列数更改为3, 洗牌</string>
+    <string name="game_menu_6x6_button">将行数和列数更改为6, 洗牌</string>
+    <string name="game_menu_9x9_button">将行数和列数更改为9, 洗牌</string>
+    <string name="game_menu_secret_cube_button">改变立方体模式, 洗牌</string>
+    <string name="game_menu_secret_simul_button">改变并发模式, 洗牌</string>
+    <string name="game_menu_secret_autoslide_button">改变自动滑动模式</string>
+    <string name="game_menu_secret_blindfold_button">改变盲模式</string>
+    <string name="game_menu_secret_semi_blindfold_button">改变半盲模式</string>
+    <string name="game_menu_secret_active_button">打开子菜单</string>
     <string name="game_menu_secret_inactive_button">秘密</string>
-    <string name="game_menu_finish_button">終了</string>
-    <string name="game_menu_start_button">開始</string>
-    <string name="game_menu_stop_button">一時停止</string>
-    <string name="game_swipe_top_button">上に回す</string>
-    <string name="game_swipe_right_button">右に回す</string>
-    <string name="game_swipe_bottom_button">下に回す</string>
-    <string name="game_swipe_left_button">左に回す</string>
+    <string name="game_menu_finish_button">结束</string>
+    <string name="game_menu_start_button">开始</string>
+    <string name="game_menu_stop_button">暂停</string>
+    <string name="game_swipe_top_button">向上滑动</string>
+    <string name="game_swipe_right_button">向右滑动</string>
+    <string name="game_swipe_bottom_button">向下滑动</string>
+    <string name="game_swipe_left_button">向左滑动</string>
     <string name="game_number_button">%d</string>
-    <string name="game_read_numbers_for_accessibility">%dぎょう目, 左から</string>
-    <string name="game_read_space_for_accessibility">, 空き</string>
-    <string name="game_dialog_resize_message">本当に、サイズを変更し、シャッフルしてもよろしいですか?</string>
-    <string name="game_dialog_complete_message">本当に終了してもよろしいですか?</string>
-    <string name="input_textbox_hint">数字の並びを入力してください</string>
+    <string name="game_read_numbers_for_accessibility">第%d行, 左起</string>
+    <string name="game_read_space_for_accessibility">, 空场</string>
+    <string name="game_dialog_resize_message">您确定要调整大小和随机播放吗?</string>
+    <string name="game_dialog_complete_message">你确定你要结束吗?</string>
+    <string name="input_textbox_hint">请输入数字序列</string>
     <string name="input_update_button">更新</string>
-    <string name="input_check_button">確認</string>
-    <string name="input_contents">"もしボタンを押せば、
-入力した値が、
-プレイ中のゲームに上書きされます。"</string>
-    <string name="ranking_type1_title">スコアランキング</string>
-    <string name="ranking_type2_title">時間ランキング</string>
-    <string name="ranking_type3_title">プレイ日時</string>
-    <string name="ranking_textbox_hint">検索する数字の並びを入力してください</string>
+    <string name="input_check_button">确认</string>
+    <string name="input_contents">"如果按下按钮,
+当前游戏将被覆盖。"</string>
+    <string name="ranking_type1_title">分数排名</string>
+    <string name="ranking_type2_title">时间排名</string>
+    <string name="ranking_type3_title">播放日期</string>
+    <string name="ranking_textbox_hint">请输入要搜索的数字序列</string>
     <string name="ranking_search_button">検索</string>
-    <string name="ranking_read_status_play_date_for_accessibility">プレイ日時は%s</string>
-    <string name="ranking_recycle_button">削除する</string>
-    <string name="ranking_copy_button">開始か終了の数字の並びをコピーする</string>
-    <string name="ranking_dialog_copy_message">どっちをコピーしますか?</string>
-    <string name="ranking_dialog_copy_start_message">開始時の数字の並び</string>
-    <string name="ranking_dialog_copy_finish_message">終了時の数字の並び</string>
-    <string name="ranking_dialog_delete_message">本当に削除してもよろしいですか？</string>
-    <string name="howto_type1_contents">"たった3つのステップしかない。
-1. 数値を自然な順序に戻す。
-2. スコアを最大化する。
-3. 新たな高次元の遊びをマスターする。
+    <string name="ranking_read_status_play_date_for_accessibility">播放日期是%s</string>
+    <string name="ranking_recycle_button">删除</string>
+    <string name="ranking_copy_button">复制开始或结束的数字序列</string>
+    <string name="ranking_dialog_copy_message">你想复制哪一个?</string>
+    <string name="ranking_dialog_copy_start_message">开始的数字序列</string>
+    <string name="ranking_dialog_copy_finish_message">结束的数字序列</string>
+    <string name="ranking_dialog_delete_message">你确定你要删除吗?</string>
+    <string name="howto_type1_contents">"只有3个步骤。
+1. 将数字放回自然顺序。
+2. 最大化你的分数。
+3. 掌握新的高维玩法。
 
-方法は1つあります
-1. 空きに数字をスライドさせる。
+有一种方法
+1. 将数字滑入空白处。
 
-もっと楽しみたい場合は、クエストを試そう。"</string>
-    <string name="howto_type2_screenshot">"ゲーム画面は、上部にステータス、その下にゲームスペース、その下に複数のゲームモード変更ボタン、その下に戻るボタンが配置されている。
-ゲームモード変更ボタンは左から3行3列、6行6列、9行9列、シークレット、終了、開始。"</string>
-    <string name="howto_type3_contents">"1. 空きについて。
-空きは9で計算される。
+如果您想获得更多乐趣，请尝试任务。"</string>
+    <string name="howto_type2_screenshot">"游戏画面上方是状态, 下方是游戏空间, 下方是多个游戏模式切换按钮, 下方是返回按钮。
+游戏模式改变按钮为3行3列从左起, 6行6列, 9行9列, 秘密, 结束, 开始。"</string>
+    <string name="howto_type3_contents">"1. 关于空白。
+空白按9计算。
 
-2.行数列数変更ボタンについて。
-サイズを変更すると、シャッフルされる。
+2. 关于行数和列数的改变按钮。
+调整大小时, 它们会被打乱。
 
-3.開始ボタンについて。
-「開始」する。
-「開始」とは、タイマーが作動し、数字盤を移動できるようになり、ゲームモード変更ボタンを押す事が出来なくなる。
+3. 关于开始按钮。
+开始。
+'开始'表示定时器启动, 数字牌可以移动, 游戏模式改变键不能按。
 
-「一時停止」するには、一時停止を押す。
-「一時停止」は「開始」の逆。
-また、ゲームは保存される。
-ゲームを保存すると、アプリを閉じてもゲームを再開できる。
+要'暂停', 请按暂停。
+'暂停'与'开始'相反。
+此外, 游戏已保存。
+如果保存游戏, 即使关闭应用程序也可以继续游戏。
 
-4.終了ボタンについて。
-「終了」はゲームを終了する。
-スタート時の並び、現状の並び、ステータスがランキングに保存される。
-そしてタイマーもスコアも0になる。
-そして新しいゲームを始める事ができる。
+4. 关于结束按钮。
+'结束'结束游戏。
+排名榜中保存了开始的数字序列, 结束的数字序列。
+计时器和分数将为 0。
+然后你就可以开始新的游戏了。
 
-スコアを最大にしてから使用する事をお勧めする。
+建议在最大化分数后使用它。
 
-5.秘密ボタンについて。
-スコアを最大にすると使える様になる。"</string>
+5. 关于秘密按钮。
+当你最大化你的分数时, 你可以使用它。"</string>
     <string name="howto_type4_contents1">"☆★☆★☆★☆★☆★☆★☆★☆★
-スコアカンスト
-♪♫おめでとうございます♪♫
+达到最高分
+♪♫恭喜♪♫
 ☆★☆★☆★☆★☆★☆★☆★☆★
 "</string>
-    <string name="howto_type4_contents2">"1.ランキング画面に検索機能が追加された。
+    <string name="howto_type4_contents2">"1. 排行榜界面新增搜索功能。
 
-2. ゲーム画面の秘密ボタンが有効になった。
+2. 启用游戏画面的秘密按钮。
 
-※ さて、さらにスコアカンストを達成すると、あなたの中で何かが起こるでしょう。"</string>
-    <string name="story_contents">"知性が得られるかどうかと言う時代、人々は環境に近かった。
-　環境とは種族から地球、宇宙まで全て。
-当時、人々は数字を操作すると不思議な現象が起こることを知的ではなく経験的に知っていた。
+※现在，当你达到更高的分数限制时，你的内心会发生一些事情。"</string>
+    <string name="story_contents">"在能否获取情报的时代, 人们与环境的距离很近。
+'环境'是指从种族到地球和外层空间的一切事物。
+那时, 人们凭经验而不是理智地知道, 当数字被操纵时会发生奇怪的现象。
 
- 時が経ち、古代ギリシャ時代、この数字の技術を保存するために魔方陣を作った。
- しかし、残すことを重視したせいで、縦、横、斜めの合計を合わせるだけで、環境からは程遠いものになってしまった。
+随着时间的推移, 古希腊人创造了幻方来保存这种数字技术。
+但是因为偏重保存, 只是把纵横斜加起来, 结果和环境相去甚远。
 
- そして現代では天気予報や仮想現実など、徐々に本来の形に戻りつつあるものの、まだまだ完成には程遠い。
+近代以来, 天气预报, 虚拟现实等正在逐渐回归本源, 但还远远不够完善。
 
- 元の数字を本能的に知っている人をナンバーマスターと呼ぶ。
- 君はただ目覚めていないだけかもしれない。
- 概念的な数字を捨てて、現実の数字に目覚めましょう。"</string>
+凭直觉知道原始数字的人称为数字大师。
+你可能只是没有醒。
+扔掉概念性的数字, 唤醒真实的数字。"</string>
     <string name="thx_contents">"SOUND\nhttps://soundeffect-lab.info/
 \n
 BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
-    <string name="thx_hint_for_accessibility">このゲームはスライディングパズルゲーム。
-ただし、どこから始めてどの方向に並べるかは、あなたの自由。
-また、縦合計、横合計、斜め合計がすべて一致するとスコアは高い。</string>
+    <string name="thx_hint_for_accessibility">这个游戏是一个滑动益智游戏。
+但是, 由您决定从哪里开始以及朝哪个方向开始。
+此外, 如果垂直总数, 水平总数和对角线总数都匹配, 则得分高。</string>
     <string name="thx_hint">"123 147 816
 456 258 357
 789 369 492
