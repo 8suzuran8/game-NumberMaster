@@ -3,132 +3,128 @@
     <string name="manifest_app_name">NumberMaster</string>
     <string name="base_prev_text">戻る</string>
     <string name="opening_prev_text">終了する</string>
-    <string name="opening_contents">Where do you tap to start? Please guess.</string>
-    <string name="opening_contents_accessibility">please tap center.</string>
-    <string name="menu_title">title suujishi in japanese means number master in English.</string>
+    <string name="opening_contents">どこをタップすれば開始するか? 推測してください</string>
+    <string name="opening_contents_accessibility">画面中央をタップしてください</string>
+    <string name="menu_title">数字師</string>
     <string name="menu_start_button">start</string>
-    <string name="menu_quest_button">Open your browser and go to the quest page.</string>
+    <string name="menu_quest_button">ブラウザを立ちあげてクエストページへアクセスします</string>
     <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
     <string name="menu_input_button">input</string>
     <string name="menu_ranking_button">ranking</string>
     <string name="menu_howto_button">howto</string>
     <string name="menu_story_button">story</string>
-    <string name="menu_thanks_hint_button"><![CDATA[Thanks & Hint]]></string>
-    <string name="common_read_status_score_for_accessibility">score is %s</string>
-    <string name="common_read_status_time_for_accessibility">time is %s</string>
-    <string name="common_read_status_tap_count_for_accessibility">tap count is %s</string>
+    <string name="menu_thanks_hint_button">"Thanks &amp; Hint"</string>
+    <string name="common_read_status_score_for_accessibility">スコアは%s</string>
+    <string name="common_read_status_time_for_accessibility">時間は%s</string>
+    <string name="common_read_status_tap_count_for_accessibility">タップ回数は%s</string>
     <string name="common_dialog_title">BEEP BEEP !!</string>
     <string name="common_dialog_ok">OK</string>
     <string name="common_dialog_cancel">Cancel</string>
     <string name="game_status">"%05d %03d%s%02d%s %010d"</string>
-    <string name="game_menu_3x3_button">change number of rows and columns to 3 and shuffle</string>
-    <string name="game_menu_6x6_button">change number of rows and columns to 6 and shuffle</string>
-    <string name="game_menu_9x9_button">change number of rows and columns to 9 and shuffle</string>
-    <string name="game_menu_secret_cube_button">change cube mode and shuffle</string>
-    <string name="game_menu_secret_simul_button">change simul mode and shuffle</string>
-    <string name="game_menu_secret_autoslide_button">change auto slide mode</string>
-    <string name="game_menu_secret_blindfold_button">change blindfold mode</string>
-    <string name="game_menu_secret_semi_blindfold_button">change semi blindfold mode</string>
-    <string name="game_menu_secret_active_button">Open a submenu</string>
-    <string name="game_menu_secret_inactive_button">secret</string>
-    <string name="game_menu_finish_button">finish</string>
-    <string name="game_menu_start_button">start</string>
-    <string name="game_menu_stop_button">stop</string>
-    <string name="game_swipe_top_button">rotate top</string>
-    <string name="game_swipe_right_button">rotate right</string>
-    <string name="game_swipe_bottom_button">rotate bottom</string>
-    <string name="game_swipe_left_button">rotate left</string>
+    <string name="game_menu_3x3_button">行数と列数を3に変更し、シャッフルする</string>
+    <string name="game_menu_6x6_button">行数と列数を6に変更し、シャッフルする</string>
+    <string name="game_menu_9x9_button">行数と列数を9に変更し、シャッフルする</string>
+    <string name="game_menu_secret_cube_button">キューブモードを変更し、シャッフルする</string>
+    <string name="game_menu_secret_simul_button">多面モードを変更し、シャッフルする</string>
+    <string name="game_menu_secret_autoslide_button">オートスライドモードを変更する</string>
+    <string name="game_menu_secret_blindfold_button">目隠しモードを変更する</string>
+    <string name="game_menu_secret_semi_blindfold_button">半目隠しモードを変更する</string>
+    <string name="game_menu_secret_active_button">サブメニューを開く</string>
+    <string name="game_menu_secret_inactive_button">秘密</string>
+    <string name="game_menu_finish_button">終了</string>
+    <string name="game_menu_start_button">開始</string>
+    <string name="game_menu_stop_button">一時停止</string>
+    <string name="game_swipe_top_button">上に回す</string>
+    <string name="game_swipe_right_button">右に回す</string>
+    <string name="game_swipe_bottom_button">下に回す</string>
+    <string name="game_swipe_left_button">左に回す</string>
     <string name="game_number_button">%d</string>
-    <string name="game_read_numbers_for_accessibility">%d row, from left</string>
-    <string name="game_read_space_for_accessibility">, space</string>
-    <string name="game_dialog_resize_message">Resize and shuffle</string>
-    <string name="game_dialog_complete_message">Complete this game</string>
-    <string name="input_textbox_hint">please enter the value</string>
-    <string name="input_update_button">update</string>
-    <string name="input_check_button">check</string>
-    <string name="input_contents">"If you press the button,
-the game you are playing will be rewritten
-to what you have entered."</string>
-    <string name="ranking_type1_title">SCORE RANKING</string>
-    <string name="ranking_type2_title">TIME RANKING</string>
-    <string name="ranking_type3_title">PLAY DATE</string>
-    <string name="ranking_textbox_hint">please enter the start number in input menu</string>
-    <string name="ranking_search_button">search</string>
-    <string name="ranking_read_status_play_date_for_accessibility">play date is %s</string>
-    <string name="ranking_recycle_button">recycle complete data</string>
-    <string name="ranking_copy_button">copy start or complete numbers</string>
-    <string name="ranking_dialog_copy_message">Which one do you want to copy?</string>
-    <string name="ranking_dialog_copy_start_message">Start numbers</string>
-    <string name="ranking_dialog_copy_finish_message">Complete numbers</string>
-    <string name="ranking_dialog_delete_message">Are you sure you want to delete this complete data?</string>
-    <string name="howto_type1_contents">"There are 3 steps
-1. Return the numbers to their natural order.
-2. Maximize the score.
-3. Master the new high-dimensional play.
+    <string name="game_read_numbers_for_accessibility">%dぎょう目, 左から</string>
+    <string name="game_read_space_for_accessibility">, 空き</string>
+    <string name="game_dialog_resize_message">本当に、サイズを変更し、シャッフルしてもよろしいですか?</string>
+    <string name="game_dialog_complete_message">本当に終了してもよろしいですか?</string>
+    <string name="input_textbox_hint">数字の並びを入力してください</string>
+    <string name="input_update_button">更新</string>
+    <string name="input_check_button">確認</string>
+    <string name="input_contents">"もしボタンを押せば、
+入力した値が、
+プレイ中のゲームに上書きされます。"</string>
+    <string name="ranking_type1_title">スコアランキング</string>
+    <string name="ranking_type2_title">時間ランキング</string>
+    <string name="ranking_type3_title">プレイ日時</string>
+    <string name="ranking_textbox_hint">検索する数字の並びを入力してください</string>
+    <string name="ranking_search_button">検索</string>
+    <string name="ranking_read_status_play_date_for_accessibility">プレイ日時は%s</string>
+    <string name="ranking_recycle_button">削除する</string>
+    <string name="ranking_copy_button">開始か終了の数字の並びをコピーする</string>
+    <string name="ranking_dialog_copy_message">どっちをコピーしますか?</string>
+    <string name="ranking_dialog_copy_start_message">開始時の数字の並び</string>
+    <string name="ranking_dialog_copy_finish_message">終了時の数字の並び</string>
+    <string name="ranking_dialog_delete_message">本当に削除してもよろしいですか？</string>
+    <string name="howto_type1_contents">"たった3つのステップしかない。
+1. 数値を自然な順序に戻す。
+2. スコアを最大化する。
+3. 新たな高次元の遊びをマスターする。
 
-There are 1 way
-1. Slide the number into the empty frame.
+方法は1つあります
+1. 空きに数字をスライドさせる。
 
-If you want more fun, try the quest."</string>
-    <string name="howto_type2_screenshot">"The game screen has a status at the top, a game space below it, multiple game mode change buttons below that, and a return button below that.
-game mode change buttons are from left 3 rows 3 columns, 6 rows 6 columns, 9 rows 9 columns, secret, finish, start."</string>
-    <string name="howto_type3_contents">"1. about space.
-Vacant place
-Calculated at 9
+もっと楽しみたい場合は、クエストを試そう。"</string>
+    <string name="howto_type2_screenshot">"ゲーム画面は、上部にステータス、その下にゲームスペース、その下に複数のゲームモード変更ボタン、その下に戻るボタンが配置されている。
+ゲームモード変更ボタンは左から3行3列、6行6列、9行9列、シークレット、終了、開始。"</string>
+    <string name="howto_type3_contents">"1. 空きについて。
+空きは9で計算される。
 
-2. about change number of rows buttons.
-If you change the size,
-the current situation
-will be shuffled.
+2.行数列数変更ボタンについて。
+サイズを変更すると、シャッフルされる。
 
-3. about start button.
-Press start to "start".
-"Start" means that the timer will run, you will be able to move the number board, and you will not be able to press the buttons.
+3.開始ボタンについて。
+「開始」する。
+「開始」とは、タイマーが作動し、数字盤を移動できるようになり、ゲームモード変更ボタンを押す事が出来なくなる。
 
-Press stop to "pause".
-"Pause" is the opposite of "start".
-In addition, the game is save.
-Once the game is saved, you can restart the game even if you close app.
+「一時停止」するには、一時停止を押す。
+「一時停止」は「開始」の逆。
+また、ゲームは保存される。
+ゲームを保存すると、アプリを閉じてもゲームを再開できる。
 
-4. about finish button.
-"Finish" is to finish the game.
-The order at the start, the order at the finish, and the status are saved in the ranking.
-Then the timer and score become 0.
-You can start a new game.
+4.終了ボタンについて。
+「終了」はゲームを終了する。
+スタート時の並び、現状の並び、ステータスがランキングに保存される。
+そしてタイマーもスコアも0になる。
+そして新しいゲームを始める事ができる。
 
-Proceed to use after maximizing the score.
+スコアを最大にしてから使用する事をお勧めする。
 
-5. about secret button.
-Can be used
-after maximizing the score."</string>
+5.秘密ボタンについて。
+スコアを最大にすると使える様になる。"</string>
     <string name="howto_type4_contents1">"☆★☆★☆★☆★☆★☆★☆★☆★
-♪♫Congratulations♪♫
-on Counter Stop.
+スコアカンスト
+♪♫おめでとうございます♪♫
 ☆★☆★☆★☆★☆★☆★☆★☆★
 "</string>
-    <string name="howto_type4_contents2">"1. The search function has been released on the ranking screen.
+    <string name="howto_type4_contents2">"1.ランキング画面に検索機能が追加された。
 
-2. The secret button has changed to a cube mode button on the game screen.
+2. ゲーム画面の秘密ボタンが有効になった。
 
-※ Now, if you achieve more counter stops, something will happen in you."</string>
-    <string name="story_contents">" People were close to the environment when they asked if they would gain intelligence or not.
- The environment is everything from races to the earth and space.
-At that time, people knew that manipulating numbers would cause a mysterious phenomenon, not intellectually but empirically.
+※ さて、さらにスコアカンストを達成すると、あなたの中で何かが起こるでしょう。"</string>
+    <string name="story_contents">"知性が得られるかどうかと言う時代、人々は環境に近かった。
+　環境とは種族から地球、宇宙まで全て。
+当時、人々は数字を操作すると不思議な現象が起こることを知的ではなく経験的に知っていた。
 
- Over time, in the ancient Greek era, he created a magic square in the world of mathematics in an attempt to preserve it.
- However, because of the emphasis on leaving it, it has become a thing that is not close to the environment at all, just to match the total of vertical, horizontal and diagonal.
+ 時が経ち、古代ギリシャ時代、この数字の技術を保存するために魔方陣を作った。
+ しかし、残すことを重視したせいで、縦、横、斜めの合計を合わせるだけで、環境からは程遠いものになってしまった。
 
- And although it is gradually returning to its original form in modern times, such as weather forecasts and virtual reality, it is still far from being completed.
+ そして現代では天気予報や仮想現実など、徐々に本来の形に戻りつつあるものの、まだまだ完成には程遠い。
 
- A number master, who instinctively knows the original numbers.
- You may just not be awake.
- Discard the conceptual numbers and wake up to the real numbers."</string>
+ 元の数字を本能的に知っている人をナンバーマスターと呼ぶ。
+ 君はただ目覚めていないだけかもしれない。
+ 概念的な数字を捨てて、現実の数字に目覚めましょう。"</string>
     <string name="thx_contents">"SOUND\nhttps://soundeffect-lab.info/
 \n
 BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
-    <string name="thx_hint_for_accessibility">This game is sliding puzzle.
-However, you are free to decide where to start and in which direction.
-Also, if all of the vertical total, horizontal total, and diagonal total match, the score will be higher.</string>
+    <string name="thx_hint_for_accessibility">このゲームはスライディングパズルゲーム。
+ただし、どこから始めてどの方向に並べるかは、あなたの自由。
+また、縦合計、横合計、斜め合計がすべて一致するとスコアは高い。</string>
     <string name="thx_hint">"123 147 816
 456 258 357
 789 369 492

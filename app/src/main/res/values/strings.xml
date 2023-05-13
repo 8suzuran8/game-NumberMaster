@@ -13,7 +13,7 @@
     <string name="menu_ranking_button">ranking</string>
     <string name="menu_howto_button">howto</string>
     <string name="menu_story_button">story</string>
-    <string name="menu_thanks_hint_button"><![CDATA[Thanks & Hint]]></string>
+    <string name="menu_thanks_hint_button">"Thanks &amp; Hint"</string>
     <string name="common_read_status_score_for_accessibility">score is %s</string>
     <string name="common_read_status_time_for_accessibility">time is %s</string>
     <string name="common_read_status_tap_count_for_accessibility">tap count is %s</string>
@@ -108,7 +108,7 @@ on Counter Stop.
 "</string>
     <string name="howto_type4_contents2">"1. The search function has been released on the ranking screen.
 
-2. The secret button has changed to a cube mode button on the game screen.
+2. The secret button is now enabled on the game screen.
 
 ※ Now, if you achieve more counter stops, something will happen in you."</string>
     <string name="story_contents">" People were close to the environment when they asked if they would gain intelligence or not.
