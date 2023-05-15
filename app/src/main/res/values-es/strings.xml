@@ -1,0 +1,175 @@
+<resources>
+    <!-- name="fileOrActivityName_type1_type2..." -->
+    <string name="manifest_app_name">NumberMaster</string>
+    <string name="base_prev_text">retroceso</string>
+    <string name="opening_prev_text">finalizar</string>
+    <string name="opening_contents">¿Dónde hago clic para empezar? Adivinar</string>
+    <string name="opening_contents_accessibility">haga clic en el centro de la pantalla</string>
+    <string name="menu_title">Suujishi en japones por el titulo es Maestra de números en español.</string>
+    <string name="menu_start_button">start</string>
+    <string name="menu_quest_button">Abra su navegador y vaya a la página de la misión.</string>
+    <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
+    <string name="menu_input_button">input</string>
+    <string name="menu_ranking_button">ranking</string>
+    <string name="menu_howto_button">howto</string>
+    <string name="menu_story_button">story</string>
+    <string name="menu_thanks_hint_button">"Thanks &amp; Hint"</string>
+    <string name="common_read_status_score_for_accessibility">la puntuación es %s</string>
+    <string name="common_read_status_time_for_accessibility">el tiempo es %s</string>
+    <string name="common_read_status_tap_count_for_accessibility">grifo es %s</string>
+    <string name="common_dialog_title">BEEP BEEP !!</string>
+    <string name="common_dialog_ok">OK</string>
+    <string name="common_dialog_cancel">Cancel</string>
+    <string name="game_status">"%05d %03d%s%02d%s %010d"</string>
+    <string name="game_menu_3x3_button">Cambie el número de filas y columnas a 3 y mezcle</string>
+    <string name="game_menu_6x6_button">Cambie el número de filas y columnas a 6 y mezcle</string>
+    <string name="game_menu_9x9_button">Cambie el número de filas y columnas a 9 y mezcle</string>
+    <string name="game_menu_secret_cube_button">Cambiar el modo de cubo y mezcle</string>
+    <string name="game_menu_secret_simul_button">Cambiar el modo de simultáneo y mezcle</string>
+    <string name="game_menu_secret_autoslide_button">Cambiar el modo de movimiento automático</string>
+    <string name="game_menu_secret_blindfold_button">Cambiar el modo de ciego</string>
+    <string name="game_menu_secret_semi_blindfold_button">Cambiar el modo de medio ciego</string>
+    <string name="game_menu_secret_active_button">submenú abierto</string>
+    <string name="game_menu_secret_inactive_button">secreto</string>
+    <string name="game_menu_finish_button">fin</string>
+    <string name="game_menu_start_button">comenzar</string>
+    <string name="game_menu_stop_button">pausa</string>
+    <string name="game_swipe_top_button">rodar hacia arriba</string>
+    <string name="game_swipe_right_button">rodar hacia derecha</string>
+    <string name="game_swipe_bottom_button">rodar hacia abajo</string>
+    <string name="game_swipe_left_button">rodar hacia izquierda</string>
+    <string name="game_number_button">%d</string>
+    <string name="game_read_numbers_for_accessibility">línea %d, Desde la izquierda, </string>
+    <string name="game_read_space_for_accessibility">, campo vacío</string>
+    <string name="game_dialog_resize_message">¿Estás seguro de que quieres cambiar el tamaño y mezclar?</string>
+    <string name="game_dialog_complete_message">¿Seguro que quieres terminar?</string>
+    <string name="input_textbox_hint">Por favor ingrese una secuencia de números</string>
+    <string name="input_update_button">actualizar</string>
+    <string name="input_check_button">confirmación</string>
+    <string name="input_contents">"Si presiona el botón,
+el valor que ingresó sobrescribirá el juego que está jugando."</string>
+    <string name="ranking_type1_title">clasificación de puntuación</string>
+    <string name="ranking_type2_title">clasificación de tiempo</string>
+    <string name="ranking_type3_title">fecha del juego</string>
+    <string name="ranking_textbox_hint">Por favor ingrese una secuencia de números para buscar</string>
+    <string name="ranking_search_button">buscar</string>
+    <string name="ranking_read_status_play_date_for_accessibility">La fecha de juego es %s</string>
+    <string name="ranking_recycle_button">borrar</string>
+    <string name="ranking_copy_button">copiar la secuencia de números que comienzan o terminan</string>
+    <string name="ranking_dialog_copy_message">¿Cuál quieres copiar?</string>
+    <string name="ranking_dialog_copy_start_message">Secuencia de primer número</string>
+    <string name="ranking_dialog_copy_finish_message">Secuencia de último número</string>
+    <string name="ranking_dialog_delete_message">¿Está seguro de que desea eliminarlo?</string>
+    <string name="howto_type1_contents">"Solo hay 3 pasos.
+1. Vuelva a colocar los números en su orden natural.
+2. Maximiza tu puntuación.
+3. Domina nuevos juegos de alta dimensión.
+
+Hay una manera
+1. Deslice hacia campo vacío.
+
+Si quieres más diversión, prueba las misiones."</string>
+    <string name="howto_type2_screenshot">"La pantalla del juego tiene un estado en la parte superior, un espacio de juego debajo, varios botones de cambio de modo de juego debajo y un botón de retroceso debajo.
+El botón de cambio de modo de juego es 3 filas 3 columnas, 6 filas 6 columnas, 9 filas 9 columnas desde la izquierda, secreto, fin, comenzar."</string>
+    <string name="howto_type3_contents">"1. Acerca de campo vacío
+La campo vacío se calcula en 9.
+
+2. Acerca del botón de cambio de número de filas y columnas.
+Cuando se cambia el tamaño, se barajan.
+
+3. Acerca del botón de start.
+"Comenzar.
+"Comenzar" significa que el temporizador está activado, el tablero de números se puede mover y el botón de cambio de modo de juego no se puede presionar.
+
+Para "pausar" presione stop.
+"Pausa" es lo contrario de "comenzar".
+Además, el juego se guarda.
+Si guarda el juego, puede reanudarlo incluso si cierra la aplicación.
+
+4. Acerca del botón de finish.
+"finish" termina el juego.
+primer número, último número, estado se guardan en la clasificación.
+Y el cronómetro y la puntuación serán 0.
+Entonces puedes comenzar un nuevo juego.
+
+Se recomienda usarlo después de maximizar la puntuación.
+
+5. Acerca del botón de secret.
+Puedes usarlo cuando maximizas tu puntuación."</string>
+    <string name="howto_type4_contents1">"☆★☆★☆★☆★☆★☆★☆★☆★
+Maximizar puntaje
+♪♫Felicidades♪♫
+☆★☆★☆★☆★☆★☆★☆★☆★
+"</string>
+    <string name="howto_type4_contents2">"1. Se ha agregado una función de búsqueda a la pantalla de clasificación.
+
+2. El botón secreto en la pantalla del juego está habilitado.
+
+※ Ahora, cuando alcances un mayor límite de puntuación, algo sucederá dentro de ti."</string>
+    <string name="story_contents">"Las personas estaban cerca del medio ambiente en la era de si se puede obtener inteligencia.
+"Medio ambiente" significa todo, desde las razas hasta la tierra y el espacio exterior.
+En ese momento, la gente sabía empíricamente, no intelectualmente, que ocurrirían fenómenos extraños cuando se manipularan los números.
+
+Con el tiempo, los antiguos griegos crearon cuadrados mágicos para preservar esta tecnología numérica.
+Sin embargo, dado que nos enfocamos en el mantener, terminamos haciendo coincidir los totales verticales, los totales horizontales y los totales diagonales.
+Esto está lejos del medio ambiente.
+
+En los tiempos modernos, cosas como los pronósticos del tiempo y la realidad virtual están volviendo a la vida lentamente, pero todavía están lejos de ser perfectos.
+
+Una persona que conoce intuitivamente el número original se llama maestro de números.
+Puede que simplemente no estés despierto.
+Deseche los números conceptuales y despiértese con los números reales."</string>
+    <string name="thx_contents">"SOUND\nhttps://soundeffect-lab.info/
+\n
+BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
+    <string name="thx_hint_for_accessibility">Este juego es un juego de rompecabezas deslizante.
+Sin embargo, depende de usted decidir por dónde empezar y en qué dirección.
+Además, si el total vertical, el total horizontal y el total diagonal coinciden, la puntuación es alta.</string>
+    <string name="thx_hint">"123 147 816
+456 258 357
+789 369 492
+
+123123 816672
+456456 357159
+789789 492834
+123123 438276
+456456 951951
+789789 276438
+
+123123123
+456456456
+789789789
+123123123
+456456456
+789789789
+
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+
+816672672
+357159159
+492834834
+438276276
+951951951
+276438438
+438276276
+951951951
+276438438"</string>
+</resources>
