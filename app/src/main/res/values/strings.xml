@@ -1,6 +1,9 @@
 <resources>
     <!-- name="fileOrActivityName_type1_type2..." -->
     <string name="manifest_app_name">NumberMaster</string>
+    <string name="manifest_description">This game is sliding puzzle.
+However, you are free to decide where to start and in which direction.
+Also, if all of the vertical total, horizontal total, and diagonal total match, the score will be higher.</string>
     <string name="base_prev_text">PREVIOUS</string>
     <string name="opening_prev_text">FINISH</string>
     <string name="opening_contents">Where do you tap to start? Please guess.</string>

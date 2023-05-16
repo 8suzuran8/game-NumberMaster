@@ -2,6 +2,9 @@
     <!-- name="fileOrActivityName_type1_type2..." -->
     <!-- 中国語 簡体字 -->
     <string name="manifest_app_name">NumberMaster</string>
+    <string name="manifest_description">这个游戏是一个滑动益智游戏。
+但是, 由您决定从哪里开始以及朝哪个方向开始。
+此外, 如果垂直总数, 水平总数和对角线总数都匹配, 则得分高。</string>
     <string name="base_prev_text">返回</string>
     <string name="opening_prev_text">结束</string>
     <string name="opening_contents">我从哪里开始? 猜测</string>

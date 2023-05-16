@@ -1,6 +1,9 @@
 <resources>
     <!-- name="fileOrActivityName_type1_type2..." -->
     <string name="manifest_app_name">NumberMaster</string>
+    <string name="manifest_description">このゲームはスライディングパズルゲーム。
+ただし、どこから始めてどの方向に並べるかは、あなたの自由。
+また、縦合計、横合計、斜め合計がすべて一致するとスコアは高い。</string>
     <string name="base_prev_text">戻る</string>
     <string name="opening_prev_text">終了する</string>
     <string name="opening_contents">どこをタップすれば開始するか? 推測してください</string>

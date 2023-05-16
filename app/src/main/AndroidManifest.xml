@@ -2,15 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
+        android:appCategory="game"
+        android:isGame="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+
         android:label="@string/manifest_app_name"
+        android:description="@string/manifest_description"
+
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher"
+
         android:supportsRtl="true"
         android:theme="@style/Theme.NumberMaster">
         <meta-data
-            android:name="com.google.android.shortcuts"
-            android:resource="@xml/animate_all_prev" />
+            android:name="com.google.android.8suzuran8.numbermaster"
+            android:resource="@xml/animate_all_prev"
+            />
         <activity
             android:name=".OpeningActivity"
             android:launchMode="singleTask"

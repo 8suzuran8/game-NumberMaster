@@ -1,6 +1,9 @@
 <resources>
     <!-- name="fileOrActivityName_type1_type2..." -->
     <string name="manifest_app_name">NumberMaster</string>
+    <string name="manifest_description">Este juego es un juego de rompecabezas deslizante.
+Sin embargo, depende de usted decidir por dónde empezar y en qué dirección.
+Además, si el total vertical, el total horizontal y el total diagonal coinciden, la puntuación es alta.</string>
     <string name="base_prev_text">retroceso</string>
     <string name="opening_prev_text">finalizar</string>
     <string name="opening_contents">¿Dónde hago clic para empezar? Adivinar</string>
