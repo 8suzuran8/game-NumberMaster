@@ -1,0 +1,179 @@
+<resources>
+    <!-- name="fileOrActivityName_type1_type2..." -->
+    <string name="manifest_app_name">NumberMaster</string>
+    <string name="manifest_description">यह गेम एक स्लाइडिंग पज़ल गेम है।
+लेकिन यह आपको तय करना है कि कहां से और किस दिशा में शुरुआत करनी है।
+साथ ही, यदि लंबवत योग, क्षैतिज योग और विकर्ण योग सभी मेल खाते हैं, तो स्कोर अधिक होगा।</string>
+    <string name="base_prev_text">वापस करना</string>
+    <string name="opening_prev_text">खत्म करना</string>
+    <string name="opening_contents">आरंभ करने के लिए मैं कहां टैप कर सकता हूं? अंदाज़ा लगाओ</string>
+    <string name="opening_contents_accessibility">स्क्रीन के केंद्र पर टैप करें</string>
+    <string name="menu_title">नंबर मास्टर</string>
+    <string name="menu_start_button">start</string>
+    <string name="menu_quest_button">अपना ब्राउज़र खोलें और मिशन पेज पर जाएं</string>
+    <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
+    <string name="menu_input_button">input</string>
+    <string name="menu_ranking_button">ranking</string>
+    <string name="menu_howto_button">howto</string>
+    <string name="menu_story_button">story</string>
+    <string name="menu_thanks_hint_button">"Thanks &amp; Hint"</string>
+    <string name="common_read_status_score_for_accessibility">स्कोर %s है</string>
+    <string name="common_read_status_time_for_accessibility">समय %s है</string>
+    <string name="common_read_status_tap_count_for_accessibility">नल %s है</string>
+    <string name="common_dialog_title">BEEP BEEP !!</string>
+    <string name="common_dialog_ok">OK</string>
+    <string name="common_dialog_cancel">Cancel</string>
+    <string name="game_status">"%05d %03d%s%02d%s %010d"</string>
+    <string name="game_menu_3x3_button">पंक्तियों और स्तंभों की संख्या को 3 में बदलें और फेरबदल करें</string>
+    <string name="game_menu_6x6_button">पंक्तियों और स्तंभों की संख्या को 6 में बदलें और फेरबदल करें</string>
+    <string name="game_menu_9x9_button">पंक्तियों और स्तंभों की संख्या को 9 में बदलें और फेरबदल करें</string>
+    <string name="game_menu_secret_cube_button">क्यूब मोड बदलें और फेरबदल करें</string>
+    <string name="game_menu_secret_simul_button">एक साथ मोड बदलें और फेरबदल करें</string>
+    <string name="game_menu_secret_autoslide_button">स्वचालित आंदोलन मोड बदलें</string>
+    <string name="game_menu_secret_blindfold_button">आंखों पर पट्टी मोड बदलें</string>
+    <string name="game_menu_secret_semi_blindfold_button">आधा अंधा मोड बदलें</string>
+    <string name="game_menu_secret_active_button">सबमेनू खोलें</string>
+    <string name="game_menu_secret_inactive_button">गुप्त</string>
+    <string name="game_menu_finish_button">खत्म करना</string>
+    <string name="game_menu_start_button">शुरू</string>
+    <string name="game_menu_stop_button">रोकना</string>
+    <string name="game_swipe_top_button">ऊपर घुमाओ</string>
+    <string name="game_swipe_right_button">दाएं घुमाएं</string>
+    <string name="game_swipe_bottom_button">नीचे घुमाएं</string>
+    <string name="game_swipe_left_button">बांए घुमाएं</string>
+    <string name="game_number_button">%d</string>
+    <string name="game_read_numbers_for_accessibility">पंक्ति %d, बाएं से</string>
+    <string name="game_read_space_for_accessibility">, खाली फ्रेम</string>
+    <string name="game_dialog_resize_message">क्या आप वाकई आकार बदलना और शफ़ल करना चाहते हैं?</string>
+    <string name="game_dialog_complete_message">क्या आप वाकई छोड़ना चाहते हैं?</string>
+    <string name="input_textbox_hint">कृपया संख्याओं का क्रम दर्ज करें</string>
+    <string name="input_update_button">अद्यतन</string>
+    <string name="input_check_button">पुष्टि करना</string>
+    <string name="input_contents">"यदि आप बटन दबाते हैं
+आपके द्वारा दर्ज किया गया मान आपके द्वारा खेले जा रहे गेम को अधिलेखित कर देगा।"</string>
+    <string name="ranking_type1_title">स्कोर रैंकिंग</string>
+    <string name="ranking_type2_title">समय रैंकिंग</string>
+    <string name="ranking_type3_title">खेलने की तारीख</string>
+    <string name="ranking_textbox_hint">कृपया खोजने के लिए संख्याओं का क्रम दर्ज करें</string>
+    <string name="ranking_search_button">खोज</string>
+    <string name="ranking_read_status_play_date_for_accessibility">खेलने की तारीख %s है</string>
+    <string name="ranking_recycle_button">मिटाना</string>
+    <string name="ranking_copy_button">शुरू या खत्म होने वाली संख्याओं के क्रम को कॉपी करें</string>
+    <string name="ranking_dialog_copy_message">आप किस नंबर की नकल करना चाहते हैं?</string>
+    <string name="ranking_dialog_copy_start_message">शुरुआती संख्या</string>
+    <string name="ranking_dialog_copy_finish_message">अंत संख्या</string>
+    <string name="ranking_dialog_delete_message">क्या आप इसे मिटाना चाहते हैं?</string>
+    <string name="howto_type1_contents">"केवल 3 चरण हैं।
+1. संख्याओं को उनके प्राकृतिक क्रम में वापस रखें।
+2. अपना स्कोर अधिकतम करें।
+3. नए उच्च-आयामी नाटक में महारत हासिल करें।
+
+एक रास्ता है
+1. नंबर को खाली फ्रेम में स्लाइड करें।
+
+यदि आप और अधिक मज़ा चाहते हैं, तो मिशनों को आजमाएँ।"</string>
+    <string name="howto_type2_screenshot">"गेम स्क्रीन में शीर्ष पर स्थिति है, उसके नीचे गेम स्पेस है, उसके नीचे कुछ गेम मोड चेंज बटन हैं, और उसके नीचे एक रिटर्न बटन है।
+गेम मोड चेंज बटन 3 पंक्तियाँ 3 कॉलम, 6 पंक्तियाँ 6 कॉलम, 9 पंक्तियाँ 9 कॉलम बाएँ, गुप्त, अंत, प्रारंभ है।"</string>
+    <string name="howto_type3_contents">"1. खाली स्लॉट के संबंध में।
+खाली स्लॉट 9 के रूप में गिने जाते हैं।
+
+2. पंक्तियों/स्तंभों की संख्या परिवर्तन बटन के संबंध में।
+आकार बदलें शफ़ल करेगा।
+
+3. start बटन के बारे में।
+शुरू।
+"शुरू" का अर्थ है कि टाइमर सक्रिय है, नंबर बोर्ड को स्थानांतरित किया जा सकता है, और गेम मोड चेंज बटन को दबाया नहीं जा सकता है।
+
+रोकने के लिए रोकना दबाएं।
+"रोकें" "प्रारंभ" के विपरीत है।
+साथ ही, खेल सहेजा गया है।
+यदि आप गेम को सहेजते हैं, तो आप ऐप बंद करने पर भी गेम को फिर से शुरू कर सकते हैं।
+
+4. finish बटन के बारे में।
+निकास खेल समाप्त करता है।
+शुरुआती संख्या, अंत संख्या, दर्जा रैंकिंग में सहेजे जाते हैं।
+और टाइमर और स्कोर 0 होगा।
+तब आप एक नया खेल शुरू कर सकते हैं।
+
+स्कोर को अधिकतम करने के बाद इसका उपयोग करने की अनुशंसा की जाती है।
+
+5. secret बटन के बारे में।
+जब आप अपना स्कोर अधिकतम करते हैं तो आप इसका उपयोग कर सकते हैं।"</string>
+    <string name="howto_type4_contents1">"☆★☆★☆★☆★☆★☆★☆★☆★
+स्कोर अधिकतम करें
+♪♫बधाई हो♪♫
+☆★☆★☆★☆★☆★☆★☆★☆★
+"</string>
+    <string name="howto_type4_contents2">"1. रैंकिंग स्क्रीन में एक सर्च फंक्शन जोड़ा गया है।
+
+2. गेम स्क्रीन पर गुप्त बटन सक्षम है।
+
+※ अब, जब आप स्कोर की और सीमा तक पहुंचेंगे, तो आपके अंदर कुछ होगा।"</string>
+    <string name="story_contents">"क्या बुद्धि प्राप्त की जा सकती है, इस युग में लोग पर्यावरण के करीब थे।
+"पर्यावरण" का अर्थ दौड़ से लेकर पृथ्वी और बाहरी अंतरिक्ष तक सब कुछ है।
+उस समय, लोग अनुभवजन्य रूप से जानते थे, बौद्धिक रूप से नहीं, कि संख्याओं में हेरफेर करने पर अजीब घटनाएं घटित होंगी।
+
+जैसे-जैसे समय बीतता गया, प्राचीन यूनानियों ने इस संख्या तकनीक को संरक्षित करने के लिए जादुई वर्ग बनाए।
+लेकिन उन्होंने इसे संरक्षित करने पर ध्यान केंद्रित किया।
+नतीजतन, केवल ऊर्ध्वाधर, क्षैतिज और विकर्ण के योग का मिलान करना आवश्यक था।
+इसका पर्यावरण से अच्छा संबंध नहीं है।
+
+आधुनिक समय में, मौसम के पूर्वानुमान और आभासी वास्तविकता जैसी चीजें धीरे-धीरे अपने मूल स्वरूप में लौट रही हैं, लेकिन वे अभी भी पूरी तरह से दूर हैं।
+
+एक व्यक्ति जो मूल संख्या को सहज रूप से जानता है, उसे नंबर मास्टर कहा जाता है।
+हो सकता है कि आप जागे ही न हों।
+वैचारिक संख्याओं को फेंक दें और वास्तविक संख्याओं के प्रति जागें।"</string>
+    <string name="thx_contents">"SOUND\nhttps://soundeffect-lab.info/
+\n
+BGM\nhttps://dova-s.jp/bgm/play3715.html"</string>
+    <string name="thx_hint_for_accessibility">यह गेम एक स्लाइडिंग पज़ल गेम है।
+लेकिन यह आपको तय करना है कि कहां से और किस दिशा में शुरुआत करनी है।
+साथ ही, यदि लंबवत योग, क्षैतिज योग और विकर्ण योग सभी मेल खाते हैं, तो स्कोर अधिक होगा।</string>
+    <string name="thx_hint">"123 147 816
+456 258 357
+789 369 492
+
+123123 816672
+456456 357159
+789789 492834
+123123 438276
+456456 951951
+789789 276438
+
+123123123
+456456456
+789789789
+123123123
+456456456
+789789789
+
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+123456789
+
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+816492357
+357816492
+492357816
+
+816672672
+357159159
+492834834
+438276276
+951951951
+276438438
+438276276
+951951951
+276438438"</string>
+</resources>
