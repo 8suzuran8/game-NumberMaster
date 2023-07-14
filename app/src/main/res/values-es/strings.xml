@@ -11,7 +11,7 @@ Además, si el total vertical, el total horizontal y el total diagonal coinciden
     <string name="menu_title">Suujishi en japones por el titulo es Maestra de números en español.</string>
     <string name="menu_start_button">start</string>
     <string name="menu_quest_button">Abra su navegador y vaya a la página de la misión.</string>
-    <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
+    <string name="menu_quest_url">https://github.com/8suzuran8/game-NumberMaster/wiki/QUEST</string>
     <string name="menu_input_button">input</string>
     <string name="menu_ranking_button">ranking</string>
     <string name="menu_howto_button">howto</string>

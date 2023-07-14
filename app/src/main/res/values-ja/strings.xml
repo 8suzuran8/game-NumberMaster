@@ -11,7 +11,7 @@
     <string name="menu_title">数字師</string>
     <string name="menu_start_button">start</string>
     <string name="menu_quest_button">ブラウザを立ちあげてクエストページへアクセスします</string>
-    <string name="menu_quest_url">https://github.com/8suzuran8/NumberMaster/wiki/QUEST</string>
+    <string name="menu_quest_url">https://github.com/8suzuran8/game-NumberMaster/wiki/QUEST</string>
     <string name="menu_input_button">input</string>
     <string name="menu_ranking_button">ranking</string>
     <string name="menu_howto_button">howto</string>
