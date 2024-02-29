@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2200"
+   height="5300"
+   viewBox="0 0 582.08332 1402.2917"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="rain.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.13229901"
+     inkscape:cx="355.25588"
+     inkscape:cy="2966.7645"
+     inkscape:window-width="1352"
+     inkscape:window-height="812"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1017"
+       x="-0.0056645018"
+       y="-11.329004"
+       width="1.0113291"
+       height="23.658007">
+      <feGaussianBlur
+         stdDeviation="0.01 20"
+         result="blur"
+         id="feGaussianBlur1017" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Blur"
+       id="filter106"
+       x="-2.2677164"
+       y="-0.18141732"
+       width="5.5354328"
+       height="1.3628346">
+      <feGaussianBlur
+         stdDeviation="5 10"
+         result="blur"
+         id="feGaussianBlur106" />
+    </filter>
+  </defs>
+  <rect
+     style="fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:18.9329;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect1"
+     width="582.08331"
+     height="1402.2916"
+     x="0"
+     y="0"
+     inkscape:label="背景" />
+  <g
+     id="g50">
+    <path
+       style="color:#000000;fill:#ffffff;stroke-width:0.864067;stroke-linecap:round;-inkscape-stroke:none;filter:url(#filter106)"
+       d="M 26.110287,23.464844 A 2.6459636,12.345765 0 0 0 23.464844,35.808178 V 143.40954 a 2.6459636,12.345765 0 0 0 2.645443,12.34697 2.6459636,12.345765 0 0 0 2.646224,-12.34697 V 35.808178 A 2.6459636,12.345765 0 0 0 26.110287,23.464844 Z"
+       id="path1"
+       transform="matrix(1.2597589,0,0,0.71407935,-6.7824833,5.5903703)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path1"
+       id="use106"
+       transform="translate(52.916748,52.916568)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path1"
+       id="use107"
+       transform="translate(105.83341,26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use106"
+       id="use108"
+       transform="translate(105.83341,26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use107"
+       id="use109"
+       transform="translate(105.83334,-26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use108"
+       id="use110"
+       transform="translate(105.83334,-26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use109"
+       id="use111"
+       transform="translate(105.83333,26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use110"
+       id="use112"
+       transform="translate(105.83333,26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use111"
+       id="use113"
+       transform="translate(105.83333,-26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use112"
+       id="use114"
+       transform="translate(105.83333,-26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use113"
+       id="use115"
+       transform="translate(105.83334,26.458334)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path1"
+       id="use116"
+       transform="translate(0,158.7499)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use106"
+       id="use117"
+       transform="translate(0,185.20825)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use107"
+       id="use118"
+       transform="translate(0,132.29155)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use108"
+       id="use119"
+       transform="translate(0,158.7499)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use109"
+       id="use120"
+       transform="translate(0,158.7499)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use110"
+       id="use121"
+       transform="translate(0,185.20825)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use111"
+       id="use122"
+       transform="translate(0,132.29155)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use112"
+       id="use123"
+       transform="translate(0,158.7499)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use113"
+       id="use124"
+       transform="translate(0,158.7499)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use114"
+       id="use125"
+       transform="translate(0,185.20825)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use115"
+       id="use126"
+       transform="translate(0,132.29155)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use116"
+       id="use127"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use117"
+       id="use128"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use118"
+       id="use129"
+       transform="translate(0,132.29165)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use119"
+       id="use130"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use120"
+       id="use131"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use121"
+       id="use132"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use122"
+       id="use133"
+       transform="translate(0,132.29165)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use123"
+       id="use134"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use124"
+       id="use135"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use125"
+       id="use136"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use126"
+       id="use137"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use127"
+       id="use138"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use128"
+       id="use139"
+       transform="translate(0,105.8333)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use129"
+       id="use140"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use130"
+       id="use141"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use131"
+       id="use142"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use132"
+       id="use143"
+       transform="translate(0,105.8333)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use133"
+       id="use144"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use134"
+       id="use145"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use135"
+       id="use146"
+       transform="translate(0,158.75)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use136"
+       id="use147"
+       transform="translate(0,105.8333)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use137"
+       id="use148"
+       transform="translate(0,185.20835)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path1"
+       id="use1"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use106"
+       id="use2"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use107"
+       id="use3"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use108"
+       id="use4"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use109"
+       id="use5"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use110"
+       id="use6"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use111"
+       id="use7"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use112"
+       id="use8"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use113"
+       id="use9"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use114"
+       id="use10"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use115"
+       id="use11"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use116"
+       id="use12"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use117"
+       id="use13"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use118"
+       id="use14"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use119"
+       id="use15"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use120"
+       id="use16"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use121"
+       id="use17"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use122"
+       id="use18"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use123"
+       id="use19"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use124"
+       id="use20"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use125"
+       id="use21"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use126"
+       id="use22"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use127"
+       id="use23"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use128"
+       id="use24"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use129"
+       id="use25"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use130"
+       id="use26"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use131"
+       id="use27"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use132"
+       id="use28"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use133"
+       id="use29"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use134"
+       id="use30"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use135"
+       id="use31"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use136"
+       id="use32"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use137"
+       id="use33"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use138"
+       id="use34"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use139"
+       id="use35"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use140"
+       id="use36"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use141"
+       id="use37"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use142"
+       id="use38"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use143"
+       id="use39"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use144"
+       id="use40"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use145"
+       id="use41"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use146"
+       id="use42"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use147"
+       id="use43"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use148"
+       id="use44"
+       transform="translate(0,640.29201)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use23"
+       id="use45"
+       transform="translate(0,306.9168)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use25"
+       id="use46"
+       transform="translate(0,306.9168)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use27"
+       id="use47"
+       transform="translate(0,306.9168)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use29"
+       id="use48"
+       transform="translate(0,306.9168)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use31"
+       id="use49"
+       transform="translate(0,306.9168)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use33"
+       id="use50"
+       transform="translate(0,306.9168)" />
+  </g>
+</svg>
