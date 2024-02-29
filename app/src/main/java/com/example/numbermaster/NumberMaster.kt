@@ -45,6 +45,7 @@ import android.media.SoundPool
 import android.opengl.GLSurfaceView
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -103,6 +104,7 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
     var statusGame: MutableMap<String, String> = mutableMapOf(
         "simulMode" to "0",
         "horrorMode" to "0",
+        "horrorModeDirection" to "0",
         "stop" to "1", // STOP中か?
         "score" to "0",
         "time" to "0",
@@ -154,6 +156,13 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
     var boardStandLayout: MutableList<FrameLayout?> = mutableListOf(
         null,
         null,
+    )
+
+    private var ghostPosition: MutableMap<String, Int> = mutableMapOf(
+        "puzzleIdNumber" to 0,
+        "cubeSideNumber" to 0,
+        "x" to 0,
+        "y" to 0,
     )
 
     // 数字の管理
@@ -470,6 +479,8 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
             })
             start()
         }
+
+        this.ghostMove()
     }
 
     /**
@@ -1025,6 +1036,11 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
 
             backgroundRain1.alpha = 0.5F
             backgroundRain2.alpha = 0.5F
+
+            // positionを再配置
+            this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
+
+            Log.e("@@@@@ initial ghost position", this.ghostPosition.toString())
         } else {
             this.statusGame["horrorMode"] = 0.toString()
 
@@ -1220,6 +1236,90 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
                 this.numbers[puzzleIdNumber]
             )
         }
+    }
+
+    /**
+     * お化けの初期値を取得
+     * @param nonNumberPanelPosition 空白枠の位置
+     */
+    private fun getGhostInitialPosition(nonNumberPanelPosition: MutableList<MutableMap<String, Int>>): MutableMap<String, Int> {
+        val randomPosition: MutableMap<String, Int> = mutableMapOf(
+            "puzzleIdNumber" to 0,
+            "cubeSideNumber" to 0,
+            "x" to 0,
+            "y" to 0
+        )
+        do {
+            randomPosition["puzzleIdNumber"] = if (this.statusGame["simulMode"]!!.toInt() == 0) {
+                0
+            } else {
+                (0..1).random()
+            }
+
+            val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[randomPosition["puzzleIdNumber"]!!]["size"]!!.toInt())
+
+            randomPosition["cubeSideNumber"] = if (this.statusPuzzle[randomPosition["puzzleIdNumber"]!!]["useCubeMode"]!!.toInt() != 1) {
+                0
+            } else {
+                (0..5).random()
+            }
+
+            randomPosition["x"] = (0 until sizeMax).random()
+            randomPosition["y"] = (0 until sizeMax).random()
+        } while (nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["cubeSideNumber"] == randomPosition["cubeSideNumber"]
+            && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["x"] == randomPosition["x"]
+            && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["y"] == randomPosition["y"])
+
+        return randomPosition
+    }
+
+    private fun ghostMove() {
+        // @todo
+        if (this.statusGame["horrorMode"]!!.toInt() == 0) return
+
+        // 移動方向の選択
+        val moveDirection = if (this.statusGame["horrorMode"]!!.toInt() == 1) {
+            // ノーマルホラーモード
+            (0 .. 1).random()
+        } else {
+            // ロジカルホラーモード
+            if (this.statusGame["horrorModeDirection"] == "0") {
+                // x移動
+                this.statusGame["horrorModeDirection"] = 1.toString()
+                0
+            } else {
+                // y移動
+                this.statusGame["horrorModeDirection"] = 0.toString()
+                1
+            }
+        }
+
+        // 移動 @todo x,yは差分で決められるが、cubeSideNumber間の移動が大変そう。
+        val ghostMoveTo: MutableMap<String, Int> = mutableMapOf(
+            "puzzleIdNumber" to 0,
+            "cubeSideNumber" to 0,
+            "x" to 0,
+            "y" to 0,
+        )
+
+        // もしノーマルホラーモードなら
+        if (this.statusGame["horrorMode"]!!.toInt() == 1) {
+            // もしその場所が空白枠だったら、
+            if (this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["cubeSideNumber"] == this.ghostPosition["cubeSideNumber"]
+                    && this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["x"] == this.ghostPosition["x"]
+                    && this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["y"] == this.ghostPosition["y"]) {
+                // ランダムで移動するか移動しないかを決める
+                if ((0..5).random() == 0) {
+                    this.ghostPosition = ghostMoveTo
+                    this.ghostWork()
+                }
+            }
+        }
+    }
+
+    private fun ghostWork() {
+        // @todo
+        if (this.statusGame["horrorMode"]!!.toInt() == 0) return
     }
 
     private fun updateNumberPanelByMove(puzzleIdNumber: Int, beforeNonNumberPanelPosition: MutableMap<String, Int>, afterNonNumberPanelPosition: MutableMap<String, Int>) {
