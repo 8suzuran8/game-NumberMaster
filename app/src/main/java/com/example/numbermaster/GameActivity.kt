@@ -109,6 +109,7 @@ class GameActivity : NumberMasterActivity() {
         super.onResume()
         if (this.numberMaster != null && this.numberMaster!!.bgmMediaPlayer != null) {
             this.numberMaster!!.bgmMediaPlayer!!.start()
+            this.numberMaster!!.bgmMediaPlayerHorror!!.start()
         }
     }
 
@@ -116,6 +117,7 @@ class GameActivity : NumberMasterActivity() {
         super.onPause()
         if (this.numberMaster != null && this.numberMaster!!.bgmMediaPlayer != null) {
             this.numberMaster!!.bgmMediaPlayer!!.pause()
+            this.numberMaster!!.bgmMediaPlayerHorror!!.pause()
         }
     }
 
@@ -125,6 +127,10 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.bgmMediaPlayer!!.reset()
             this.numberMaster!!.bgmMediaPlayer!!.release()
             this.numberMaster!!.bgmMediaPlayer = null
+
+            this.numberMaster!!.bgmMediaPlayerHorror!!.reset()
+            this.numberMaster!!.bgmMediaPlayerHorror!!.release()
+            this.numberMaster!!.bgmMediaPlayerHorror = null
         }
     }
 
@@ -133,6 +139,10 @@ class GameActivity : NumberMasterActivity() {
             this.numberMaster!!.bgmMediaPlayer!!.reset()
             this.numberMaster!!.bgmMediaPlayer!!.release()
             this.numberMaster!!.bgmMediaPlayer = null
+
+            this.numberMaster!!.bgmMediaPlayerHorror!!.reset()
+            this.numberMaster!!.bgmMediaPlayerHorror!!.release()
+            this.numberMaster!!.bgmMediaPlayerHorror = null
         }
     }
 
@@ -156,6 +166,9 @@ class GameActivity : NumberMasterActivity() {
             }
             R.id.button_autoslide -> {
                 this.numberMaster!!.buttonClickAutoslideProcess(true)
+            }
+            R.id.button_horror -> {
+                this.numberMaster!!.buttonClickHorrorProcess(true)
             }
         }
     }
@@ -204,6 +217,9 @@ class GameActivity : NumberMasterActivity() {
             }
             R.id.button_autoslide -> {
                 this.numberMaster!!.buttonClickAutoslideProcess()
+            }
+            R.id.button_horror -> {
+                this.numberMaster!!.buttonClickHorrorProcess()
             }
             R.id.button_simul -> {
                 val that = this
@@ -300,7 +316,7 @@ class GameActivity : NumberMasterActivity() {
             }
         }
 
-        for (key in listOf("3x3", "6x6", "9x9", "secret", "autoslide", "simul", "semi_blindfold", "blindfold", "cube", "finish", "stop")) {
+        for (key in listOf("3x3", "6x6", "9x9", "secret", "autoslide", "horror", "simul", "semi_blindfold", "blindfold", "cube", "finish", "stop")) {
             val id = this.getResourceId("button_$key")
             this.numberMaster!!.buttonsGame[key] = findViewById(id)
             this.numberMaster!!.buttonsGame[key]!!.layoutParams.width = that.globalActivityInfo["meta:otherSize"]!!.toFloat().toInt()
@@ -310,7 +326,7 @@ class GameActivity : NumberMasterActivity() {
         this.numberMaster!!.buttonsGame["prev"] = findViewById(R.id.prev_button)
 
         // longClick
-        for (key in listOf("3x3", "6x6", "9x9", "cube", "autoslide")) {
+        for (key in listOf("3x3", "6x6", "9x9", "cube", "autoslide", "horror")) {
             val id = this.getResourceId("button_$key")
             findViewById<ImageButton>(id).apply {
                 setOnTouchListener(object : View.OnTouchListener {

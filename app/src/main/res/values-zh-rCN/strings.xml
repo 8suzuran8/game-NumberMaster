@@ -31,6 +31,7 @@
     <string name="game_menu_secret_cube_button">改变立方体模式, 洗牌</string>
     <string name="game_menu_secret_simul_button">改变并发模式, 洗牌</string>
     <string name="game_menu_secret_autoslide_button">改变自动滑动模式</string>
+    <string name="game_menu_secret_horror_button">恐怖模式改变</string>
     <string name="game_menu_secret_blindfold_button">改变盲模式</string>
     <string name="game_menu_secret_semi_blindfold_button">改变半盲模式</string>
     <string name="game_menu_secret_active_button">打开子菜单</string>

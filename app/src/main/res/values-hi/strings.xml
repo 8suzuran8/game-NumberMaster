@@ -30,6 +30,7 @@
     <string name="game_menu_secret_cube_button">क्यूब मोड बदलें और फेरबदल करें</string>
     <string name="game_menu_secret_simul_button">एक साथ मोड बदलें और फेरबदल करें</string>
     <string name="game_menu_secret_autoslide_button">स्वचालित आंदोलन मोड बदलें</string>
+    <string name="game_menu_secret_horror_button">हॉरर मोड में बदलाव</string>
     <string name="game_menu_secret_blindfold_button">आंखों पर पट्टी मोड बदलें</string>
     <string name="game_menu_secret_semi_blindfold_button">आधा अंधा मोड बदलें</string>
     <string name="game_menu_secret_active_button">सबमेनू खोलें</string>

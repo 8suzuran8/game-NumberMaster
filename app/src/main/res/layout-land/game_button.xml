@@ -58,6 +58,16 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/button_horror"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:contentDescription="@string/game_menu_secret_horror_button"
+                android:onClick="buttonClickListener"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_enabled_horror" />
+
+            <ImageButton
                 android:id="@+id/button_autoslide"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

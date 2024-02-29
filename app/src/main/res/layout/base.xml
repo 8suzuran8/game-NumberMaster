@@ -37,6 +37,27 @@
         android:importantForAccessibility="no"
         tools:ignore="ImageContrastCheck" />
 
+    <!-- horror -->
+    <ImageView
+        android:id="@+id/background_rain1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:scaleType="fitCenter"
+        android:src="@drawable/background_rain"
+        android:importantForAccessibility="no"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/background_rain2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@drawable/background_rain"
+        tools:ignore="ImageContrastCheck" />
+
     <!-- prev button start -->
     <ImageView
         android:id="@+id/prev_button_image"

@@ -30,6 +30,7 @@ Also, if all of the vertical total, horizontal total, and diagonal total match, 
     <string name="game_menu_secret_cube_button">change cube mode and shuffle</string>
     <string name="game_menu_secret_simul_button">change simul mode and shuffle</string>
     <string name="game_menu_secret_autoslide_button">change auto slide mode</string>
+    <string name="game_menu_secret_horror_button">change horror mode</string>
     <string name="game_menu_secret_blindfold_button">change blindfold mode</string>
     <string name="game_menu_secret_semi_blindfold_button">change semi blindfold mode</string>
     <string name="game_menu_secret_active_button">Open a submenu</string>

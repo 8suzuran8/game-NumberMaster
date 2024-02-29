@@ -30,6 +30,7 @@
     <string name="game_menu_secret_cube_button">キューブモードを変更し、シャッフルする</string>
     <string name="game_menu_secret_simul_button">多面モードを変更し、シャッフルする</string>
     <string name="game_menu_secret_autoslide_button">オートスライドモードを変更する</string>
+    <string name="game_menu_secret_horror_button">ホラーを変更する</string>
     <string name="game_menu_secret_blindfold_button">目隠しモードを変更する</string>
     <string name="game_menu_secret_semi_blindfold_button">半目隠しモードを変更する</string>
     <string name="game_menu_secret_active_button">サブメニューを開く</string>

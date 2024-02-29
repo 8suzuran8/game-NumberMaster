@@ -30,6 +30,7 @@ Además, si el total vertical, el total horizontal y el total diagonal coinciden
     <string name="game_menu_secret_cube_button">Cambiar el modo de cubo y mezcle</string>
     <string name="game_menu_secret_simul_button">Cambiar el modo de simultáneo y mezcle</string>
     <string name="game_menu_secret_autoslide_button">Cambiar el modo de movimiento automático</string>
+    <string name="game_menu_secret_horror_button">Cambiar el modo de terror</string>
     <string name="game_menu_secret_blindfold_button">Cambiar el modo de ciego</string>
     <string name="game_menu_secret_semi_blindfold_button">Cambiar el modo de medio ciego</string>
     <string name="game_menu_secret_active_button">submenú abierto</string>

@@ -71,7 +71,7 @@ import kotlin.math.roundToInt
  * useCubeModeの場合のはscore+(n * size * 6)
  * useCubeModeで15パズルと魔方陣が混ざっている場合はscore+(100 * size * 6 * 2)
  */
-class NumberMaster constructor(private val activity: AppCompatActivity, private val resources: Resources, private val globalActivityInfo: MutableMap<String, String>) {
+class NumberMaster(private val activity: AppCompatActivity, private val resources: Resources, private val globalActivityInfo: MutableMap<String, String>) {
     val numberMasterCalculator: NumberMasterCalculator = NumberMasterCalculator()
     var numberMasterRenderer: NumberMasterRenderer? = null
     var numberMasterOnSwipeTouchListener: NumberMasterOnSwipeTouchListener? = null
@@ -102,6 +102,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     )
     var statusGame: MutableMap<String, String> = mutableMapOf(
         "simulMode" to "0",
+        "horrorMode" to "0",
         "stop" to "1", // STOP中か?
         "score" to "0",
         "time" to "0",
@@ -139,6 +140,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         "secret" to null,
         "cube" to null,
         "autoslide" to null,
+        "horror" to null,
         "semi_blindfold" to null, // 画像操作事のみ使用
         "blindfold" to null,
         "finish" to null,
@@ -229,6 +231,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
     private var soundSuccess = 0
     private var soundCounterStop = 0
     var bgmMediaPlayer: MediaPlayer? = null
+    var bgmMediaPlayerHorror: MediaPlayer? = null
 
     var dbHelper: NumberMasterOpenHelper? = null
 
@@ -328,6 +331,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         this.bgmMediaPlayer = MediaPlayer.create(activity, R.raw.bgm001)
         this.bgmMediaPlayer!!.isLooping = true
         this.bgmMediaPlayer!!.start()
+
+        this.bgmMediaPlayerHorror = MediaPlayer.create(activity, R.raw.bgm_horror001)
+        this.bgmMediaPlayerHorror!!.isLooping = true
+        this.bgmMediaPlayerHorror!!.setVolume(0F, 0F)
+        this.bgmMediaPlayerHorror!!.start()
     }
 
     fun getPuzzleIdNumberBySwipeButton(v: View): Int {
@@ -408,9 +416,9 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
             }
         }
 
-        var tapCount = this.statusGame["tapCount"]!!.toInt() + 1
-        if (tapCount > Int.MAX_VALUE) tapCount = 0
-        this.statusGame["tapCount"] = tapCount.toString()
+        var tapCount = this.statusGame["tapCount"]!!.toInt() + 1.toFloat()
+        if (tapCount > Int.MAX_VALUE) tapCount = 0.toFloat()
+        this.statusGame["tapCount"] = tapCount.toInt().toString()
         this.updateStatus()
 
         // 移動アニメーション設定
@@ -821,7 +829,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
         val that = this
         this.activity.findViewById<RelativeLayout>(R.id.button_container).apply {
             if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
+                if (layoutParams.height == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 7).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         height =
@@ -830,11 +838,11 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         height =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 7).toInt()
                     }
                 }
             } else {
-                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
+                if (layoutParams.width == (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 7).toInt()
                     || forceClose) {
                     updateLayoutParams {
                         width =
@@ -843,7 +851,7 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 } else {
                     updateLayoutParams {
                         width =
-                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 6).toInt()
+                            (that.globalActivityInfo["meta:otherSize"]!!.toFloat() * 7).toInt()
                     }
                 }
             }
@@ -999,6 +1007,32 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                     this.statusPuzzle[puzzleIdNumber]["autoslide"] = nextLine.toString()
                 }
             }
+        }
+    }
+
+    fun buttonClickHorrorProcess(logicalMode: Boolean = false) {
+        val backgroundRain1 = this.activity.findViewById<ImageView>(R.id.background_rain1)
+        val backgroundRain2 = this.activity.findViewById<ImageView>(R.id.background_rain2)
+        if (this.statusGame["horrorMode"]!!.toInt() == 0) {
+            if (logicalMode) {
+                this.statusGame["horrorMode"] = 2.toString()
+            } else {
+                this.statusGame["horrorMode"] = 1.toString()
+            }
+
+            this.bgmMediaPlayerHorror!!.setVolume(1F, 1F)
+            this.bgmMediaPlayer!!.setVolume(0F, 0F)
+
+            backgroundRain1.alpha = 0.5F
+            backgroundRain2.alpha = 0.5F
+        } else {
+            this.statusGame["horrorMode"] = 0.toString()
+
+            this.bgmMediaPlayerHorror!!.setVolume(0F, 0F)
+            this.bgmMediaPlayer!!.setVolume(1F, 1F)
+
+            backgroundRain1.alpha = 0F
+            backgroundRain2.alpha = 0F
         }
     }
 
@@ -1354,16 +1388,10 @@ class NumberMaster constructor(private val activity: AppCompatActivity, private 
                 return true
             }
 
-            if (
-                this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == y
-                && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! != x
-                && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1 <= x
-                && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! + 1 >= x
-            ) {
-                return true
-            }
-
-            return false
+            return (this.nonNumberPanelPosition[puzzleIdNumber]["y"]!! == y
+                    && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! != x
+                    && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! - 1 <= x
+                    && this.nonNumberPanelPosition[puzzleIdNumber]["x"]!! + 1 >= x)
         }
 
         val sizeMax = this.numberMasterCalculator.getSizeMax(this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt())

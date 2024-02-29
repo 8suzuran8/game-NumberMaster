@@ -1,6 +1,8 @@
 package com.example.numbermaster
 
 import android.animation.AnimatorInflater
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -119,6 +121,33 @@ open class NumberMasterActivity : AppCompatActivity() {
                 AnimatorInflater.loadStateListAnimator(that, R.xml.animate_all_background3)
         }
 
+        // 雨のアニメーション
+        val backgroundRain1 = findViewById<ImageView>(R.id.background_rain1)
+        val backgroundRain2 = findViewById<ImageView>(R.id.background_rain2)
+
+        backgroundRain1.translationY = -that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+        backgroundRain2.translationY = -that.globalActivityInfo["meta:rootLayoutLong"]!!.toFloat()
+
+        ObjectAnimator.ofPropertyValuesHolder(
+            backgroundRain1,
+            PropertyValuesHolder.ofFloat("translationY", 0F)
+        ).apply {
+            startDelay = 200
+            duration = 800
+            repeatCount = -1
+            repeatMode = ObjectAnimator.RESTART
+            start()
+        }
+        ObjectAnimator.ofPropertyValuesHolder(
+            backgroundRain2,
+            PropertyValuesHolder.ofFloat("translationY", 0F)
+        ).apply {
+            duration = 400
+            repeatCount = -1
+            repeatMode = ObjectAnimator.RESTART
+            start()
+        }
+
         // 戻るボタン
         findViewById<ImageView>(R.id.prev_button_image).apply {
             translationX = if (this.resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
@@ -187,6 +216,9 @@ open class NumberMasterActivity : AppCompatActivity() {
             }
             "button_secret" -> {
                 return R.id.button_secret
+            }
+            "button_horror" -> {
+                return R.id.button_horror
             }
             "button_autoslide" -> {
                 return R.id.button_autoslide
