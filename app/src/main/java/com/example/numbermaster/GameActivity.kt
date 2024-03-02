@@ -167,9 +167,6 @@ class GameActivity : NumberMasterActivity() {
             R.id.button_autoslide -> {
                 this.numberMaster!!.buttonClickAutoslideProcess(true)
             }
-            R.id.button_horror -> {
-                this.numberMaster!!.buttonClickHorrorProcess(true)
-            }
         }
     }
 

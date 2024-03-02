@@ -36,6 +36,7 @@
 package com.example.numbermaster
 
 import android.animation.*
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.graphics.*
@@ -43,9 +44,12 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.opengl.GLSurfaceView
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
+import android.os.VibratorManager
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -221,8 +225,21 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         null,
     )
 
-    // [0]横、[1]縦
-    // [*][1]と[*][3]は同じ値でなければならない
+    /**
+     * [0]横、[1]縦
+     * [*][1]と[*][3]は同じ値でなければならない
+     *
+     * 以下の例の場合の展開図。5は重なる面になる。
+     *  1
+     * 4025
+     *  3
+     *  5
+     *
+     *  1
+     * 4025
+     *  3
+     *  5
+     */
     private var cubeNet: MutableList<MutableList<MutableList<Int?>>> = mutableListOf(
         mutableListOf(
             mutableListOf(4, 0, 2, 5),
@@ -467,6 +484,24 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
                         that.statusPuzzle[puzzleIdNumber]["useCubeMode"]!!.toInt()
                     )
 
+                    // もしお化けの場所が空白枠だったら
+                    if (puzzleIdNumber == that.ghostPosition["puzzleIdNumber"]) {
+                        if (that.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == that.ghostPosition["cubeSideNumber"]
+                            && that.nonNumberPanelPosition[puzzleIdNumber]["x"] == that.ghostPosition["x"]
+                            && that.nonNumberPanelPosition[puzzleIdNumber]["y"] == that.ghostPosition["y"]
+                        ) {
+                            that.ghostWork()
+                        } else {
+                            if ((0..5).random() == 0) {
+                                // @todo
+                                // ghostを再配置
+                                // this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
+                            }
+                        }
+                    } else if (false) {
+                        // @todo お化けが近くに居る時の処理
+                    }
+
                     if (successType == null) {
                         // 効果音
                         that.soundPool!!.play(that.soundMove, 1F, 1F, 0, 0, 1F)
@@ -479,8 +514,6 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
             })
             start()
         }
-
-        this.ghostMove()
     }
 
     /**
@@ -1039,8 +1072,6 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
 
             // positionを再配置
             this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
-
-            Log.e("@@@@@ initial ghost position", this.ghostPosition.toString())
         } else {
             this.statusGame["horrorMode"] = 0.toString()
 
@@ -1273,53 +1304,42 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         return randomPosition
     }
 
-    private fun ghostMove() {
-        // @todo
-        if (this.statusGame["horrorMode"]!!.toInt() == 0) return
-
-        // 移動方向の選択
-        val moveDirection = if (this.statusGame["horrorMode"]!!.toInt() == 1) {
-            // ノーマルホラーモード
-            (0 .. 1).random()
-        } else {
-            // ロジカルホラーモード
-            if (this.statusGame["horrorModeDirection"] == "0") {
-                // x移動
-                this.statusGame["horrorModeDirection"] = 1.toString()
-                0
-            } else {
-                // y移動
-                this.statusGame["horrorModeDirection"] = 0.toString()
-                1
-            }
-        }
-
-        // 移動 @todo x,yは差分で決められるが、cubeSideNumber間の移動が大変そう。
-        val ghostMoveTo: MutableMap<String, Int> = mutableMapOf(
-            "puzzleIdNumber" to 0,
-            "cubeSideNumber" to 0,
-            "x" to 0,
-            "y" to 0,
-        )
-
-        // もしノーマルホラーモードなら
-        if (this.statusGame["horrorMode"]!!.toInt() == 1) {
-            // もしその場所が空白枠だったら、
-            if (this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["cubeSideNumber"] == this.ghostPosition["cubeSideNumber"]
-                    && this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["x"] == this.ghostPosition["x"]
-                    && this.nonNumberPanelPosition[this.ghostPosition["puzzleIdNumber"]!!]["y"] == this.ghostPosition["y"]) {
-                // ランダムで移動するか移動しないかを決める
-                if ((0..5).random() == 0) {
-                    this.ghostPosition = ghostMoveTo
-                    this.ghostWork()
-                }
-            }
-        }
-    }
-
     private fun ghostWork() {
-        // @todo
         if (this.statusGame["horrorMode"]!!.toInt() == 0) return
+
+        // vibrator
+        val vibratorManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            (activity.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager)
+                .defaultVibrator
+        }
+        else {
+            @Suppress("DEPRECATION")
+            activity.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+        }
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                vibratorManager?.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE))
+            }
+            else {
+                @Suppress("DEPRECATION")
+                vibratorManager?.vibrate(1500)
+            }
+        }
+        catch (_: Exception) {
+            //生じた全てのExceptionは無視する
+        }
+
+        // ステータスの呪い
+        if (this.statusGame["score"]!!.toInt() > 100) this.statusGame["score"] = (this.statusGame["score"]!!.toInt() - 100).toString()
+        else this.statusGame["score"] = 0.toString()
+        this.statusGame["time"] = (this.statusGame["time"]!!.toDouble() + 50).toString()
+
+        // お化け画像の表示
+        // @todo
+
+        // ghostを再配置
+        this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
     }
 
     private fun updateNumberPanelByMove(puzzleIdNumber: Int, beforeNonNumberPanelPosition: MutableMap<String, Int>, afterNonNumberPanelPosition: MutableMap<String, Int>) {
