@@ -187,9 +187,7 @@ class NumberMasterCheckSuccess {
             }
         }
 
-        if (this.trueCount(checkPatternResults) > 0) return true
-
-        return false
+        return this.trueCount(checkPatternResults) > 0
     }
 
     private fun checkOrderByNumber6x6(number: MutableList<MutableList<Int>>): Boolean {
@@ -337,9 +335,7 @@ class NumberMasterCheckSuccess {
             }
         }
 
-        if (this.trueCount(checkPatternResults) > 0) return true
-
-        return false
+        return this.trueCount(checkPatternResults) > 0
     }
 
     // 魔方陣の確認

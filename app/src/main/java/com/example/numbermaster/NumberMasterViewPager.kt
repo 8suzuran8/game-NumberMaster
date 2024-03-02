@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 
-class NumberMasterViewPager constructor(activity: FragmentActivity, pageName: String, rootLayoutWidth: Float, otherSize: Int, itemCount: Int) {
+class NumberMasterViewPager(activity: FragmentActivity, pageName: String, rootLayoutWidth: Float, otherSize: Int, itemCount: Int) {
     var viewPager: ViewPager2 = activity.findViewById(R.id.view_pager2)
     var adapter: ScreenSlidePagerAdapter? = null
 

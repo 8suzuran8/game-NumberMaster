@@ -10,7 +10,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.IntBuffer
 
-class NumberMasterRenderer constructor(private val context: AppCompatActivity, private val textureIds: MutableList<Int>) : GLSurfaceView.Renderer {
+class NumberMasterRenderer(private val context: AppCompatActivity, private val textureIds: MutableList<Int>) : GLSurfaceView.Renderer {
     val rotateUp: Int = 0
     val rotateRight: Int = 1
     val rotateDown: Int = 2
