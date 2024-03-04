@@ -50,6 +50,7 @@ import android.os.Looper
 import android.os.VibratorManager
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -485,21 +486,12 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
                     )
 
                     // もしお化けの場所が空白枠だったら
-                    if (puzzleIdNumber == that.ghostPosition["puzzleIdNumber"]) {
-                        if (that.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] == that.ghostPosition["cubeSideNumber"]
-                            && that.nonNumberPanelPosition[puzzleIdNumber]["x"] == that.ghostPosition["x"]
-                            && that.nonNumberPanelPosition[puzzleIdNumber]["y"] == that.ghostPosition["y"]
-                        ) {
-                            that.ghostWork()
-                        } else {
-                            if ((0..5).random() == 0) {
-                                // @todo
-                                // ghostを再配置
-                                // this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
-                            }
+                    if (that.ghostNear() != 0) {
+                        if ((0..5).random() == 0) {
+                            // ghostを再配置
+                            that.ghostPosition = that.getGhostInitialPosition(that.nonNumberPanelPosition)
+                            that.ghostNear()
                         }
-                    } else if (false) {
-                        // @todo お化けが近くに居る時の処理
                     }
 
                     if (successType == null) {
@@ -514,6 +506,38 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
             })
             start()
         }
+    }
+
+    private fun calculateAddScore(puzzleIdNumber: Int, successType: Int): Int {
+        // スコアの計算
+        var addScore = 0
+        if (successType == 1) {
+            addScore = 10
+        } else if (successType == 2 || successType == 3) {
+            addScore = 100
+        }
+
+        addScore *= this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt()
+
+        if (this.statusPuzzle[puzzleIdNumber]["useCubeMode"]!!.toInt() == 1) {
+            addScore *= 6
+        }
+
+        if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 1) {
+            addScore *= 5
+        } else if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 2) {
+            addScore *= 4
+        }
+
+        if (successType == 3) {
+            addScore *= 2
+        }
+
+        if (this.settings["counterStopCount"]!!.toInt() > 1) {
+            addScore = floor(addScore / this.settings["counterStopCount"]!!.toDouble()).toInt()
+        }
+
+        return addScore
     }
 
     /**
@@ -614,33 +638,7 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
             }
         }
 
-        // スコアの計算
-        var addScore = 0
-        if (successType == 1) {
-            addScore = 10
-        } else if (successType == 2 || successType == 3) {
-            addScore = 100
-        }
-
-        addScore *= this.statusPuzzle[puzzleIdNumber]["size"]!!.toInt()
-
-        if (this.statusPuzzle[puzzleIdNumber]["useCubeMode"]!!.toInt() == 1) {
-            addScore *= 6
-        }
-
-        if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 1) {
-            addScore *= 5
-        } else if (this.statusPuzzle[puzzleIdNumber]["blindfoldMode"]!!.toInt() == 2) {
-            addScore *= 4
-        }
-
-        if (successType == 3) {
-            addScore *= 2
-        }
-
-        if (this.settings["counterStopCount"]!!.toInt() > 1) {
-            addScore = floor(addScore / this.settings["counterStopCount"]!!.toDouble()).toInt()
-        }
+        val addScore = this.calculateAddScore(puzzleIdNumber, successType)
 
         var newScore: Int = this.statusGame["score"]!!.toInt() + addScore
         if (newScore > 99999) {
@@ -1054,15 +1052,11 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         }
     }
 
-    fun buttonClickHorrorProcess(logicalMode: Boolean = false) {
+    fun buttonClickHorrorProcess() {
         val backgroundRain1 = this.activity.findViewById<ImageView>(R.id.background_rain1)
         val backgroundRain2 = this.activity.findViewById<ImageView>(R.id.background_rain2)
         if (this.statusGame["horrorMode"]!!.toInt() == 0) {
-            if (logicalMode) {
-                this.statusGame["horrorMode"] = 2.toString()
-            } else {
-                this.statusGame["horrorMode"] = 1.toString()
-            }
+            this.statusGame["horrorMode"] = 1.toString()
 
             this.bgmMediaPlayerHorror!!.setVolume(1F, 1F)
             this.bgmMediaPlayer!!.setVolume(0F, 0F)
@@ -1072,6 +1066,7 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
 
             // positionを再配置
             this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
+            this.ghostNear()
         } else {
             this.statusGame["horrorMode"] = 0.toString()
 
@@ -1080,6 +1075,11 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
 
             backgroundRain1.alpha = 0F
             backgroundRain2.alpha = 0F
+
+            this.statusText!!.apply {
+                stateListAnimator = null
+                scaleY = 1.0F
+            }
         }
     }
 
@@ -1301,7 +1301,99 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
             && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["x"] == randomPosition["x"]
             && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["y"] == randomPosition["y"])
 
+        Log.e("@@@@@ ghost position", randomPosition.toString())
         return randomPosition
+    }
+
+    /**
+     * ghostと空白枠との距離
+     * return 0 : 空白枠と重なってる | 1 : 空白枠の隣 | 2 : 空白枠から2枠 | 3 : 空白枠から3枠以上
+     */
+    private fun distanceGhostAndNonNumberPanel(puzzleIdNumber: Int): Int {
+        if (this.nonNumberPanelPosition[puzzleIdNumber]["cubeSideNumber"] != this.ghostPosition["cubeSideNumber"]) {
+            return 3
+        }
+
+        if (this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]
+            && this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]) {
+            return 0
+        }
+
+        // 空白枠から上下左右方向
+        for (i in (1..2)) {
+            if (this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]
+                && (
+                        this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! + i
+                                || this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! - i
+                        )
+            ) {
+                return i
+            }
+
+            if (this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]
+                && (
+                        this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! + i
+                                || this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! - i
+                        )
+            ) {
+                return i
+            }
+        }
+
+        // 空白枠から斜め一枠
+        if ((this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! + 1 || this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! - 1)
+            && (
+                    this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! + 1
+                            || this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! - 1
+                    )
+        ) {
+            return 2
+        }
+
+        if ((this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! + 1 || this.nonNumberPanelPosition[puzzleIdNumber]["y"] == this.ghostPosition["y"]!! - 1)
+            && (
+                    this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! + 1
+                            || this.nonNumberPanelPosition[puzzleIdNumber]["x"] == this.ghostPosition["x"]!! - 1
+                    )
+        ) {
+            return 2
+        }
+
+        return 3
+    }
+
+    private fun ghostNear(): Int {
+        val distanceGhostAndNonNumberPanel = this.distanceGhostAndNonNumberPanel(this.ghostPosition["puzzleIdNumber"]!!.toInt())
+        if (distanceGhostAndNonNumberPanel == 0) {
+            this.ghostWork()
+        } else {
+            when (distanceGhostAndNonNumberPanel) {
+                1 -> {
+                    this.statusText!!.stateListAnimator =
+                        AnimatorInflater.loadStateListAnimator(
+                            activity,
+                            R.xml.animate_game_horror_status_near1
+                        )
+                }
+
+                2 -> {
+                    this.statusText!!.stateListAnimator =
+                        AnimatorInflater.loadStateListAnimator(
+                            activity,
+                            R.xml.animate_game_horror_status_near2
+                        )
+                }
+
+                else -> {
+                    this.statusText!!.apply {
+                        stateListAnimator = null
+                        scaleY = 1.0F
+                    }
+                }
+            }
+        }
+
+        return distanceGhostAndNonNumberPanel
     }
 
     private fun ghostWork() {
@@ -1331,15 +1423,22 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         }
 
         // ステータスの呪い
-        if (this.statusGame["score"]!!.toInt() > 100) this.statusGame["score"] = (this.statusGame["score"]!!.toInt() - 100).toString()
+        // 数字順と魔方陣のミックスを完成した時のスコア分マイナスにする
+        val addScore = if (this.statusGame["simulMode"]!!.toInt() == 0) {
+            this.calculateAddScore(this.ghostPosition["puzzleIdNumber"]!!, 2)
+        } else {
+            this.calculateAddScore(this.ghostPosition["puzzleIdNumber"]!!, 3)
+        }
+        Log.e("@@@@@ add score", addScore.toString())
+        if (this.statusGame["score"]!!.toInt() > addScore) this.statusGame["score"] = (this.statusGame["score"]!!.toInt() - addScore).toString()
         else this.statusGame["score"] = 0.toString()
-        this.statusGame["time"] = (this.statusGame["time"]!!.toDouble() + 50).toString()
 
         // お化け画像の表示
         // @todo
 
         // ghostを再配置
         this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)
+        this.ghostNear()
     }
 
     private fun updateNumberPanelByMove(puzzleIdNumber: Int, beforeNonNumberPanelPosition: MutableMap<String, Int>, afterNonNumberPanelPosition: MutableMap<String, Int>) {
