@@ -486,11 +486,14 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
                     )
 
                     // もしお化けの場所が空白枠だったら
-                    if (that.ghostNear() != 0) {
-                        if ((0..5).random() == 0) {
-                            // ghostを再配置
-                            that.ghostPosition = that.getGhostInitialPosition(that.nonNumberPanelPosition)
-                            that.ghostNear()
+                    if (that.statusGame["horrorMode"]!!.toInt() != 0) {
+                        if (that.ghostNear() != 0) {
+                            if ((0..5).random() == 0) {
+                                // ghostを再配置
+                                that.ghostPosition =
+                                    that.getGhostInitialPosition(that.nonNumberPanelPosition)
+                                that.ghostNear()
+                            }
                         }
                     }
 
@@ -1429,7 +1432,7 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         } else {
             this.calculateAddScore(this.ghostPosition["puzzleIdNumber"]!!, 3)
         }
-        Log.e("@@@@@ add score", addScore.toString())
+
         if (this.statusGame["score"]!!.toInt() > addScore) this.statusGame["score"] = (this.statusGame["score"]!!.toInt() - addScore).toString()
         else this.statusGame["score"] = 0.toString()
 
