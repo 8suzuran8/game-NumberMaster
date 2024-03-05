@@ -1,0 +1,24 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:repeatCount="0"
+                android:repeatMode="restart"
+                android:propertyName="alpha"
+                android:duration="500"
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:repeatCount="0"
+                android:repeatMode="restart"
+                android:propertyName="alpha"
+                android:startOffset="1500"
+                android:duration="500"
+                android:valueFrom="1.0"
+                android:valueTo="0.0"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

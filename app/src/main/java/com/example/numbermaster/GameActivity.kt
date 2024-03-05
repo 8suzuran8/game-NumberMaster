@@ -527,6 +527,9 @@ class GameActivity : NumberMasterActivity() {
             layoutParams.width = 0
         }
 
+        // ghost
+        this.numberMaster!!.ghostImageView = findViewById(R.id.ghost)
+
         val accessibility : AccessibilityManager = this.getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
         if (accessibility.isEnabled) {
             this.numberMaster!!.multiSuccessMaxTime = Double.MAX_VALUE

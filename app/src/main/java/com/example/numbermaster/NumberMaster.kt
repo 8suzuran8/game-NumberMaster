@@ -170,6 +170,16 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         "y" to 0,
     )
 
+    private val ghostImages = mutableListOf(
+        BitmapFactory.decodeResource(this.resources, R.drawable.ghost001),
+        BitmapFactory.decodeResource(this.resources, R.drawable.ghost002),
+        BitmapFactory.decodeResource(this.resources, R.drawable.ghost003),
+        BitmapFactory.decodeResource(this.resources, R.drawable.ghost004),
+        BitmapFactory.decodeResource(this.resources, R.drawable.ghost005),
+    )
+
+    var ghostImageView: ImageView? = null
+
     // 数字の管理
     // 神ステージの6面 x 9 x 9 = 81 * 6 = 486
     // [神ステージの面番号][y位置][x位置]
@@ -1437,7 +1447,10 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
         else this.statusGame["score"] = 0.toString()
 
         // お化け画像の表示
-        // @todo
+        val ghost = (0 until this.ghostImages.size).random()
+        this.ghostImageView!!.setImageBitmap(this.ghostImages[ghost])
+        this.ghostImageView!!.visibility = ImageView.VISIBLE
+        this.ghostImageView!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_ghost)
 
         // ghostを再配置
         this.ghostPosition = this.getGhostInitialPosition(this.nonNumberPanelPosition)

@@ -36,6 +36,16 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/ghost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:alpha="0.0"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:importantForAccessibility="no"/>
+
+    <ImageView
         android:id="@+id/effect_counter_stop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
