@@ -50,7 +50,6 @@ import android.os.Looper
 import android.os.VibratorManager
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -171,11 +170,14 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
     )
 
     private val ghostImages = mutableListOf(
-        BitmapFactory.decodeResource(this.resources, R.drawable.ghost001),
-        BitmapFactory.decodeResource(this.resources, R.drawable.ghost002),
-        BitmapFactory.decodeResource(this.resources, R.drawable.ghost003),
-        BitmapFactory.decodeResource(this.resources, R.drawable.ghost004),
-        BitmapFactory.decodeResource(this.resources, R.drawable.ghost005),
+        R.drawable.ghost001,
+        R.drawable.ghost002,
+        R.drawable.ghost003,
+        R.drawable.ghost004,
+        R.drawable.ghost005,
+        R.drawable.ghost006,
+        R.drawable.ghost007,
+        R.drawable.ghost008,
     )
 
     var ghostImageView: ImageView? = null
@@ -1308,13 +1310,12 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
                 (0..5).random()
             }
 
-            randomPosition["x"] = (0 until sizeMax).random()
-            randomPosition["y"] = (0 until sizeMax).random()
+            randomPosition["x"] = (0 .. sizeMax).random()
+            randomPosition["y"] = (0 .. sizeMax).random()
         } while (nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["cubeSideNumber"] == randomPosition["cubeSideNumber"]
             && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["x"] == randomPosition["x"]
             && nonNumberPanelPosition[randomPosition["puzzleIdNumber"]!!]["y"] == randomPosition["y"])
 
-        Log.e("@@@@@ ghost position", randomPosition.toString())
         return randomPosition
     }
 
@@ -1448,7 +1449,9 @@ class NumberMaster(private val activity: AppCompatActivity, private val resource
 
         // お化け画像の表示
         val ghost = (0 until this.ghostImages.size).random()
-        this.ghostImageView!!.setImageBitmap(this.ghostImages[ghost])
+
+        BitmapFactory.decodeResource(this.resources, this.ghostImages[ghost])
+        this.ghostImageView!!.setImageBitmap(BitmapFactory.decodeResource(this.resources, this.ghostImages[ghost]))
         this.ghostImageView!!.visibility = ImageView.VISIBLE
         this.ghostImageView!!.stateListAnimator = AnimatorInflater.loadStateListAnimator(activity, R.xml.animate_game_ghost)
 
